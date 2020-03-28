@@ -11,6 +11,13 @@ const sidebar = [
         title: 'Advance',
         collapsable: false,
         children: [
+            ['advance/', 'Handler Operators'],
+        ]
+    },
+    {
+        title: 'Appendix',
+        collapsable: false,
+        children: [
             ['appendix/', 'Appendix A'],
             ['appendix/other', 'Appendix B'],
         ]
