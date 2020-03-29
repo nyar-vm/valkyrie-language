@@ -3,8 +3,8 @@
 代数数据类型简称 ADT, Curry-Howard 同构指出了逻辑系统和程序语言之间的相似性
 
 
-$$\begin{array}{|c|c|c|}\hline
-\text { Algebra } & \text { Logic } & \text { Types } \\
+$$\begin{array}{|c|c|c|}
+\hline\text { Algebra } & \text { Logic } & \text { Types } \\
 \hline a+b & a \vee b & \text {  a | b } \\
 \hline a \times b & a \wedge b & (a, b) \\
 \hline a=b & a \Longleftrightarrow b & \text { isomorphism }\\
@@ -90,13 +90,13 @@ type Direction {
 
 variants/alternation/tagged union
 
-在集合论中，这被称作 disjoint union（不相交集），表述为 A + B。 如图：
+在集合论中, 这被称作 disjoint union（不相交集）, 表述为 A + B。 如图：
 
 <div align=center><img src="/assets/Equivalentie.svg"></div>
 
-不相交集在数据类型中往往被称作 tagged union (C++) 或者 sum type (haskell, rust)，和 product type 相反的是，大部分编程语言没有 sum type。我们看 rust 是如何使用 sum type 来解决上面的问题的：
+不相交集在数据类型中往往被称作 tagged union (C++) 或者 sum type (haskell, rust), 和 product type 相反的是, 大部分编程语言没有 sum type。我们看 rust 是如何使用 sum type 来解决上面的问题的：
 
-围绕着编程语言是否需要 exception，exception 是良药还是毒药，有诸多争议，java / python 是建制派，C++ / haskell 是骑墙派，rust / go 是反对派，erlang / elixir 是无政府主义者，这里便不展开。你问我支持谁？我喜欢尤达大师对卢克说的那句经典台词：do or do not, there's no try。这句话也蕴含了 erlang 的哲理：let it crash。
+围绕着编程语言是否需要 exception, exception 是良药还是毒药, 有诸多争议, java / python 是建制派, C++ / haskell 是骑墙派, rust / go 是反对派, erlang / elixir 是无政府主义者, 这里便不展开。你问我支持谁？我喜欢尤达大师对卢克说的那句经典台词：do or do not, there's no try。这句话也蕴含了 erlang 的哲理：let it crash。
 
 ## Union Type
 
@@ -105,12 +105,6 @@ variants/alternation/tagged union
 一定程度上解决了 null 的问题, 但是考虑 get(key), 到底这个值天生就是 null 还是取不到所以是 null?
 
 typescript 和 python 里就常有这样的问题
-
-为了避免直面 Subtyping 的复杂性
-
-Valkyrie 已经移除了 Union Type, Intersection Type, Not Type 等设施.
-
-不过 Subtyping 还是存在于 Valkyrie, Subtyping 无处不在无法消除.
 
 
 ## Product Type
@@ -139,11 +133,18 @@ class Point {
 first class function 的语言, 所以函数也是一种类型, 那么函数类型对应的数如何计算呢?
 
 
+是的, 我们需要做的就是记下每个可能的实现并计算它们。
 
+简单！例如, 假设我们有一个函数SuitColor映射卡Suit到Color, 红色或黑色。type Suit = Heart | Spade | Diamond | Club
+type Color = Red | Black
+
+type SuitColor = Suit -> Color无论提供什么样的诉讼, 一种方法是返回红色：(Heart -> Red); (Spade -> Red); (Diamond -> Red); (Club -> Red)
 
 ## Generics Type
 
-Generics type，或者说泛型，是让人又爱又恨的类型。它简化了代码，提升了抽象程度，但程序员为之付出的代价是陡升的学习曲线。抛开泛型的好坏不提，我们先看看泛型的数学意义是什么。还是以 Option 类型来说事：
+泛型或者说参化多态能让你能根据自定义的需求, 编写出适用于任意类型的、灵活可复用的函数及类型
+
+让你避免编写重复的代码, 用一种清晰抽象的方式来表达代码的意图
 
 ```ts
 type Option<T> {
@@ -151,18 +152,16 @@ type Option<T> {
     None
 }
 ```
-```
-Optional<'a>它不是一个类型，而是一个类型构造函数。
 
-Optional<string>是一种类型。
+当填入任意类型时, `Optional<String>` 是一种类型, `Optional<Integer>` 是一种类型
 
-Optional<int>是一种类型，但Optional<'a>不是。
+但 `Optional<T>` 不是, 它是一个类型构造函数
 
-T 代表任意类型，`Option<T>` 是 T 映射到这个 enum 的结果。
-```
-所以换个角度，我们可以认为泛型是作用在类型上的一种特殊的函数，它接受一种或者多种类型，返回一种新的类型。
+我们可以认为泛型是作用在类型上的一种特殊的函数, 它接受一种或者多种类型, 返回一种新的类型
 
-多项式函数 $f(t) = t + 1$
+因此 `Option<T>` 对应多项式函数 $F(t) = t + 1$
+
+同样的我们还有 `Result<T, E>` 类型, 对应多元多项式函数 $F(t, e) = t + e$
 
 ```ts
 type Result<T, E> {
@@ -171,20 +170,51 @@ type Result<T, E> {
 }
 ```
 
-多项式函数 $f(t, e) = t + e$
-
-
-
-
 ### Recursive Type
+
+这里的 List 说的是 lisp 中的 List,
+
+虽然 valkyrie 中内置了一个 List类型, 不过那个实际是 `Deque<Any>`
+
+
+```ts
+type List<T> {
+    Nil,
+    Cons {
+        car: T,
+        cdr: List<T>,
+    }
+}
+```
+
+- cons:  对象构造器 (constructs memory objects)
+- car: 暂存器位址内容 (content of address register)
+- cdr: 递减暂存器内容 (content of decrement register)
+- nil: 拉丁语, 等价于英语中的 nothing
+
+任何非空的列表, 都可以被视为一对由列表第一个元素及列表其余元素所组成的列表。 Lisp 列表体现了这个概念。我们使用 Cons 的一半来指向列表的第一个元素, 然后用另一半指向列表其余的元素(可能是别的 Cons 或 nil )。
+
+List 是和类型, Nil 是单位类型, Cons 是积类型, 所以可以列出表达式
+
+$$L(t) = 1 + t * L(t)$$
+
+看起来就像是个方程, 我们可以解出
+
+$$L(t) = \frac{1}{1-t}$$
+
+看起来有点诡异, 这是什么意思?
+
+-/
+
+
 
 ### Differential Type
 
 ### Usage
 
-这就是你可以称之为“无损”的转换。如果您对转换进行往返，则可以恢复原始值。数学家会称之为同构（来自希腊语“相同的形状”）。
+这就是你可以称之为“无损”的转换。如果您对转换进行往返, 则可以恢复原始值。数学家会称之为同构（来自希腊语“相同的形状”）。
 
-另一个例子怎么样？这是一个包含三种情况的类型，是，否，也许。type YesNoMaybe =
+另一个例子怎么样？这是一个包含三种情况的类型, 是, 否, 也许。type YesNoMaybe =
     | Yes
     | No
     | Maybe我们可以无损地将其转换为此类型吗？type YesNoOption = { maybeIsYes: bool option }
