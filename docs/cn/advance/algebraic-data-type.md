@@ -86,26 +86,45 @@ type Direction {
 
 ## Sum Type
 
-枚举类型, enum
+可以看到, 每列出一项, 类型的值就会加上那一项对应的类型值
 
-variants/alternation/tagged union
+考虑集合的并, 如果集合不相交, 取并集后的大小等于之前两者的大小加和
 
-在集合论中, 这被称作 disjoint union（不相交集）, 表述为 A + B。 如图：
+在集合论中, 这被称作**不交并**(disjoint union), 如图
 
 <div align=center><img src="/assets/Equivalentie.svg"></div>
 
-不相交集在数据类型中往往被称作 tagged union (C++) 或者 sum type (haskell, rust), 和 product type 相反的是, 大部分编程语言没有 sum type。我们看 rust 是如何使用 sum type 来解决上面的问题的：
+在类型论中, 这被称为**和类型** (Sum Type)
 
-围绕着编程语言是否需要 exception, exception 是良药还是毒药, 有诸多争议, java / python 是建制派, C++ / haskell 是骑墙派, rust / go 是反对派, erlang / elixir 是无政府主义者, 这里便不展开。你问我支持谁？我喜欢尤达大师对卢克说的那句经典台词：do or do not, there's no try。这句话也蕴含了 erlang 的哲理：let it crash。
+在编程语言中很多不同的名称, 比如 enum/variant/alternation/tagged union 等等
 
 ## Union Type
 
-并类型, 虽然很多时候和和类型是一样的, 但是有时候是不一样的
+并类型, 有时候会和和类型搞混, 不过这两者是不一样的
 
-一定程度上解决了 null 的问题, 但是考虑 get(key), 到底这个值天生就是 null 还是取不到所以是 null?
+```ts
+//? Sum Type
+type Option<T> {
+    Some(T),
+    None
+}
 
-typescript 和 python 里就常有这样的问题
+Option<Option<T>> =/> Option<T>
+```
 
+当两者类型有交集时, 取并集的时候那部分只会计算一次
+
+```ts
+//? Union Type
+type Optional<T> = T | null;
+
+T | null | null ==> T | null
+Optional<Optional<T>> ==> Optional<T>
+```
+
+这种约化有时候会有麻烦, 比如你取到一个 undefined 的时候就容易搞不清到底这个值天生就是 undefined 还是取不到所以返回 undefined?
+
+所以 typescript 和 python 虽然有类型标注但这个问题还是很头大
 
 ## Product Type
 
@@ -130,7 +149,7 @@ class Point {
 
 ### Function type
 
-first class function 的语言, 所以函数也是一种类型, 那么函数类型对应的数如何计算呢?
+作为 first class function 的语言, 函数也是一种类型, 那么函数类型对应的数如何计算呢?
 
 
 是的, 我们需要做的就是记下每个可能的实现并计算它们。
@@ -172,7 +191,9 @@ type Result<T, E> {
 
 ### Recursive Type
 
-这里的 List 说的是 lisp 中的 List,
+有时候在类型的定义中会引用自身, 这就是递归类型.
+
+最常见的递归类型是 List, 这里的 List 说的是 lisp 中的 List,
 
 虽然 valkyrie 中内置了一个 List类型, 不过那个实际是 `Deque<Any>`
 
@@ -187,12 +208,16 @@ type List<T> {
 }
 ```
 
-- cons:  对象构造器 (constructs memory objects)
-- car: 暂存器位址内容 (content of address register)
-- cdr: 递减暂存器内容 (content of decrement register)
-- nil: 拉丁语, 等价于英语中的 nothing
+这些标识符就像是来自异世界的一样, 让人摸不着头脑
 
-任何非空的列表, 都可以被视为一对由列表第一个元素及列表其余元素所组成的列表。 Lisp 列表体现了这个概念。我们使用 Cons 的一半来指向列表的第一个元素, 然后用另一半指向列表其余的元素(可能是别的 Cons 或 nil )。
+- **cons**: 对象构造器 (constructs memory objects)
+- **car**: 暂存器位址内容 (content of address register)
+- **cdr**: 递减暂存器内容 (content of decrement register)
+- **nil**: 拉丁语, 等价于英语中的 nothing
+
+任何非空的列表, 都可以被视为一对由列表第一个元素及列表其余元素所组成的列表。
+
+我们使用 Cons 的一半来指向列表的第一个元素, 然后用另一半指向列表其余的元素, 可能是别的 Cons 或 nil
 
 List 是和类型, Nil 是单位类型, Cons 是积类型, 所以可以列出表达式
 
@@ -204,11 +229,10 @@ $$L(t) = \frac{1}{1-t}$$
 
 看起来有点诡异, 这是什么意思?
 
--/
-
-
 
 ### Differential Type
+
+
 
 ### Usage
 

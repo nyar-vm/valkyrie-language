@@ -25,9 +25,6 @@ Rust 编译器保证，如果声明一个值不会变，它就真的不会变。
 
 不过可变性也是非常有用的。变量只是默认不可变；正如在第二章所做的那样，你可以在变量名之前加 `mut` 来使其可变。除了允许改变值之外，`mut` 向读者表明了其他代码将会改变这个变量值的意图。
 
-例如，让我们将 *src/main.rs* 修改为如下代码：
-
-<span class="filename">文件名: src/main.rs</span>
 
 ```rust
 fn main() {
@@ -36,17 +33,6 @@ fn main() {
     x = 6;
     println!("The value of x is: {}", x);
 }
-```
-
-现在运行这个程序，出现如下内容：
-
-```text
-$ cargo run
-   Compiling variables v0.1.0 (file:///projects/variables)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/variables`
-The value of x is: 5
-The value of x is: 6
 ```
 
 通过 `mut`，允许把绑定到 `x` 的值从 `5` 改成 `6`。在一些情况下，你会想用可变变量，因为与只用不可变变量相比，它会让代码更容易编写。
@@ -59,7 +45,7 @@ The value of x is: 6
 
 首先，不允许对常量使用 `mut`。常量不光默认不能变，它总是不能变。
 
-声明常量使用 `const` 关键字而不是 `let`，并且 *必须* 注明值的类型。在下一部分，[“数据类型”][data-types] 中会介绍类型和类型注解，现在无需关心这些细节，记住总是标注类型即可。
+声明常量使用 `const` 关键字而不是 `let`，并且 **必须** 注明值的类型。在下一部分，[“数据类型”][data-types] 中会介绍类型和类型注解，现在无需关心这些细节，记住总是标注类型即可。
 
 常量可以在任何作用域中声明，包括全局作用域，这在一个值需要被很多部分的代码用到时很有用。
 
@@ -80,8 +66,6 @@ const MAX_POINTS: u32 = 100_000;
 我们可以定义一个与之前变量同名的新变量，而新变量会 **隐藏** 之前的变量。
 
 Rustacean 们称之为第一个变量被第二个 **隐藏** 了，这意味着使用这个变量时会看到第二个值。可以用相同变量名称来隐藏一个变量，以及重复使用 `let` 关键字来多次隐藏，如下所示：
-
-<span class="filename">文件名: src/main.rs</span>
 
 ```rust
 fn main() {
@@ -110,7 +94,7 @@ let spaces = spaces.len();
 
 这里允许第一个 `spaces` 变量是字符串类型，而第二个 `spaces` 变量，它是一个恰巧与第一个变量同名的崭新变量，是数字类型。隐藏使我们不必使用不同的名字，如 `spaces_str` 和 `spaces_num`；相反，我们可以复用 `spaces` 这个更简单的名字。然而，如果尝试使用 `mut`，将会得到一个编译时错误，如下所示：
 
-```rust,ignore,does_not_compile
+```rust
 let mut spaces = "   ";
 spaces = spaces.len();
 ```
@@ -127,5 +111,3 @@ error[E0308]: mismatched types
   = note: expected type `&str`
              found type `usize`
 ```
-
-现在我们已经了解了变量如何工作，让我们看看变量可以拥有的更多数据类型。
