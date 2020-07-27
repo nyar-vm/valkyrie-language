@@ -159,6 +159,9 @@ type Color = Red | Black
 
 type SuitColor = Suit -> Color无论提供什么样的诉讼, 一种方法是返回红色：(Heart -> Red); (Spade -> Red); (Diamond -> Red); (Club -> Red)
 
+swap :: (a, b) -> (b, a)
+
+
 ## Generics Type
 
 泛型或者说参化多态能让你能根据自定义的需求, 编写出适用于任意类型的、灵活可复用的函数及类型
@@ -230,6 +233,26 @@ $$L(t) = \frac{1}{1-t}$$
 看起来有点诡异, 这是什么意思?
 
 
+再来看二叉树,
+
+```ts
+type BinaryTree<T> {
+    Leaf(T),
+    Node(BinaryTree<T>, BinaryTree<T>),
+}
+```
+
+Leaf 是泛型, Node 是积类型, 所以可以列出表达式
+
+$$B(t) = t + B(t)\times B(t)$$
+
+$$B(t) = \frac{1-\sqrt{1-4a}}{2}$$
+
+更加诡异了, 怎么开根号都出来了
+
+
+
+
 ### Differential Type
 
 
@@ -242,3 +265,8 @@ $$L(t) = \frac{1}{1-t}$$
     | Yes
     | No
     | Maybe我们可以无损地将其转换为此类型吗？type YesNoOption = { maybeIsYes: bool option }
+
+
+https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types
+
+https://zhuanlan.zhihu.com/p/20570808
