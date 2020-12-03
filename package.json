@@ -1,5 +1,6 @@
 {
     "scripts": {
+        "reset": "git reset Head~ --soft",
         "start": "vuepress dev docs",
         "update": "yarn upgrade-interactive --latest",
         "test": "yarn install && yarn start",

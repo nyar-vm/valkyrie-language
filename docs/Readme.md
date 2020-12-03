@@ -1,11 +1,5 @@
----
-actionText: 开始阅读
-actionLink: /cn/appendix/
-footer: CC0 Licensed | Copyright © 2012-2019 Aster™
----
+## Choose your language
 
 
-
-[Chinese](/cn/appendix/)
-
-[English](/en/appendix/)
+- [简体中文](/cn/appendix/)
+- [English](/en/appendix/)

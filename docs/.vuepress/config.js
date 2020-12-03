@@ -1,3 +1,51 @@
+const locale_cn = {
+    selectText: '选择语言',
+    label: '简体中文',
+    editLinkText: '在 GitHub 上编辑此页',
+    serviceWorker: {
+        updatePopup: {
+            message: "发现新内容可用.",
+            buttonText: "刷新"
+        }
+    },
+    sidebar: {
+        "/cn/appendix/": [
+            {
+                title: '附录',
+                collapsable: true,
+                children: [
+                    ['', '附录A'],
+                    ['other', '附录B'],
+                ]
+            },
+        ]
+    }
+}
+
+const locale_en = {
+    selectText: 'Languages',
+    label: 'English',
+    ariaLabel: 'Languages',
+    editLinkText: 'Edit this page on GitHub',
+    serviceWorker: {
+        updatePopup: {
+            message: "New content is available.",
+            buttonText: "Refresh"
+        }
+    },
+    sidebar: {
+        "/en/appendix/": [
+            {
+                title: 'Appendix',
+                collapsable: true,
+                children: [
+                    ['', 'Appendix A'],
+                ]
+            },
+        ]
+    }
+}
+
 module.exports = {
     dest: 'docs/.build',
     locales: {
@@ -23,51 +71,8 @@ module.exports = {
             lineNumbers: true
         },
         locales: {
-            '/cn/': {
-                selectText: '选择语言',
-                label: '简体中文',
-                editLinkText: '在 GitHub 上编辑此页',
-                serviceWorker: {
-                    updatePopup: {
-                        message: "发现新内容可用.",
-                        buttonText: "刷新"
-                    }
-                },
-                sidebar: {
-                    "cn/": [
-                        {
-                            title: '附录',
-                            collapsable: true,
-                            children: [
-                                ['appendix', '附录'],
-                            ]
-                        },
-                    ]
-                }
-            },
-            '/en/': {
-                selectText: 'Languages',
-                label: 'English',
-                ariaLabel: 'Languages',
-                editLinkText: 'Edit this page on GitHub',
-                serviceWorker: {
-                    updatePopup: {
-                        message: "New content is available.",
-                        buttonText: "Refresh"
-                    }
-                },
-                sidebar: {
-                    "en/": [
-                        {
-                            title: 'Appendix',
-                            collapsable: true,
-                            children: [
-                                ['appendix', 'Appendix'],
-                            ]
-                        },
-                    ]
-                }
-            },
+            '/cn/': locale_cn,
+            '/en/': locale_en,
         },
     },
     serviceWorker: true,
