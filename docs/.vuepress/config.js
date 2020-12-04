@@ -1,62 +1,33 @@
-const locale_cn = {
-    selectText: '选择语言',
-    label: '简体中文',
-    editLinkText: '在 GitHub 上编辑此页',
-    serviceWorker: {
-        updatePopup: {
-            message: "发现新内容可用.",
-            buttonText: "刷新"
-        }
+const sidebar = [
+    {
+        title: 'Basic',
+        collapsable: false,
+        children: [
+            ['basic/', 'Literal'],
+            ['basic/types', 'Type'],
+        ]
     },
-    sidebar: {
-        "/cn/appendix/": [
-            {
-                title: '附录',
-                collapsable: true,
-                children: [
-                    ['', '附录A'],
-                    ['other', '附录B'],
-                ]
-            },
+    {
+        title: 'Advance',
+        collapsable: false,
+        children: [
+            ['appendix/', 'Appendix A'],
+            ['appendix/other', 'Appendix B'],
         ]
     }
-}
-
-const locale_en = {
-    selectText: 'Languages',
-    label: 'English',
-    ariaLabel: 'Languages',
-    editLinkText: 'Edit this page on GitHub',
-    serviceWorker: {
-        updatePopup: {
-            message: "New content is available.",
-            buttonText: "Refresh"
-        }
-    },
-    sidebar: {
-        "/en/appendix/": [
-            {
-                title: 'Appendix',
-                collapsable: true,
-                children: [
-                    ['', 'Appendix A'],
-                ]
-            },
-        ]
-    }
-}
+]
 
 module.exports = {
     dest: 'docs/.build',
     locales: {
         '/cn/': {
             lang: 'zh-CN',
-            title: 'TemplateVuepress',
+            title: 'Valkyrie 语言教程',
             lastUpdated: 'Last Updated',
         },
         '/en/': {
             lang: 'en-US',
-            title: 'TemplateVuepress',
+            title: 'Valkyrie Tutorial',
             lastUpdated: 'Last Updated',
         }
     },
@@ -64,15 +35,42 @@ module.exports = {
         ['link', { rel: 'shortcut icon', type: "image/x-icon", href: './favicon.png' }]
     ],
     themeConfig: {
-        repo: 'GalAster/TemplateVuepress',
+        repo: 'nyar-lang/ValkyrieTutorial',
         editLinks: true,
         docsDir: 'docs',
         markdown: {
             lineNumbers: true
         },
         locales: {
-            '/cn/': locale_cn,
-            '/en/': locale_en,
+            '/cn/': {
+                selectText: '选择语言',
+                label: '简体中文',
+                editLinkText: '在 GitHub 上编辑此页',
+                serviceWorker: {
+                    updatePopup: {
+                        message: "发现新内容可用.",
+                        buttonText: "刷新"
+                    }
+                },
+                sidebar: {
+                    "/cn/": sidebar,
+                }
+            },
+            '/en/': {
+                selectText: 'Languages',
+                label: 'English',
+                ariaLabel: 'Languages',
+                editLinkText: 'Edit this page on GitHub',
+                serviceWorker: {
+                    updatePopup: {
+                        message: "New content is available.",
+                        buttonText: "Refresh"
+                    }
+                },
+                sidebar: {
+                    "/en/": sidebar
+                }
+            },
         },
     },
     serviceWorker: true,
