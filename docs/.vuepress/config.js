@@ -73,7 +73,7 @@ module.exports = {
                 },
                 sidebar: {
                     "/cn/": sidebar,
-                }
+                },
             },
             '/en/': {
                 selectText: 'Languages',
@@ -87,7 +87,7 @@ module.exports = {
                     }
                 },
                 sidebar: {
-                    "/en/": sidebar
+                    // "/en/": sidebar
                 }
             },
         },
@@ -95,6 +95,7 @@ module.exports = {
     serviceWorker: true,
     markdown: {
         config: md => {
+            lineNumbers: true
         }
     },
     plugins: {
