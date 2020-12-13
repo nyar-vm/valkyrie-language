@@ -5,6 +5,13 @@ const sidebar = [
         children: [
             ['basic/', 'Literal'],
             ['basic/operators', 'Operator'],
+            ['basic/variable', 'Variable'],
+            ['basic/function', 'Function'],
+            ['basic/class', 'Class'],
+            ['basic/trait', 'Trait'],
+            ['basic/enumerate', 'Enumerate'],
+            ['basic/pattern-match', 'Pattern Match'],
+            ['basic/control-flow', 'Control Flow'],
             ['basic/error-handling', 'Error Handling'],
             ['basic/unit-testing', 'Testing'],
             ['basic/module', 'Module'],
@@ -17,10 +24,11 @@ const sidebar = [
         children: [
             ['advance/', 'Handler Operators'],
             ['advance/operator-overloading', 'Operator Overloading'],
-            ['advance/adhoc-polymorphism', 'Ad-hoc Polymorphism'],
+
             ['advance/collections', 'Collections'],
             ['advance/closure', 'Closure'],
             ['advance/iterators', 'Iterator'],
+            ['advance/adhoc-polymorphism', 'Ad-hoc Polymorphism'],
             ['advance/generic-type', 'Generic Type'],
             ['advance/higher-kinded-type', 'Higher Kinded Type'],
             ['advance/algebraic-data-type', 'Algebraic Data Type'],
