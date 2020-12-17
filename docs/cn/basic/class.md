@@ -7,44 +7,34 @@ class {
 ```
 
 
-```ts
-class T();
-```
-
 
 构造体和我们在第三章讨论过的元组类似。和元组一样，构造体的每一部分可以是不同类型。但不同于元组，构造体需要命名各部分数据以便能清楚的表明其值的意义。由于有了这些名字，构造体比元组更灵活：不需要依赖顺序来指定或访问实例中的值。
 
-定义构造体，需要使用 `struct` 关键字并为整个构造体提供一个名字。构造体的名字需要描述它所组合的数据的意义。接着，在大括号中，定义每一部分数据的名字和类型，我们称为 **字段**（*field*）。例如，示例 5-1 展示了一个存储用户账号信息的构造体：
+定义构造体，需要使用 `struct` 关键字并为整个构造体提供一个名字。构造体的名字需要描述它所组合的数据的意义。
 
-```rust
-struct User {
-    username: String,
-    email: String,
-    sign_in_count: u64,
-    active: bool,
+接着，在大括号中，定义每一部分数据的名字和类型，我们称为 **字段**（*field*）。例如，示例 5-1 展示了一个存储用户账号信息的构造体：
+
+```ts
+class User {
+    username: str,
+    email: str,
+    vip: bool,
+    score: u64
 }
 ```
 
-
-## Tuple
-
 ## New Object
 
-一旦定义了构造体后，为了使用它，通过为每个字段指定具体值来创建这个构造体的 **实例**。创建一个实例需要以构造体的名字开头，接着在大括号中使用 `key: value` 键-值对的形式提供字段，其中 key 是字段的名字，value 是需要存储在字段中的数据值。实例中字段的顺序不需要和它们在构造体中声明的顺序一致。换句话说，构造体的定义就像一个类型的通用模板，而实例则会在这个模板中放入特定数据来创建这个类型的值。例如，可以像示例 5-2 这样来声明一个特定的用户：
+为了使用构造体，通过为每个字段指定具体值来创建这个构造体的 **实例**。
 
-```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-let user1 = User {
-    email: String::from("someone@example.com"),
-    username: String::from("someusername123"),
-    active: true,
-    sign_in_count: 1,
+创建一个实例需要以构造体的名字开头，接着在大括号中使用 `key: value` 键-值对的形式提供字段，其中 key 是字段的名字，value 是需要存储在字段中的数据值。实例中字段的顺序不需要和它们在构造体中声明的顺序一致。换句话说，构造体的定义就像一个类型的通用模板，而实例则会在这个模板中放入特定数据来创建这个类型的值。例如，可以像示例 5-2 这样来声明一个特定的用户：
+
+```ts
+new User {
+    username: "valkyrie",
+    email: "valkyrie@nyar.org",
+    score: 0,
+    vip: false,
 };
 ```
 
@@ -104,14 +94,14 @@ fn build_user(email: String, username: String) -> User {
 因为示例 5-4 中的参数名与字段名都完全相同，我们可以使用 **字段初始化简写语法**（*field init shorthand*）来重写 `build_user`，这样其行为与之前完全相同，不过无需重复 `email` 和 `username` 了，如示例 5-5 所示。
 
 ```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-fn build_user(email: String, username: String) -> User {
+class User {
+    username: str,
+    email: str,
+    vip: bool,
+    score: u64
+}
+
+fn new_user(email: String, username: String) -> User {
     User {
         email,
         username,
@@ -158,7 +148,7 @@ let user2 = User {
 
 使用构造体更新语法，我们可以通过更少的代码来达到相同的效果，如示例 5-7 所示。`..` 语法指定了剩余未显式设置值的字段应有与给定实例对应字段相同的值。
 
-```rust
+```ts
 # struct User {
 #     username: String,
 #     email: String,
@@ -173,7 +163,7 @@ let user2 = User {
 #     sign_in_count: 1,
 # };
 #
-let user2 = User {
+let user2 = new User {
     email: String::from("another@example.com"),
     username: String::from("anotherusername567"),
     ..user1

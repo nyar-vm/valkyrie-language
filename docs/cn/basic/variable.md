@@ -1,18 +1,11 @@
 ## 变量和可变性
 
-> [ch03-01-variables-and-mutability.md](https://github.com/rust-lang/book/blob/master/src/ch03-01-variables-and-mutability.md)
-> <br>
-> commit d69b1058c660abfe1d274c58d39c06ebd5c96c47
+变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
 
-第二章中提到过，变量默认是不可改变的（immutable）。这是推动你以充分利用 Rust 提供的安全性和简单并发性来编写代码的众多方式之一。不过，你仍然可以使用可变变量。让我们探讨一下 Rust 拥抱不可变性的原因及方法，以及何时你不想使用不可变性。
+当变量不可变时，一旦值被绑定一个名称上，你就不能改变这个值。
 
-当变量不可变时，一旦值被绑定一个名称上，你就不能改变这个值。为了对此进行说明，使用 `cargo new variables` 命令在 *projects* 目录生成一个叫做 *variables* 的新项目。
 
-接着，在新建的 *variables* 目录，打开 *src/main.rs* 并将代码替换为如下代码，这些代码还不能编译：
-
-<span class="filename">文件名: src/main.rs</span>
-
-```rust,ignore,does_not_compile
+```rust
 fn main() {
     let x = 5;
     println!("The value of x is: {}", x);
@@ -21,18 +14,6 @@ fn main() {
 }
 ```
 
-保存并使用 `cargo run` 运行程序。应该会看到一条错误信息，如下输出所示：
-
-```text
-error[E0384]: cannot assign twice to immutable variable `x`
- --> src/main.rs:4:5
-  |
-2 |     let x = 5;
-  |         - first assignment to `x`
-3 |     println!("The value of x is: {}", x);
-4 |     x = 6;
-  |     ^^^^^ cannot assign twice to immutable variable
-```
 
 这个例子展示了编译器如何帮助你找出程序中的错误。虽然编译错误令人沮丧，但那只是表示程序不能安全的完成你想让它完成的工作；并 **不能** 说明你不是一个好程序员！经验丰富的 Rustacean 们一样会遇到编译错误。
 
@@ -72,7 +53,7 @@ The value of x is: 6
 
 除了防止出现 bug 外，还有很多地方需要权衡取舍。例如，使用大型数据结构时，适当地使用可变变量，可能比复制和返回新分配的实例更快。对于较小的数据结构，总是创建新实例，采用更偏向函数式的编程风格，可能会使代码更易理解，为可读性而牺牲性能或许是值得的。
 
-### 变量和常量的区别
+## Constant
 
 不允许改变值的变量，可能会使你想起另一个大部分编程语言都有的概念：**常量**（*constants*）。类似于不可变变量，常量是绑定到一个名称的不允许改变的值，不过常量与变量还是有一些区别。
 
@@ -94,9 +75,11 @@ const MAX_POINTS: u32 = 100_000;
 
 将遍布于应用程序中的硬编码值声明为常量，能帮助后来的代码维护人员了解值的意图。如果将来需要修改硬编码值，也只需修改汇聚于一处的硬编码值。
 
-### 隐藏（Shadowing）
+## Shadowing
 
-正如在第二章猜猜看游戏的 [“比较猜测的数字和秘密数字”][comparing-the-guess-to-the-secret-number] 中所讲，我们可以定义一个与之前变量同名的新变量，而新变量会 **隐藏** 之前的变量。Rustacean 们称之为第一个变量被第二个 **隐藏** 了，这意味着使用这个变量时会看到第二个值。可以用相同变量名称来隐藏一个变量，以及重复使用 `let` 关键字来多次隐藏，如下所示：
+我们可以定义一个与之前变量同名的新变量，而新变量会 **隐藏** 之前的变量。
+
+Rustacean 们称之为第一个变量被第二个 **隐藏** 了，这意味着使用这个变量时会看到第二个值。可以用相同变量名称来隐藏一个变量，以及重复使用 `let` 关键字来多次隐藏，如下所示：
 
 <span class="filename">文件名: src/main.rs</span>
 
@@ -114,13 +97,7 @@ fn main() {
 
 这个程序首先将 `x` 绑定到值 `5` 上。接着通过 `let x =` 隐藏 `x`，获取初始值并加 `1`，这样 `x` 的值就变成 `6` 了。第三个 `let` 语句也隐藏了 `x`，将之前的值乘以 `2`，`x` 最终的值是 `12`。运行这个程序，它会有如下输出：
 
-```text
-$ cargo run
-   Compiling variables v0.1.0 (file:///projects/variables)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/variables`
-The value of x is: 12
-```
+
 
 隐藏与将变量标记为 `mut` 是有区别的。当不小心尝试对变量重新赋值时，如果没有使用 `let` 关键字，就会导致编译时错误。通过使用 `let`，我们可以用这个值进行一些计算，不过计算完之后变量仍然是不变的。
 
@@ -152,7 +129,3 @@ error[E0308]: mismatched types
 ```
 
 现在我们已经了解了变量如何工作，让我们看看变量可以拥有的更多数据类型。
-
-[comparing-the-guess-to-the-secret-number]:
-ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
-[data-types]: ch03-02-data-types.html#data-types

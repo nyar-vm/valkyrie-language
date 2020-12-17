@@ -38,8 +38,8 @@ const sidebar = [
         title: 'Appendix',
         collapsable: false,
         children: [
-            ['appendix/', 'Appendix A'],
-            ['appendix/other', 'Appendix B'],
+            ['appendix/', 'Keywords'],
+            ['appendix/identifier', 'Identifiers'],
         ]
     }
 ]
