@@ -27,39 +27,34 @@ else {
 
 这个错误表明 Rust 期望一个 `bool` 却得到了一个整数。不像 Ruby 或 JavaScript 这样的语言，Rust 并不会尝试自动地将非布尔值转换为布尔值。必须总是显式地使用布尔值作为 `if` 的条件。例如，如果想要 `if` 代码块只在一个数字不等于 `0` 时执行，可以把 `if` 表达式修改成下面这样：
 
-<span class="filename">文件名: src/main.rs</span>
 
-```rust
-fn main() {
-    let number = 3;
-
-    if number != 0 {
-        println!("number was something other than zero");
-    }
+```rs
+let number = 3;
+if number != 0 {
+    println!("number was something other than zero");
 }
 ```
 
 运行代码会打印出 `number was something other than zero`。
 
-## `if-else if` Expression
+## `if else-if` Expression
 
 可以将 `else if` 表达式与 `if` 和 `else` 组合来实现多重条件。例如：
 
-<span class="filename">文件名: src/main.rs</span>
 
 ```rust
-fn main() {
-    let number = 6;
-
-    if number % 4 == 0 {
-        println!("number is divisible by 4");
-    } else if number % 3 == 0 {
-        println!("number is divisible by 3");
-    } else if number % 2 == 0 {
-        println!("number is divisible by 2");
-    } else {
-        println!("number is not divisible by 4, 3, or 2");
-    }
+let number = 6;
+if number % 2 == 0 {
+    println!("number is divisible by 2");
+}
+else if number % 3 == 0 {
+    println!("number is divisible by 3");
+}
+else if number % 4 == 0 {
+    println!("number is divisible by 4");
+}
+else {
+    println!("number is not divisible by 2, 3, or 4");
 }
 ```
 
