@@ -152,12 +152,12 @@ class Point {
 作为 first class function 的语言, 函数也是一种类型, 那么函数类型对应的数如何计算呢?
 
 
-是的, 我们需要做的就是记下每个可能的实现并计算它们。
+是的, 我们需要做的就是记下每个可能的实现并计算它们. 
 
-简单！例如, 假设我们有一个函数SuitColor映射卡Suit到Color, 红色或黑色。type Suit = Heart | Spade | Diamond | Club
+简单! 例如, 假设我们有一个函数SuitColor映射卡Suit到Color, 红色或黑色. type Suit = Heart | Spade | Diamond | Club
 type Color = Red | Black
 
-type SuitColor = Suit -> Color无论提供什么样的诉讼, 一种方法是返回红色：(Heart -> Red); (Spade -> Red); (Diamond -> Red); (Club -> Red)
+type SuitColor = Suit -> Color无论提供什么样的诉讼, 一种方法是返回红色: (Heart -> Red); (Spade -> Red); (Diamond -> Red); (Club -> Red)
 
 swap :: (a, b) -> (b, a)
 
@@ -218,7 +218,7 @@ type List<T> {
 - **cdr**: 递减暂存器内容 (content of decrement register)
 - **nil**: 拉丁语, 等价于英语中的 nothing
 
-任何非空的列表, 都可以被视为一对由列表第一个元素及列表其余元素所组成的列表。
+任何非空的列表, 都可以被视为一对由列表第一个元素及列表其余元素所组成的列表. 
 
 我们使用 Cons 的一半来指向列表的第一个元素, 然后用另一半指向列表其余的元素, 可能是别的 Cons 或 nil
 
@@ -259,9 +259,9 @@ $$B(t) = \frac{1-\sqrt{1-4a}}{2}$$
 
 ### Usage
 
-这就是你可以称之为“无损”的转换。如果您对转换进行往返, 则可以恢复原始值。数学家会称之为同构（来自希腊语“相同的形状”）。
+这就是你可以称之为"无损"的转换. 如果您对转换进行往返, 则可以恢复原始值. 数学家会称之为同构 (来自希腊语"相同的形状") . 
 
-另一个例子怎么样？这是一个包含三种情况的类型, 是, 否, 也许。type YesNoMaybe =
+另一个例子怎么样？这是一个包含三种情况的类型, 是, 否, 也许. type YesNoMaybe =
     | Yes
     | No
     | Maybe我们可以无损地将其转换为此类型吗？type YesNoOption = { maybeIsYes: bool option }
