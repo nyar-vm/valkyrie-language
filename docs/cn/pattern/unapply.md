@@ -7,9 +7,14 @@ class T(int)
 
 元组类, 结构类
 
-元组类在 Scala 中被称为案例类
+元组类在 Scala 中被称为案例类 (Case Classes)
 
-case class
+
+我们已经知道 match case 中的 case 可以省略
+
+
+
+case X_Name(args)
 
 
 ````valkyrie

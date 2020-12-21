@@ -1,0 +1,230 @@
+# Valkyrie Language
+
+
+## 设计目标
+
+Valkyrie 是一门具有渐进类型的动态语言,
+
+Valkyrie 的设计目标是灵活, 简洁以及高度的一致性
+
+其血缘来自 Rust, Scala 以及 Swift.
+
+(Originally called vlang, but then vlang was occupied :)
+
+接下来介绍 Valkyrie 的主要特性
+
+## 扩展
+
+如果没有扩展, 那么 V 是一门很死板很严格的语言.
+
+严格的令人难受, `1 + 1.0`, `"a" + 'b'`, `[1] ++ 2`, 统统算不了.
+
+扩展赋予了 V 高度的灵活性与可能性.
+
+默认会载入名为 Prelude 的扩展, Prelude 中定义了一些常用的合理的运算规则.
+
+extension 可以继承和重写, 你可以也定义自己的 Prelude, 然后形成自己的代码风格.
+
+V 中所有的语法糖都由对应的 trait 来静态决策, 以此来免除不必要运行时开销
+
+### 孤儿规则
+
+如果你想扩展一个方法, 要么类是在你的库中定义的, 要么特质是在你的库中定义的
+
+否则只能在 extension package namespace 中修改
+
+````valkyrie
+/// Namespace is generally lowercase, but extension is uppercase
+/// Because the performance is similar to the introduce a trait
+pkg extension Features;
+````
+
+### 符号重载
+
+pkg extension FreeAdd {
+    /// Symbols are defined in the standard library
+    /// Types are also defined in the standard library
+    /// Overloading is prohibited by the orphan rule
+    /// Ordinary overload does not need extension
+    def +(i: Integer, f: Decimal) {
+        /// The function will return automatically
+        /// The return type is automatically inferred
+        i as Decimal + f
+    }
+}
+
+### 数字模式
+
+
+````valkyrie
+tagged Quality {
+    Kilogram(auto Decimal),
+    Gram(auto Decimal),
+}
+def +(lhs: Quality, rhg: Quality): Quality {
+    /// Some conversion rules, that's it, anyone can write
+    @unimplemented()
+}
+
+pkg extension SIUnit {
+    /// number_prefix means integer_suffix + decimal_suffix
+    def number_prefix kg(n): Quality = Quality::Kilogram(n);
+    def number_prefix  g(n): Quality = Quality::Gram(n);
+}
+````
+
+然后你就可以写如下代码了!
+
+````valkyrie
+use SIUnit;
+let weight = 1kg + 1g;
+````
+
+以此类推, 你应该能很轻易的实现下列功能, 这就是 Valkyrie 一致性的体现.
+
+````valkyrie
+use Complex;
+let z = 1 + 2i;
+/// Note that you cannot bind `i` twice in one namespace
+use Quaternion;
+let q = 1 + 2i + 3j + 4k;
+````
+
+
+### 字符串模式
+
+如果什么前缀也没有, 默认的字符串叫 s-string(slot)
+
+内置的字符串模式
+
+s"${x}"
+f""
+re""
+
+同理你也可以用 extension 扩展你自己的字符串
+
+你已经猜到了, 使用 string_prefix, 这也是一致性的体现
+
+
+## 模式匹配
+
+
+### case 守卫
+
+match x {
+    case x is Integer   => "x is an instance of type `Integer`"
+    case x is Callablte => "x satisfies the trait bound `Callable`"
+    case x in [1, 2, 3] => "x is one of [1, 2, 3]"
+    case x if x < 0     => "x satisfies the condition x < 0"
+}
+
+
+case 解构
+
+if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4} {
+    print(a) /// 1
+    print(y) /// 2
+    print(p) /// {z: 3, w: 4}
+}
+
+if case Point(a, ..p, y) = Point(1, 2, 3, 4) {
+    print(a) /// 1
+    print(p) /// [2, 3]
+    print(y) /// 4
+}
+
+
+自定义提取器
+
+match input {
+    case Regex(group0) => Integer::parse(group0),
+}
+///
+if case Some(s) = Regex::unapply(input) {
+    Integer::parse(group0)
+}
+
+
+
+
+
+
+## 多态
+
+注意以上所有方法都是静态决策的
+
+/// 隐式类型转换(type coercion)
+extends Integer: From<String> {
+    def from(s) { Self::parse(i) }
+}
+/// Coercion<T> 需要满足 bound From<T>
+extends Integer: Coercion<String>;
+
+def add_one(input: Integer): Integer {
+    input + 1
+}
+/// 发现类型不匹配, 尝试查找 Coercion 的静态方法
+add_one("1") /// 2
+
+
+/// 显式类型转换
+def add_one(auto input: Integer): Integer {
+    input + 1
+}
+/// 发现类型不匹配, 调用 from 方法
+add_one("1") /// 2
+
+
+/// 基于 trait 的泛型静态派发
+def add_one<T>(input: T): Integer
+for T: Into<Integer>
+{
+    input.into() + 1
+}
+
+/// 并类型匹配
+def add_one(input: Integer|String): Integer {
+    let y = match input {
+        x is Integer => x,
+        x is String => Integer::parse(x)
+    }
+    y + 1
+}
+
+/// 和类型匹配
+tagged Canbe {
+    Integer(Integer)
+    String(String)
+}
+
+def add_one(input: Canbe): Integer {
+    let y = match input {
+        Canbe::Integer(x) => x,
+        Canbe::String(x) => Integer::parse(x)
+    }
+    y + 1
+}
+
+
+
+## 专门设计的 REPL 模式
+
+### 时序与非时序模式
+
+````valkyrie
+let sec = 1;
+
+
+````
+
+## 基于 AST 的宏
+
+基于 AST 的宏可能没有基于 Token 的宏那么强大, 但是你真的想在一个语言里写完全不同的另一个语言吗?
+
+特别是 Token 宏的 IDE 支持性一般特别差, 带 TokenKind 的 AST 宏却能获得非常好的支持.
+
+## IR 兼容性
+
+V 的语法并不是绝对稳定的, V 会把源文件编译成单个的 IR 文件来屏蔽这种改变, 由此来获得前向兼容性.
+
+V 使用类似 Rust 的 Edition 发布模式.
