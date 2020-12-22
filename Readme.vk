@@ -31,6 +31,8 @@ V 中所有的语法糖都由对应的 trait 来静态决策, 以此来免除不
 
 否则只能在 extension package namespace 中修改
 
+这一规则是为了防止在不知情的情况下引入未知的语义
+
 ````valkyrie
 /// Namespace is generally lowercase, but extension is uppercase
 /// Because the performance is similar to the introduce a trait
@@ -38,6 +40,16 @@ pkg extension Features;
 ````
 
 ### 符号重载
+
+最常见的应用是符号重载, 当你要整合两个第三方库类型转换时, 经常会被孤儿规则禁止.
+
+因此需要声明 extension 来实现兼容.
+
+还有一种情况是某个运算是方便的, 但可能不是很严格.
+
+比如我们一般默认加法服从交换律, 但是 `"a" + "b" != "b" + "a"` 破坏了交换律.
+
+于是可以将选择权交给库用户.
 
 ````valkyrie
 /// Otherwise, all it will inherit all extensions in the current namespace
@@ -57,6 +69,9 @@ pkg extension FreeAdd {
 
 ### 数字模式
 
+有时候我们想输入一些特殊的数值, 比如带单位的运算, 如果用构造器很可能让代码失去可读性.
+
+这种情况下可以用数字模式, 数字模式是后缀形式的.
 
 ````valkyrie
 tagged Quality {
@@ -69,13 +84,13 @@ def +(lhs: Quality, rhg: Quality): Quality {
 }
 
 pkg extension SIUnit {
-    /// number_prefix means integer_suffix + decimal_suffix
-    def number_prefix kg(n): Quality = Quality::Kilogram(n);
-    def number_prefix  g(n): Quality = Quality::Gram(n);
+    /// number_suffix means integer_suffix + decimal_suffix
+    def number_suffix kg(n): Quality = Quality::Kilogram(n);
+    def number_suffix  g(n): Quality = Quality::Gram(n);
 }
 ````
 
-然后你就可以写如下代码了!
+然后你就可以写如下写法了!
 
 ````valkyrie
 use SIUnit;
@@ -92,24 +107,33 @@ use Quaternion;
 let q = 1 + 2i + 3j + 4k;
 ````
 
-
 ### 字符串模式
 
-如果什么前缀也没有, 默认的字符串叫 s-string(slot)
+字符串也是个很复杂的东西, 众口难调, 不同的人喜欢不同的写法
 
-内置的字符串模式
+好在我们有字符串模式, 字符串模式是前缀表达.
 
+如果什么前缀也没有, 默认的字符串叫 s-string(slot).
+
+````valkyrie
+r"\a"
 s"${x}"
 f""
 re""
+````
 
-同理你也可以用 extension 扩展你自己的字符串
+同样的, 你也可以用 `extension` 扩展你自己的字符串模式.
 
-你已经猜到了, 使用 string_prefix, 这也是一致性的体现
+你已经猜到了, 使用 `string_prefix`, 这也是一致性的体现.
+
+你能想到什么应用? 嵌入 json 对象? 嵌入 css 样式? 或者更炫酷的用法?
 
 
 ## 模式匹配
 
+越来越多的语言采用模式匹配或者类似的语法, 模式匹配快成每个语言的标配了.
+
+V 当然也有个高度一致, 可 desugar 的灵活模式匹配语法
 
 ### case 守卫
 
