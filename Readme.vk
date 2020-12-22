@@ -9,8 +9,6 @@ Valkyrie 的设计目标是灵活, 简洁以及高度的一致性
 
 其血缘来自 Rust, Scala 以及 Swift.
 
-(Originally called vlang, but then vlang was occupied :)
-
 接下来介绍 Valkyrie 的主要特性
 
 ## 扩展
@@ -41,6 +39,9 @@ pkg extension Features;
 
 ### 符号重载
 
+````valkyrie
+/// Otherwise, all it will inherit all extensions in the current namespace
+@no_prelude
 pkg extension FreeAdd {
     /// Symbols are defined in the standard library
     /// Types are also defined in the standard library
@@ -52,6 +53,7 @@ pkg extension FreeAdd {
         i as Decimal + f
     }
 }
+````
 
 ### 数字模式
 
