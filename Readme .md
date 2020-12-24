@@ -206,3 +206,60 @@ if case Some(group0) = Regex::unapply(input) {
     Integer::parse(group0)
 }
 ````
+
+## Closures and Lambda Functions
+
+Closures are also a necessary feature of a modern language.
+
+Consider the following function:
+
+````valkyrie
+def doulbe_even(x) {
+    match x {
+        x if x % 2 => 2 * x,
+        x          => x
+    }
+}
+[1, 2, 3, 4].map(doulbe_even)
+````
+
+If the last parameter accepted by a function is a closure, then `()` can be omitted.
+
+Now consider writing it as an anonymous function:
+
+````valkyrie
+[1, 2, 3, 4].map {
+    /// `{lambda (x) expr}` even longer than python 🤣
+    lambda (x) match x {
+        x if x % 2 => 2 * x,
+        x          => x
+    }
+}
+````
+
+(This looks so complicated 🤣 :)
+
+This is a full form of closure, it only exists as a result of desugar, and is not actually used.
+
+The following `case closure` is commonly used:
+
+````valkyrie
+[1, 2, 3, 4].map {
+    case x if x % 2 => 2 * x,
+    case x          => x
+}
+````
+
+There is also a shorthand method called `slot closure`:
+
+````valkyrie
+[1, 2, 3, 4].map {
+    if $0 % 2 {2 * $0} else {$0}
+}
+/// Looks like perl, maybe the ternary operator should be banned
+[1, 2, 3, 4].map {$0 % 2 ? 2 * $0 : $0}
+````
+
+
+
+

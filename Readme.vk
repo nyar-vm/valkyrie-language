@@ -200,7 +200,56 @@ if case Some(group0) = Regex::unapply(input) {
 ````
 
 
+## 闭包和匿名函数
 
+闭包也是一个现代化的语言必备的特性
+
+考虑如下函数
+
+````valkyrie
+def doulbe_even(x) {
+    match x {
+        x if x % 2 => 2 * x,
+        x          => x
+    }
+}
+[1, 2, 3, 4].map(doulbe_even)
+````
+
+如果一个函数接受的最后一个参数是闭包, 那么可以省略 `()`
+
+现在考虑把它写成匿名函数
+
+````valkyrie
+[1, 2, 3, 4].map {
+    /// `(lambda (x) expr)` even longer than python 🤣
+    lambda (x) match x {
+        x if x % 2 => 2 * x,
+        x          => x
+    }
+}
+````
+
+这个看起来也太复杂了, 这是完全形式的闭包, 只是作为 desugar 的结果而存在, 实际用不到
+
+一般常用的是下面的 case 闭包:
+
+````valkyrie
+[1, 2, 3, 4].map {
+    case x if x % 2 => 2 * x,
+    case x          => x
+}
+````
+
+还有一种简写方式叫 slot 闭包:
+
+````valkyrie
+[1, 2, 3, 4].map {
+    if $0 % 2 {2 * $0} else {$0}
+}
+/// Looks like perl, maybe the ternary operator should be banned
+[1, 2, 3, 4].map {$0 % 2 ? 2 * $0 : $0}
+````
 
 
 ## 多态
@@ -211,7 +260,7 @@ if case Some(group0) = Regex::unapply(input) {
 extends Integer: From<String> {
     def from(s) { Self::parse(i) }
 }
-/// Coercion<T> 需要满足 bound From<T>
+/// Coercion<T> 需要满足 trait bound From<T>
 extends Integer: Coercion<String>;
 
 def add_one(input: Integer): Integer {
@@ -260,16 +309,49 @@ def add_one(input: Canbe): Integer {
 }
 
 
-
 ## 专门设计的 REPL 模式
+
+REPL 模式是指类似于 Mathematica, Observable 或者 Jupyter 的工作模式
 
 ### 时序与非时序模式
 
+考虑如下代码:
+
 ````valkyrie
-let sec = 1;
-
-
+let second  = 1 + first;
+let first  = 1;
 ````
+
+在带时序的语言中, 这应该直接报错, 第一行先于第二行发生, 不能使用一个未声明未初始化的变量 `first`.
+
+但是在无时序的语言中, 这是可以实现的, 因为所有声明都在同一时刻发生, 没有谁先谁后.
+
+再考虑如下代码:
+
+````valkyrie
+let a = 1;
+let a = 2;
+````
+
+在带时序的语言中, 显然第二次行应该覆盖第一行关于 `a` 的声明.
+
+但是在无时序的语言中会报错, 因为所有声明都在同一时刻发生, 没有谁先谁后.
+
+Valkyrie 中的作用域和闭包是有时序的, 但是也不能重复声明函数
+
+而其他的 package, class, trait, tagged 都是无时序的, 因此禁止重复声明
+
+### REPL 模式
+
+但是在 REPL 模式下, package namespace 是时序的, 可以反复修改一个函数并覆盖掉之前这样很方便调试.
+
+REPL 模式下所有未声明的变量默认是首次声明的可变变量, 这种设定借鉴了 Mathematica, 也很方便调试
+
+REPL 模式下可以使用 `use?` 导入一个外部模块并允许反复导入, 以此实现热重载
+
+这里 `?` 表示不要加入全局方法表, 因为一旦加入就会污染所有的定义, 这种污染是不可逆的.
+
+REPL 模式可以使用 `¶` 和 `⁋` 获取历史输入输出, 相当于 Mathematica 的 `In`, `Out` 以及 `%`
 
 ## 基于 AST 的宏
 
@@ -279,6 +361,6 @@ let sec = 1;
 
 ## IR 兼容性
 
-V 的语法并不是绝对稳定的, V 会把源文件编译成单个的 IR 文件来屏蔽这种改变, 由此来获得前向兼容性.
+Valkyrie 的语法并不是绝对稳定的, Valkyrie 会把源文件编译成单个的 IR 文件来屏蔽这种改变, 由此来获得前向兼容性.
 
-V 使用类似 Rust 的 Edition 发布模式.
+Valkyrie 使用类似 Rust 的 Edition 发布模式.
