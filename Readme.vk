@@ -135,18 +135,42 @@ re""
 
 V 当然也有个高度一致, 可 desugar 的灵活模式匹配语法
 
+### 字面量匹配
+
+字面量匹配是标配
+
+````valkyrie
+match x {
+    case 1      => "integer"
+    case 1.0    => "decimal"
+    case '1'    => "character"
+    case "1"    => "string"
+    case 1...4  => "range"
+    case (1, 2) => "tuple"
+    case [1, 2] => "list"
+    _           => "something else"
+}
+````
+
 ### case 守卫
 
+有时候模式匹配量需要一点条件判定, 这种情况下可以用 case 守卫
+
+````valkyrie
 match x {
     case x is Integer   => "x is an instance of type `Integer`"
     case x is Callablte => "x satisfies the trait bound `Callable`"
     case x in [1, 2, 3] => "x is one of [1, 2, 3]"
     case x if x < 0     => "x satisfies the condition x < 0"
+    _                   => "none of the above conditions are met"
 }
+````
 
+### case 解构
 
-case 解构
+某些时候想要匹配某一段数据, 那么可以用 case 解构
 
+````valkyrie
 if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4} {
     print(a) /// 1
     print(y) /// 2
@@ -158,18 +182,22 @@ if case Point(a, ..p, y) = Point(1, 2, 3, 4) {
     print(p) /// [2, 3]
     print(y) /// 4
 }
+````
+
+### 自定义提取器
+
+对于自定义的类, 可以定义 unapply 方法来自定义提取的数据.
 
 
-自定义提取器
-
+````valkyrie
 match input {
     case Regex(group0) => Integer::parse(group0),
 }
-///
-if case Some(s) = Regex::unapply(input) {
+/// desugar as unapply
+if case Some(group0) = Regex::unapply(input) {
     Integer::parse(group0)
 }
-
+````
 
 
 

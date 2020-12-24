@@ -75,7 +75,7 @@ pkg extension FreeAdd {
 }
 ````
 
-### 数字模式
+### Digit mode
 
 Sometimes we want to enter some special values, such as calculations with units. If you use the constructor, it may make the code unreadable.
 
@@ -100,14 +100,14 @@ pkg extension SIUnit {
 }
 ````
 
-然后你就可以写如下写法了!
+Then you can write as follows!
 
 ````valkyrie
 use SIUnit;
 let weight = 1kg + 1g;
 ````
 
-以此类推, 你应该能很轻易的实现下列功能, 这就是 Valkyrie 一致性的体现.
+By analogy, you should be able to easily implement the following functions, which is the embodiment of Valkyrie's consistency.
 
 ````valkyrie
 use Complex;
@@ -117,13 +117,13 @@ use Quaternion;
 let q = 1 + 2i + 3j + 4k;
 ````
 
-### 字符串模式
+### String mode
 
-字符串也是个很复杂的东西, 众口难调, 不同的人喜欢不同的写法
+String is also a very complicated thing, it is difficult to adjust, different people like different writing.
 
-好在我们有字符串模式, 字符串模式是前缀表达.
+Fortunately, we have string patterns, which are prefix expressions.
 
-如果什么前缀也没有, 默认的字符串叫 s-string(slot).
+If there is no prefix, the default string is called `s-string(slot)`.
 
 ````valkyrie
 r"\a"
@@ -132,9 +132,77 @@ f""
 re""
 ````
 
-同样的, 你也可以用 extension 扩展你自己的字符串模式
+Similarly, you can also use extension to extend your own string pattern
 
-你已经猜到了, 使用 `string_prefix`, 这也是一致性的体现
+As you have guessed, use `string_prefix`, which is also a manifestation of consistency
 
-你能想到什么应用? 嵌入 json 对象? 嵌入 css 样式? 或者更炫酷的用法?
+What application can you think of? Embed json object? Embed css style? Or more cool usage?
 
+## Pattern matching
+
+More and more languages use pattern matching or similar grammars, and pattern matching is fast becoming the standard for every language.
+
+Valkyrie of course also has a highly consistent, but desugar flexible pattern matching syntax
+
+### Literal match
+
+Literal matching is basic.
+
+````valkyrie
+match x {
+    case 1      => "integer"
+    case 1.0    => "decimal"
+    case '1'    => "character"
+    case "1"    => "string"
+    case 1...4  => "range"
+    case (1, 2) => "tuple"
+    case [1, 2] => "list"
+    _           => "something else"
+}
+````
+
+### case guard
+
+Sometimes the amount of pattern matching requires a little conditional judgment, in this case you can use the `case guard`
+
+````valkyrie
+match x {
+    case x is Integer   => "x is an instance of type `Integer`"
+    case x is Callablte => "x satisfies the trait bound `Callable`"
+    case x in [1, 2, 3] => "x is one of [1, 2, 3]"
+    case x if x < 0     => "x satisfies the condition x < 0"
+    _                   => "none of the above conditions are met"
+}
+````
+
+### case deconstruction
+
+Sometimes you want to match a certain piece of data, then you can use case deconstruction
+
+````valkyrie
+if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4} {
+    print(a) /// 1
+    print(y) /// 2
+    print(p) /// {z: 3, w: 4}
+}
+
+if case Point(a, ..p, y) = Point(1, 2, 3, 4) {
+    print(a) /// 1
+    print(p) /// [2, 3]
+    print(y) /// 4
+}
+````
+
+### Custom extractor
+
+For custom classes, you can define the `unapply` method to customize the extracted data.
+
+````valkyrie
+match input {
+    case Regex(group0) => Integer::parse(group0),
+}
+/// desugar as unapply
+if case Some(group0) = Regex::unapply(input) {
+    Integer::parse(group0)
+}
+````
