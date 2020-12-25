@@ -254,38 +254,70 @@ def doulbe_even(x) {
 
 ## 多态
 
-注意以上所有方法都是静态决策的
+有时候我们需要一些多态接口, 比如同时接受字符串和整数的函数
 
-/// 隐式类型转换(type coercion)
+侵入性最强但是用起来最方便的是隐式类型转换
+
+````valkyrie
+/// First define ordinary type conversion
 extends Integer: From<String> {
     def from(s) { Self::parse(i) }
 }
-/// Coercion<T> 需要满足 trait bound From<T>
-extends Integer: Coercion<String>;
+/// `ImplicitFrom<T>` needs to meet trait bound `From<T>`
+extends Integer: ImplicitFrom<String>;
 
 def add_one(input: Integer): Integer {
     input + 1
 }
-/// 发现类型不匹配, 尝试查找 Coercion 的静态方法
+/// Found type mismatch, try implicit type conversion
 add_one("1") /// 2
+````
 
+其次是显式类型转换, 自动规约输入
 
-/// 显式类型转换
+````valkyrie
 def add_one(auto input: Integer): Integer {
     input + 1
 }
-/// 发现类型不匹配, 调用 from 方法
+/// Found that the type does not match, call the `from` method
 add_one("1") /// 2
+````
 
+比较规范的是使用基于 trait 的泛型静态派发
 
-/// 基于 trait 的泛型静态派发
+````valkyrie
 def add_one<T>(input: T): Integer
 for T: Into<Integer>
 {
     input.into() + 1
 }
+````
 
-/// 并类型匹配
+以上这些方法都是非限定性的多态, 输入不需要预先确定.
+
+但是有时候输入是固定的几类, 这就需要限定性多态.
+
+限定性多态可以用并类型和和类型实现, 很多语言里不区分这两个, 甚至混淆了两者.
+
+但是仔细想想 `Optional<Optional<T>>` 和 `Nullable<Nullable<T>>` 能一样吗?
+
+````valkyrie
+/// This is the sum type, tagged union
+tagged Optional<T> {
+    Some<T>,
+    None,
+}
+
+/// This is the union type, untagged union
+class Null {};
+type Nullable<T> = T | Null;
+
+Optional<Optional<T>> ==> Optional<Optional<T>>
+Nullable<Nullable<T>> ==> Nullable<T>
+````
+
+````valkyrie
+/// sum type matching
 def add_one(input: Integer|String): Integer {
     let y = match input {
         x is Integer => x,
@@ -294,7 +326,7 @@ def add_one(input: Integer|String): Integer {
     y + 1
 }
 
-/// 和类型匹配
+/// union type matching
 tagged Canbe {
     Integer(Integer)
     String(String)
@@ -307,7 +339,7 @@ def add_one(input: Canbe): Integer {
     }
     y + 1
 }
-
+````
 
 ## 专门设计的 REPL 模式
 
