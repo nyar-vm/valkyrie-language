@@ -126,17 +126,16 @@ Fortunately, we have string patterns, which are prefix expressions.
 If there is no prefix, the default string is called `s-string(slot)`.
 
 ````valkyrie
-r"\a"
-s"${x}"
-f""
-re""
+r"raw-string:    ${x + 1}\n"
+s"slot-string:   ${x + 1}\n"
+f"format-string: %s %f\s \n"
 ````
 
 Similarly, you can also use extension to extend your own string pattern
 
 As you have guessed, use `string_prefix`, which is also a manifestation of consistency
 
-What application can you think of? Embed json object? Embed css style? Or more cool usage?
+What application can you think of? Embed json object? Embed re object? Or more cool usage?
 
 ## Pattern matching
 
@@ -157,7 +156,7 @@ match x {
     case 1...4  => "range"
     case (1, 2) => "tuple"
     case [1, 2] => "list"
-    _           => "something else"
+    case _      => "something else"
 }
 ````
 
@@ -171,7 +170,7 @@ match x {
     case x is Callablte => "x satisfies the trait bound `Callable`"
     case x in [1, 2, 3] => "x is one of [1, 2, 3]"
     case x if x < 0     => "x satisfies the condition x < 0"
-    _                   => "none of the above conditions are met"
+    case _              => "none of the above conditions are met"
 }
 ````
 
@@ -180,7 +179,7 @@ match x {
 Sometimes you want to match a certain piece of data, then you can use case deconstruction
 
 ````valkyrie
-if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4} {
+if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4, } {
     print(a) /// 1
     print(y) /// 2
     print(p) /// {z: 3, w: 4}
@@ -217,7 +216,7 @@ Consider the following function:
 def doulbe_even(x) {
     match x {
         x if x % 2 => 2 * x,
-        x          => x
+        x          => x,
     }
 }
 [1, 2, 3, 4].map(doulbe_even)
@@ -232,7 +231,7 @@ Now consider writing it as an anonymous function:
     /// `{lambda (x) expr}` even longer than python 🤣
     lambda (x) match x {
         x if x % 2 => 2 * x,
-        x          => x
+        x          => x,
     }
 }
 ````
@@ -246,7 +245,7 @@ The following `case closure` is commonly used:
 ````valkyrie
 [1, 2, 3, 4].map {
     case x if x % 2 => 2 * x,
-    case x          => x
+    case x          => x,
 }
 ````
 
@@ -261,5 +260,154 @@ There is also a shorthand method called `slot closure`:
 ````
 
 
+## Polymorphism
 
+Sometimes we need some polymorphic interfaces, such as functions that accept strings and integers at the same time
+
+The most intrusive but the most convenient to use is implicit type conversion
+
+````valkyrie
+/// First define ordinary type conversion
+extends Integer: From<String> {
+    def from(s) { Self::parse(i) }
+}
+/// `ImplicitFrom<T>` needs to meet trait bound `From<T>`
+extends Integer: ImplicitFrom<String>;
+
+def add_one(input: Integer): Integer {
+    input + 1
+}
+/// Found type mismatch, try implicit type conversion
+add_one("1") /// 2
+````
+
+Followed by explicit type conversion, automatic convert input.
+
+````valkyrie
+def add_one(auto input: Integer): Integer {
+    input + 1
+}
+/// Found that the type does not match, call the `from` method
+add_one("1") /// 2
+````
+
+The more standard is to use trait-based generic static dispatch
+
+This constraint method is also called parametric polymorphism, or generic
+
+````valkyrie
+def add_one<T>(input: T): Integer
+for T: Into<Integer>
+{
+    input.into() + 1
+}
+````
+
+The above methods are all non-limiting polymorphism, and the input does not need to be predetermined.
+
+But sometimes the input is fixed in several categories, which requires definite polymorphism.
+
+Restrictive polymorphism can be realized by combining types and sum types. Many languages do not distinguish between the two, or even confuse the two.
+
+But think about it carefully, can `Optional<Optional<T>>` and `Nullable<Nullable<T>>` be the same?
+
+````valkyrie
+/// This is the sum type, tagged union
+tagged Optional<T> {
+    Some<T>,
+    None,
+}
+
+/// This is the union type, untagged union
+class Null {};
+type Nullable<T> = T | Null;
+
+Optional<Optional<T>> ==> Optional<Optional<T>>
+Nullable<Nullable<T>> ==> Nullable<T>
+````
+
+So the treatment of the two is also different.
+
+But in fact the compiler should be able to optimize to the same.
+
+````valkyrie
+/// sum type matching
+def add_one(input: Integer|String): Integer {
+    let y = match input {
+        x is Integer => x,
+        x is String => Integer::parse(x)
+    }
+    y + 1
+}
+
+/// union type matching
+tagged Canbe {
+    Integer(Integer)
+    String(String)
+}
+
+def add_one(input: Canbe): Integer {
+    let y = match input {
+        Canbe::Integer(x) => x,
+        Canbe::String(x) => Integer::parse(x)
+    }
+    y + 1
+}
+````
+
+## Specially designed REPL mode
+
+REPL mode refers to a working mode similar to Mathematica, Observable or Jupyter
+
+### Sequential and non-sequential mode
+
+Consider the following code:
+
+````ts
+let second  = 1 + first;
+let first  = 1;
+````
+
+In a sequential language, this should report an error directly, the first line occurs before the second line, and an undeclared and uninitialized variable `first` cannot be used.
+
+But in a non-chronological language, this is achievable, because all declarations happen at the same time, and no one comes first.
+
+Then consider the following code:
+
+````ts
+let a = 1;
+let a = 2;
+````
+
+In a non-sequential language, it is obvious that the second line should cover the declaration of `a` in the first line.
+
+But in an unscheduled language, an error will be reported, because all declarations occur at the same time, and no one comes first.
+
+The scope and closure in Valkyrie are sequential, but the function still cannot be declared repeatedly.
+
+Other packages, classes, traits, and tagged are all non-sequential, so repeated declarations are prohibited.
+
+### REPL mode
+
+But in REPL mode, the package namespace is time-sequential, and you can modify a function repeatedly and overwrite the previous one, which is very convenient for debugging.
+
+All undeclared variables in REPL mode default to the variable variables declared for the first time. This setting borrows from Mathematica and is also very convenient for debugging.
+
+In REPL mode, you can use `use?` to import an external module and allow repeated imports to achieve hot reloading
+
+Here `?` means do not add to the global method table, because once added, it will pollute all definitions, and this pollution is irreversible.
+
+REPL mode can use `¶` and `⁋` to get historical input and output, which is equivalent to Mathematica's `In`, `Out` and `%`
+
+## AST-based macro
+
+AST-based macros may not be as powerful as token-based macros, but do you really want to write a completely different language in another language?
+
+In particular, the IDE support of Token macros is generally very poor, but AST macros with TokenKind can get very good support.
+
+## IR compatibility
+
+Valkyrie's syntax is not absolutely stable. Valkyrie will compile the source file into a single IR file to shield this change and obtain forward compatibility.
+
+Valkyrie uses a Rust-like Edition release model.
 

@@ -116,10 +116,9 @@ let q = 1 + 2i + 3j + 4k;
 如果什么前缀也没有, 默认的字符串叫 s-string(slot).
 
 ````valkyrie
-r"\a"
-s"${x}"
-f""
-re""
+r"raw-string:    ${x + 1}\n"
+s"slot-string:   ${x + 1}\n"
+f"format-string: %s %f\s \n"
 ````
 
 同样的, 你也可以用 `extension` 扩展你自己的字符串模式.
@@ -171,7 +170,7 @@ match x {
 某些时候想要匹配某一段数据, 那么可以用 case 解构
 
 ````valkyrie
-if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4} {
+if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4,} {
     print(a) /// 1
     print(y) /// 2
     print(p) /// {z: 3, w: 4}
