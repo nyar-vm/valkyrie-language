@@ -37,11 +37,17 @@ Otherwise, it can only be modified in the `extension package namespace`
 
 This rule is to prevent the introduction of unknown semantics without knowing it
 
+
+![code1.png](https://i.loli.net/2021/01/01/i6E3qSJXrbxRYwa.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 /// Namespace is generally lowercase, but extension is uppercase
 /// Because the performance is similar to the introduce a trait
 pkg extension Features;
 ````
+</details>
 
 ### Operator overload
 
@@ -59,6 +65,10 @@ For example, we generally default that addition obeys the commutative law, but `
 
 So you can give the choice to the library user.
 
+![code2.png](https://i.loli.net/2021/01/01/ViJAGnKHjQLzTg5.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 /// Otherwise, all it will inherit all extensions in the current namespace
 @no_prelude
@@ -74,6 +84,7 @@ pkg extension FreeAdd {
     }
 }
 ````
+</details>
 
 ### Digit mode
 
@@ -83,6 +94,10 @@ In this case, you can use digital mode.
 
 Digital mode is in suffix form.
 
+![code3.png](https://i.loli.net/2021/01/01/vjMSVIYtCPH9Erd.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 tagged Quality {
     Kilogram(auto Decimal),
@@ -92,23 +107,30 @@ def +(lhs: Quality, rhg: Quality): Quality {
     /// Some conversion rules, that's it, anyone can write
     @unimplemented()
 }
-
 pkg extension SIUnit {
     /// number_suffix means integer_suffix + decimal_suffix
     def number_suffix kg(n): Quality = Quality::Kilogram(n);
     def number_suffix  g(n): Quality = Quality::Gram(n);
 }
 ````
+</details>
 
 Then you can write as follows!
 
+![code4.png](https://i.loli.net/2021/01/01/zdTSYPK9M8xlDpA.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 use SIUnit;
 let weight = 1kg + 1g;
 ````
+</details>
 
 By analogy, you should be able to easily implement the following functions, which is the embodiment of Valkyrie's consistency.
 
+![code5.png](https://i.loli.net/2021/01/01/8pWx96FjmoMv3nq.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 use Complex;
 let z = 1 + 2i;
@@ -116,6 +138,7 @@ let z = 1 + 2i;
 use Quaternion;
 let q = 1 + 2i + 3j + 4k;
 ````
+</details>
 
 ### String mode
 
@@ -125,11 +148,15 @@ Fortunately, we have string patterns, which are prefix expressions.
 
 If there is no prefix, the default string is called `s-string(slot)`.
 
+![code6.png](https://i.loli.net/2021/01/01/PMTWRo1qVgb4EUc.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 r"raw-string:    ${x + 1}\n"
 s"slot-string:   ${x + 1}\n"
 f"format-string: %s %f\s \n"
 ````
+</details>
 
 Similarly, you can also use extension to extend your own string pattern
 
@@ -147,6 +174,9 @@ Valkyrie of course also has a highly consistent, but desugar flexible pattern ma
 
 Literal matching is basic.
 
+![code7.png](https://i.loli.net/2021/01/01/p97Ix54MoB2sTbE.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 match x {
     case 1      => "integer"
@@ -159,11 +189,15 @@ match x {
     case _      => "something else"
 }
 ````
+</details>
 
 ### case guard
 
 Sometimes the amount of pattern matching requires a little conditional judgment, in this case you can use the `case guard`
 
+![code8.png](https://i.loli.net/2021/01/01/X8fbnA57BcPHpuL.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 match x {
     case x is Integer   => "x is an instance of type `Integer`"
@@ -173,29 +207,37 @@ match x {
     case _              => "none of the above conditions are met"
 }
 ````
+</details>
 
 ### case deconstruction
 
 Sometimes you want to match a certain piece of data, then you can use case deconstruction
 
+![code9.png](https://i.loli.net/2021/01/01/MR139UAC5s8WKmI.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4, } {
     print(a) /// 1
     print(y) /// 2
     print(p) /// {z: 3, w: 4}
 }
-
 if case Point(a, ..p, y) = Point(1, 2, 3, 4) {
     print(a) /// 1
     print(p) /// [2, 3]
     print(y) /// 4
 }
 ````
+</details>
+
 
 ### Custom extractor
 
 For custom classes, you can define the `unapply` method to customize the extracted data.
 
+![code10.png](https://i.loli.net/2021/01/01/i3lVkAIwRB9CyL6.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 match input {
     case Regex(group0) => Integer::parse(group0),
@@ -205,6 +247,8 @@ if case Some(group0) = Regex::unapply(input) {
     Integer::parse(group0)
 }
 ````
+</details>
+
 
 ## Closures and Lambda Functions
 
@@ -212,6 +256,10 @@ Closures are also a necessary feature of a modern language.
 
 Consider the following function:
 
+![](https://ftp.bmp.ovh/imgs/2021/01/e223f1897413b3a2.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 def doulbe_even(x) {
     match x {
@@ -221,11 +269,16 @@ def doulbe_even(x) {
 }
 [1, 2, 3, 4].map(doulbe_even)
 ````
-
+</details>
 If the last parameter accepted by a function is a closure, then `()` can be omitted.
 
 Now consider writing it as an anonymous function:
 
+![](https://ftp.bmp.ovh/imgs/2021/01/db0295c02d008e44.png)
+
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 [1, 2, 3, 4].map {
     /// `{lambda (x) expr}` even longer than python 🤣
@@ -235,6 +288,7 @@ Now consider writing it as an anonymous function:
     }
 }
 ````
+</details>
 
 (This looks so complicated 🤣 :)
 
@@ -242,15 +296,22 @@ This is a full form of closure, it only exists as a result of desugar, and is no
 
 The following `case closure` is commonly used:
 
+![](https://ftp.bmp.ovh/imgs/2021/01/21d6ec20f40daafa.png)
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 [1, 2, 3, 4].map {
     case x if x % 2 => 2 * x,
     case x          => x,
 }
 ````
-
+</details>
 There is also a shorthand method called `slot closure`:
 
+![](https://ftp.bmp.ovh/imgs/2021/01/480ebcb19262ab36.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 [1, 2, 3, 4].map {
     if $0 % 2 {2 * $0} else {$0}
@@ -258,7 +319,7 @@ There is also a shorthand method called `slot closure`:
 /// Looks like perl, maybe the ternary operator should be banned
 [1, 2, 3, 4].map {$0 % 2 ? 2 * $0 : $0}
 ````
-
+</details>
 
 ## Polymorphism
 
@@ -266,6 +327,11 @@ Sometimes we need some polymorphic interfaces, such as functions that accept str
 
 The most intrusive but the most convenient to use is implicit type conversion
 
+![](https://ftp.bmp.ovh/imgs/2021/01/e4a5c772985379c7.png)
+
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 /// First define ordinary type conversion
 extends Integer: From<String> {
@@ -273,16 +339,20 @@ extends Integer: From<String> {
 }
 /// `ImplicitFrom<T>` needs to meet trait bound `From<T>`
 extends Integer: ImplicitFrom<String>;
-
 def add_one(input: Integer): Integer {
     input + 1
 }
 /// Found type mismatch, try implicit type conversion
 add_one("1") /// 2
 ````
+</details>
 
 Followed by explicit type conversion, automatic convert input.
 
+![](https://ftp.bmp.ovh/imgs/2021/01/870edc42a53ad0aa.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 def add_one(auto input: Integer): Integer {
     input + 1
@@ -290,11 +360,16 @@ def add_one(auto input: Integer): Integer {
 /// Found that the type does not match, call the `from` method
 add_one("1") /// 2
 ````
+</details>
 
 The more standard is to use trait-based generic static dispatch
 
 This constraint method is also called parametric polymorphism, or generic
 
+![](https://ftp.bmp.ovh/imgs/2021/01/46b144d7ae808b29.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 def add_one<T>(input: T): Integer
 for T: Into<Integer>
@@ -302,6 +377,7 @@ for T: Into<Integer>
     input.into() + 1
 }
 ````
+</details>
 
 The above methods are all non-limiting polymorphism, and the input does not need to be predetermined.
 
@@ -311,25 +387,32 @@ Restrictive polymorphism can be realized by combining types and sum types. Many 
 
 But think about it carefully, can `Optional<Optional<T>>` and `Nullable<Nullable<T>>` be the same?
 
+![](https://ftp.bmp.ovh/imgs/2021/01/e94e0c8f84e5a6bc.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 /// This is the sum type, tagged union
 tagged Optional<T> {
     Some<T>,
     None,
 }
-
 /// This is the union type, untagged union
 class Null {};
 type Nullable<T> = T | Null;
-
 Optional<Optional<T>> ==> Optional<Optional<T>>
 Nullable<Nullable<T>> ==> Nullable<T>
 ````
+</details>
 
 So the treatment of the two is also different.
 
 But in fact the compiler should be able to optimize to the same.
 
+![](https://ftp.bmp.ovh/imgs/2021/01/f99d25a5a4124a39.png)
+
+<details>
+<summary>Copy code</summary>
 ````valkyrie
 /// sum type matching
 def add_one(input: Integer|String): Integer {
@@ -339,13 +422,11 @@ def add_one(input: Integer|String): Integer {
     }
     y + 1
 }
-
 /// union type matching
 tagged Canbe {
     Integer(Integer)
     String(String)
 }
-
 def add_one(input: Canbe): Integer {
     let y = match input {
         Canbe::Integer(x) => x,
@@ -354,6 +435,7 @@ def add_one(input: Canbe): Integer {
     y + 1
 }
 ````
+</details>
 
 ## Specially designed REPL mode
 
