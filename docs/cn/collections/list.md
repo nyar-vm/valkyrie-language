@@ -1,12 +1,12 @@
 
 
 
-| Type   | Heterogeneous | Extensible |
-|--------|---------------|------------|
-| Array   | Yes           | Yes        |
-| Tuple   | Yes           | Yes        |
-| Vector  | Yes           | Yes        |
-| List | Yes           | Yes        |
+| 类型       | 异质  | 扩张  |
+|----------|-----|-----|
+| `Array`  | Yes | Yes |
+| `Tuple`  | Yes | Yes |
+| `Vector` | Yes | Yes |
+| `List`   | Yes | Yes |
 
 ## Array
 
@@ -27,7 +27,7 @@ Aka `Extensible Array`
 
 ## List
 
-Aka `Heterogeneous Vector`
+在其他语言里也被叫做 [HList (Haskell)](https://hackage.haskell.org/package/HList), [HList (Scala)](https://www.scala-exercises.org/shapeless/heterogenous_lists).
 
 
 ## Dict
