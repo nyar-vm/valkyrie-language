@@ -10,6 +10,8 @@ def inline function_name[Generic](arguements, <, >, ): type / effect = {
 
 ### Implicit Type Conversion
 
+
+
 隐式类型转换
 
 `Character => String`, `Integer   => Decimal`
@@ -31,22 +33,35 @@ print_string('c')
 # CompileError: type mismatch;
 ```
 
+或者可以从上下文中移除自动转换
+
+```scala
+@implicit_cast.remove {
+    Character: String
+}
+```
+
 ### Explicit Type Conversion
+
+```scala
+def print_string(string: String) {
+    print(string)
+}
+print_string(1)
+# CompileError: type mismatch;
+```
+
+
+
 
 ```scala
 def print_string(into string: String) {
     print(string)
 }
-print_string('c')
-# CompileError: type mismatch;
+print_string(1)
+# nothing wrong, same as
+print_string(1.into.[String]())
 ```
-
-def print() {
-    raise ConsoleMessage(arguments)
-}
-def print_line() {
-    raise Console.log(arguments)
-}
 
 ### Coercion
 
