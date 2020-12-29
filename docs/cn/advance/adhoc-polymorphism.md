@@ -11,9 +11,8 @@
 逆变, 协变
 
 ```ts
-
 class A {
-    [mut, set, get, public]
+    @[mut, set, get, public]
     a = 0
     b = 1
 
