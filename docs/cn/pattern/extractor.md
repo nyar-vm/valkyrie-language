@@ -1,23 +1,22 @@
 # Extractor
 
-提取器模式代表 case 左边的 `Name()`
+提取器模式代表类被写在 `let` 或者 `case` 之后的行为.
 
 
 ```scala
 trait Extractor {
+    type Input;
     type Output: TupleType;
-    @overloaded(in, out)
-    extractor(object): Self::Output?
+    extractor(object: Self::Input): Self::Output?
 }
 ```
 
-该函数入参和返回值都可以重载, 但是返回值需要是 tuple
+输入值为任意类型, 但是返回值需要是 tuple
 
 ---
 
-# 常规提取器
-
-加入我们想实现以下功能:
+## 常规提取器
+假如我们想实现以下功能:
 
 ```scala
 # a = ['A', 'B', 'C']
@@ -29,8 +28,9 @@ let MyName(a) := 'A.B.C'
 ```scala
 class MyName {}
 
-extends MyName: Extractor<Output: (String,)> {
-    extract(string: String): Extractor::Output?{
+extends MyName: Extractor<Input: StringView, Output: (String,)> {
+    @never_null
+    extract(string: StringView): Extractor::Output? {
         return string.split('.')
     }
 }
@@ -38,12 +38,11 @@ extends MyName: Extractor<Output: (String,)> {
 
 由于 Extractor 已被注册为 `auto_trait`, 所以也可以直接定义 extract 函数
 
-上面的代码等价于:
+上面的代码可以简写为:
 
 ```scala
 class MyName {
-    @never_null # skip null check
-    extract(string: String): (String,)? {
+    extract(string: StringView): String {
         return string.split('.')
     }
 }
@@ -54,17 +53,40 @@ class MyName {
 ```scala
 let MyName(a) := 'A.B.C'
 
-# _tml = (['A', 'B', 'C'],)
-let _tmp = MyName::extract('A::B::C')
+# _tmp = (['A', 'B', 'C'],)
+let _tmp = MyName::extract('A::B::C')!
 # a = ['A', 'B', 'C']
-let a = _tmp!.1
+let a: [String] = _tmp.1
 ```
 
+如果不加 `@never_null`, let 下的返回值会是可空值, case 下没有返回值.
 
+```scala
+class MyName {
+    extract(one: String): (String, String)? {
+        let [one, two, **rest] = string.split('::');
+        if rest.is_empty() {
+            return (one, two)
+        }
+        else {
+            return null
+        }
+    }
+}
+```
+
+注意结果可能为空, 此时展开过程为:
+
+```scala
+let MyName(a, b) := 'A::B'
+let _tmp: (String, String)? = MyName::extract('A::B');
+let a: String? = _tmp.map { $1.1 }
+let b: String? = _tmp.map { $1.2 }
+```
 
 ---
 
-# 不交并的提取器
+## 不交并的提取器
 
 
 ```scala
@@ -79,7 +101,7 @@ union Result<T, E> {
 }
 
 # 定义成功情况的提取器
-extends<T, E> Result::Success<T, E>: Extractor<Output=(T,)> {
+extends<T, E> Result::Success<T, E>: Extractor<Input: Result<T, E>, Output=(T,)> {
     extractor(result: Result<T, E>) -> (T,)? {
         result.match {
             case Result::Success { value }:
@@ -91,7 +113,7 @@ extends<T, E> Result::Success<T, E>: Extractor<Output=(T,)> {
 }
 
 # 定义失败情况的提取器
-extends<T, E> Result::Failure<T, E>: Extractor<Output=(E,)> {
+extends<T, E> Result::Failure<T, E>: Extractor<Input: Result<T, E>, Output=(E,)> {
     extractor(result: Result<T, E>) -> (E,)? {
         result.match {
             case Result::Success { value: _ }:
@@ -103,31 +125,35 @@ extends<T, E> Result::Failure<T, E>: Extractor<Output=(E,)> {
 }
 
 # 于是可以写出如下调用
-
 result.match {
-    case Success(v): print(v)
-    case Failure(e): print(e)
+    case Success(v): print("success: {v}")
+    case Failure(e): print("failure: {e}")
 }
+```
 
-# 等价于
-let v = Result::Success::extractor(result);
+展开过程等价于如下代码:
+
+```scala
+let v = Result::Success::extract(result);
 if v != null {
-    return print(v)
+    return print("success: {v}")
 }
-let e = Result::Failure::extractor(result);
+let e = Result::Failure::extract(result);
 if e != null {
-    return print(e)
+    return print("failure: {e}")
 }
 ```
 
-该过程较为繁琐, 可以使用宏来简化
+该实现较为繁琐, 可以使用宏来简化
 
-```
+```scala
 union Result<T, E> {
+    @construct(value)
     @extract(value)
     Success {
         value: E
     }
+    @construct(error)
     @extract(error)
     Failure {
         error: T
