@@ -1,13 +1,15 @@
 
 
 ```scala
-def function_name(self, position_only, <, simple, >, name_only) {
+def function_name(positional, <, free, >, named) {
 
 }
 ```
 
 
-## Positional arguments
+## Position only arguments
+
+Positional arguments
 
 位置参数
 
@@ -17,9 +19,7 @@ def f(a, <) {}
 f()     # Error, argument required
 f(1)    # Allowed, it's a positional argument
 f(a=1)  # Error, positional only argument
-```
 
-```scala
 def f(a=2, <) {}
 
 f()     # Allowed, argument is optional
@@ -27,18 +27,27 @@ f(1)    # Allowed, it's a positional argument
 f(a=1)  # Error, positional only  argument
 ```
 
-## Keyword arguments
+## Named only arguments
+
+Aka [Keyword arguments (Python)]()
 
 具名参数
 
+```scala
+def f(>, a) {}
 
+f()     # Error, argument required
+f(1)    # Error, keyword only arguments
+f(a=1)  # Allowed, it's a keyword argument
 
+def f(>, a=1) {}
 
+f()    # Allowed
+f(1)   # Error, keyword only argument
+f(a=1) # Allowed, it's a keyword argument
+```
 
-
-### Context Receiver
-
-
+## Context Receiver
 
 隐式类型转换
 
@@ -55,15 +64,9 @@ print_context() #> test
 print_context(context: context)
 ```
 
-或者可以从上下文中移除自动转换
+## 其他定义
 
-```scala
-@implicit_cast.remove {
-    Character: String
-}
-```
-
-## 省略规则
+### 省略规则
 
 - `(arg1) -> (arg1, <, >)`
 - `(arg1, <, arg2) -> (arg1, <, arg2, >)`

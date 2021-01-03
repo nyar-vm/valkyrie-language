@@ -33,11 +33,12 @@ print_string('c')
 # CompileError: type mismatch;
 ```
 
-或者可以从上下文中移除自动转换
+也可以用宏从上下文中移除自动转换规则.
 
 ```scala
-@implicit_cast.remove {
-    Character: String
+@type_cast.implicit.remove {
+    Character => String,
+    Integer8 => Integer => Decimal
 }
 ```
 
