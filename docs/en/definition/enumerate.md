@@ -2,7 +2,7 @@
 
 ## Enumerate
 
-```vk
+```scala
 enumerate MyEnum {
 
 }
@@ -13,7 +13,7 @@ enumerate MyEnum {
 ## Flags
 
 
-```vk
+```scala
 flags MyFlags {
 
 }
