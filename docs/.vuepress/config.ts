@@ -18,15 +18,36 @@ const locales: SiteLocaleConfig = {
 
 const sidebar: SidebarConfigArray = [
     {
-        text: 'Literal',
-        // collapsable: false,
+        text: 'Literals',
+        collapsible: false,
         children: [
-            'literal/readme.md',
-            'literal/number.md',
-            'literal/string.md',
-            'literal/string.md',
+            {
+                text: "Overview",
+                link: "/en/literal/readme.md",
+            },
+            {
+                text: "Number Literal",
+                link: "/en/literal/number.md",
+            },
+            {
+                text: "String Formatted",
+                link: "/en/literal/string.md",
+            },
+            {
+                text: "String Templated",
+                link: "/en/literal/template.md",
+            },
+        ]
+    },
+    {
+        text: 'Collections',
+        collapsible: false,
+        children: [
+            {
+                text: "Overview",
+                link: "/en/collection/readme.md",
+            },
 
-            // ['literal/operators', 'Operator'],
             // ['basic/variable', 'Variable'],
             // ['basic/function', 'Function'],
             // ['basic/class', 'Class'],
@@ -38,33 +59,58 @@ const sidebar: SidebarConfigArray = [
             // ['basic/unit-testing', 'Testing'],
             // ['basic/module', 'Module'],
             // ['basic/paclet', 'Paclet'],
+            //         ['collection/readme.md', 'Collection'],
+            //         ['advance/', 'Handler Operators'],
+            //         ['advance/operator-overloading', 'Operator Overloading'],
+            //
+            //         ['advance/collections', 'Collections'],
+            //         ['advance/closure', 'Closure'],
+            //         ['advance/iterators', 'Iterator'],
+            //         ['advance/adhoc-polymorphism', 'Ad-hoc Polymorphism'],
+            //         ['advance/generic-type', 'Generic Type'],
+            //         ['advance/higher-kinded-type', 'Higher Kinded Type'],
+            //         ['advance/algebraic-data-type', 'Algebraic Data Type'],
         ]
     },
-    // {
-    //     text: 'Collections',
-    //     collapsable: false,
-    //     children: [
-    //         ['collection/readme.md', 'Collection'],
-    //         ['advance/', 'Handler Operators'],
-    //         ['advance/operator-overloading', 'Operator Overloading'],
-    //
-    //         ['advance/collections', 'Collections'],
-    //         ['advance/closure', 'Closure'],
-    //         ['advance/iterators', 'Iterator'],
-    //         ['advance/adhoc-polymorphism', 'Ad-hoc Polymorphism'],
-    //         ['advance/generic-type', 'Generic Type'],
-    //         ['advance/higher-kinded-type', 'Higher Kinded Type'],
-    //         ['advance/algebraic-data-type', 'Algebraic Data Type'],
-    //     ]
-    // },
-    // {
-    //     title: 'Appendix',
-    //     collapsable: false,
-    //     children: [
-    //         ['appendix/', 'Keywords'],
-    //         ['appendix/identifier', 'Identifiers'],
-    //     ]
-    // }
+    {
+        text: 'Definitions',
+        collapsible: false,
+        children: [
+            {
+                text: "Overview",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Let Binding",
+                link: "/en/definition/let-binding.md",
+            },
+
+            //         ['appendix/identifier', 'Identifiers'],
+        ]
+    },
+    {
+        text: 'Invokes',
+        collapsible: false,
+        children: [
+            {
+                text: "Overview",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Overview",
+                link: "/en/definition/readme.md",
+            },
+            // ['literal/operators', 'Operator'],
+        ]
+    },
+    {
+        text: 'Appendix',
+        collapsible: false,
+        children: [
+            //         ['appendix/', 'Keywords'],
+            //         ['appendix/identifier', 'Identifiers'],
+        ]
+    }
 ]
 
 const theme = defaultTheme(

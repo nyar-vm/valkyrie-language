@@ -15,6 +15,8 @@ package-lock.json
 # Build
 Thumbs.db
 .DS_Store
-docs/.build/
+#docs/.build/
 *.ps1
 *.nb
+.cache/
+.temp/
