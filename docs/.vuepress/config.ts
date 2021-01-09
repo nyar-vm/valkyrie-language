@@ -84,11 +84,53 @@ const sidebar: SidebarConfigArray = [
                 link: "/en/definition/readme.md",
             },
             {
-                text: "Let Binding",
+                text: "Let Bind",
                 link: "/en/definition/let-binding.md",
             },
-
-            //         ['appendix/identifier', 'Identifiers'],
+            {
+                text: "Micro Process",
+                link: "/en/definition/def-micro.md",
+            },
+            {
+                text: "Macro Process",
+                link: "/en/definition/def-macro.md",
+            },
+            {
+                text: "Aliased Type",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Structures",
+                link: "/en/definition/structure.md",
+            },
+            {
+                text: "Inheritance",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Interfaces",
+                link: "/en/definition/interface.md",
+            },
+            {
+                text: "Association Type",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Enumerations",
+                link: "/en/definition/enumerate.md",
+            },
+            {
+                text: "Flags",
+                link: "/en/definition/flags.md",
+            },
+            {
+                text: "Unions",
+                link: "/en/definition/union.md",
+            },
+            {
+                text: "Unites",
+                link: "/en/definition/disjoint-union.md",
+            },
         ]
     },
     {
@@ -100,18 +142,40 @@ const sidebar: SidebarConfigArray = [
                 link: "/en/definition/readme.md",
             },
             {
-                text: "Overview",
+                text: "Function Call",
                 link: "/en/definition/readme.md",
             },
-            // ['literal/operators', 'Operator'],
+            {
+                text: "Function Dot Call",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Index Call",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Slice Call",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Lambda Call",
+                link: "/en/definition/readme.md",
+            },
+            {
+                text: "Lambda Dot Call",
+                link: "/en/definition/readme.md",
+            }
+
         ]
     },
     {
         text: 'Appendix',
         collapsible: false,
         children: [
-            //         ['appendix/', 'Keywords'],
-            //         ['appendix/identifier', 'Identifiers'],
+            {
+                text: "Rust User Guide",
+                link: "/en/appendix/for-rust.md",
+            },
         ]
     }
 ]

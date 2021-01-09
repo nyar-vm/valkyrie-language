@@ -1,4 +1,7 @@
-Comment
+
+
+
+## Comment
 
 ```vk
 #
@@ -7,21 +10,6 @@ Comment
 ```
 
 
-```vk
-;; main function
-def main hello_world() {
-    print("Hello world!")
-}
-```
-
-```vk
-let x = 0;
-let mut x = 0;
-```
-
-```vk
-let int: number = 0;
-```
 
 ## Literals
 
