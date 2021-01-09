@@ -13,7 +13,7 @@ footer: CC0 Licensed | Copyright © 2012-2019 Aster™
 
 ## 运行
 
-```rust
+```vk
 > "Hello World!"
 ```
 

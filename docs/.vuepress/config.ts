@@ -2,6 +2,8 @@ import {SidebarConfig, SiteLocaleConfig} from "vuepress";
 import {SidebarConfigArray} from "@vuepress/theme-default/lib/shared/nav";
 
 import {defineUserConfig, defaultTheme} from 'vuepress'
+import {shikiPlugin} from "@vuepress/plugin-shiki";
+import {IGrammar} from "vscode-textmate";
 
 
 const locales: SiteLocaleConfig = {
@@ -172,10 +174,22 @@ export default defineUserConfig({
         //
         // }
     },
-    // plugins: {
-    // mathjax: {
-    //     target: 'chtml',
-    //     presets: [],
-    // },
-    // }
+    plugins: [
+        shikiPlugin({
+            theme: "monokai",
+            langs: [
+                {
+                    id: "valkyrie",
+                    scopeName: "Valkyrie",
+                    aliases: ["vk"],
+                    // samplePath? : string;
+                    // embeddedLangs? : Lang[];
+                    // balancedBracketSelectors? : string[];
+                    // unbalancedBracketSelectors? : string[];
+                    path: "./valkyrie.tmLanguage.json",
+                    // grammar? : IGrammar;
+                }
+            ]
+        }),
+    ],
 })

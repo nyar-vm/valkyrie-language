@@ -34,6 +34,6 @@ Aka `Extensible Array`
 
 `Dict` is a `OrderedMap` with string keys.
 
-```scala
+```vk
 type Dict[T] = OrderedMap[String, T]
 ```

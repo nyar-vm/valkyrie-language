@@ -5,7 +5,7 @@ An interface describes a set of methods that a structure needs to implement.
 Interface is roughly equivalent to virtual class, but the difference is that it does not participate in mro sorting, and
 its call always points to the end of mro.
 
-```scala
+```vk
 virtual class A {
     who(self) { print("A") }
 }
@@ -35,13 +35,24 @@ interface and trait.
 The second difference is that there is no inheritance of interfaces, there is no interface `A` inheriting
 interface `B`(`A(B)`), only interface `A` satisfies interface `B`(`A:B`)
 
-```scala
+```vk
 interface DividedBy4: DividedBy2 {
     divided_by_4(self) -> bool;
 }
 interface DividedBy2 {
     divided_by_2(self) -> bool;
 }
+
+extends int: DividedBy4 {
+    divided_by_4(self) -> bool { self % 4 == 0; }
+    divided_by_2(self) -> bool { self % 2 == 0;}
+}
+
+6.divided_by_2(); // true
+6.divided_by_4(); // false
+DividedBy2::divided_by_2(6); // true
+DividedBy4::divided_by_4(6); // false
+DividedBy4::divided_by_2(6); // ERROR: `DividedBy4::divided_by_2` does not exist.
 ```
 
 This makes interface more like type class.
@@ -61,7 +72,7 @@ That's why we need the trait.
 
 The declaration syntax of trait and interface is the same
 
-```scala
+```vk
 trait Show {
     show(self, f: Formatter) -> Unit;
 }

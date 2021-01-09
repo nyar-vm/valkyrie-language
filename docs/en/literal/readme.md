@@ -1,25 +1,25 @@
 Comment
 
-```scala
+```vk
 #
 
 #?
 ```
 
 
-```scala
+```vk
 ;; main function
 def main hello_world() {
     print("Hello world!")
 }
 ```
 
-```scala
+```vk
 let x = 0;
 let mut x = 0;
 ```
 
-```scala
+```vk
 let int: number = 0;
 ```
 
@@ -43,7 +43,7 @@ let int: number = 0;
 
 ### 字面量多态
 
-```scala
+```vk
 let list: List[String] = [] # derived as List()
 let dict: Dict[String] = [] # derived as Dict()
 ```
@@ -65,6 +65,6 @@ Default Value: false
 ###
 
 
-```scala
+```vk
 
 ```

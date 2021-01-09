@@ -34,6 +34,6 @@ Aka `Heterogeneous Vector`
 
 `Dict` is a `OrderedMap` with string keys.
 
-```scala
+```vk
 type Dict[T] = OrderedMap[String, T]
 ```

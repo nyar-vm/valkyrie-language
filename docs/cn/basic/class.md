@@ -43,7 +43,7 @@ new User {
 
 为了从构造体中获取某个特定的值, 可以使用点号. 如果我们只想要用户的邮箱地址, 可以用 `user1.email`. 要更改构造体中的值, 如果构造体的实例是可变的, 我们可以使用点号并为对应的字段赋值. 示例 5-3 展示了如何改变一个可变的 `User` 实例 `email` 字段的值:
 
-```rust
+```vk
 # struct User {
 #     username: String,
 #     email: String,
@@ -67,7 +67,7 @@ user1.email = String::from("anotheremail@example.com");
 
 示例 5-4 显示了一个 `build_user` 函数, 它返回一个带有给定的 email 和用户名的 `User` 构造体实例. `active` 字段的值为 `true`, 并且 `sign_in_count` 的值为 `1`.
 
-```rust
+```vk
 # struct User {
 #     username: String,
 #     email: String,
@@ -93,7 +93,7 @@ fn build_user(email: String, username: String) -> User {
 
 因为示例 5-4 中的参数名与字段名都完全相同, 我们可以使用 **字段初始化简写语法** (*field init shorthand*) 来重写 `build_user`, 这样其行为与之前完全相同, 不过无需重复 `email` 和 `username` 了, 如示例 5-5 所示.
 
-```rust
+```vk
 class User {
     username: str,
     email: str,
@@ -121,7 +121,7 @@ fn new_user(email: String, username: String) -> User {
 
 首先, 示例 5-6 展示了不使用更新语法时, 如何在 `user2` 中创建一个新 `User` 实例. 我们为 `email` 和 `username` 设置了新的值, 其他值则使用了实例 5-2 中创建的 `user1` 中的同名值:
 
-```rust
+```vk
 # struct User {
 #     username: String,
 #     email: String,

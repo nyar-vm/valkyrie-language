@@ -1,6 +1,6 @@
 ### Type Cast Hook
 
-```scala
+```vk
 @type_cast.implicit: Graph
 @type_cast.implicit.clear: ()
 @type_cast.implicit.try {Integer => Decimal} : bool

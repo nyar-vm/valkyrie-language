@@ -1,0 +1,630 @@
+information_for_contributors:
+      - This file has been converted from
+        https://github.com/dustypomerleau/rust-syntax/blob/master/syntaxes/rust.tmLanguage.json
+      - If you want to provide a fix or improvement, please create a pull
+        request against the original repository.
+      - Once accepted there, we are happy to receive an update request.
+version: https://github.com/dustypomerleau/rust-syntax/commit/20462d50ff97338f42c6b64c3f421c634fd60734
+name: Valkyrie
+scopeName: source.vk
+patterns:
+      - comment: boxed slice literal
+        begin: (<)(\[)
+        beginCaptures:
+              "1":
+                    name: punctuation.brackets.angle.vk
+              "2":
+                    name: punctuation.brackets.square.vk
+        end: ">"
+        endCaptures:
+              "0":
+                    name: punctuation.brackets.angle.vk
+        patterns:
+              - include: "#block-comments"
+              - include: "#comments"
+              - include: "#gtypes"
+              - include: "#lvariables"
+              - include: "#lifetimes"
+              - include: "#punctuation"
+              - include: "#types"
+      - comment: macro type metavariables
+        name: meta.macro.metavariable.type.vk
+        match: (\$)((crate)|([A-Z][A-Za-z0-9_]*))((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?
+        captures:
+              "1":
+                    name: keyword.operator.macro.dollar.vk
+              "3":
+                    name: keyword.other.crate.vk
+              "4":
+                    name: entity.name.type.metavariable.vk
+              "6":
+                    name: keyword.operator.key-value.vk
+              "7":
+                    name: variable.other.metavariable.specifier.vk
+        patterns:
+              - include: "#keywords"
+      - comment: macro metavariables
+        name: meta.macro.metavariable.vk
+        match: (\$)([a-z][A-Za-z0-9_]*)((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?
+        captures:
+              "1":
+                    name: keyword.operator.macro.dollar.vk
+              "2":
+                    name: variable.other.metavariable.name.vk
+              "4":
+                    name: keyword.operator.key-value.vk
+              "5":
+                    name: variable.other.metavariable.specifier.vk
+        patterns:
+              - include: "#keywords"
+      - comment: macro rules
+        name: meta.macro.rules.vk
+        match: \b(macro_rules!)\s+(([a-z0-9_]+)|([A-Z][a-z0-9_]*))\s+(\{)
+        captures:
+              "1":
+                    name: entity.name.function.macro.rules.vk
+              "3":
+                    name: entity.name.function.macro.vk
+              "4":
+                    name: entity.name.type.macro.vk
+              "5":
+                    name: punctuation.brackets.curly.vk
+      - comment: attributes
+        name: meta.attribute.vk
+        begin: (#)(\!?)(\[)
+        beginCaptures:
+              "1":
+                    name: punctuation.definition.attribute.vk
+              "2":
+                    name: keyword.operator.attribute.inner.vk
+              "3":
+                    name: punctuation.brackets.attribute.vk
+        end: \]
+        endCaptures:
+              "0":
+                    name: punctuation.brackets.attribute.vk
+        patterns:
+              - include: "#block-comments"
+              - include: "#comments"
+              - include: "#keywords"
+              - include: "#lifetimes"
+              - include: "#punctuation"
+              - include: "#strings"
+              - include: "#gtypes"
+              - include: "#types"
+      - comment: modules
+        match: (mod)\s+((?:r#(?!crate|[Ss]elf|super))?[a-z][A-Za-z0-9_]*)
+        captures:
+              "1":
+                    name: storage.type.vk
+              "2":
+                    name: entity.name.module.vk
+      - comment: external crate imports
+        name: meta.import.vk
+        begin: \b(extern)\s+(crate)
+        beginCaptures:
+              "1":
+                    name: storage.type.vk
+              "2":
+                    name: keyword.other.crate.vk
+        end: ;
+        endCaptures:
+              "0":
+                    name: punctuation.semi.vk
+        patterns:
+              - include: "#block-comments"
+              - include: "#comments"
+              - include: "#keywords"
+              - include: "#punctuation"
+      - comment: use statements
+        name: meta.use.vk
+        begin: \b(use)\s
+        beginCaptures:
+              "1":
+                    name: keyword.other.vk
+        end: ;
+        endCaptures:
+              "0":
+                    name: punctuation.semi.vk
+        patterns:
+              - include: "#block-comments"
+              - include: "#comments"
+              - include: "#keywords"
+              - include: "#namespaces"
+              - include: "#punctuation"
+              - include: "#types"
+              - include: "#lvariables"
+      - include: "#block-comments"
+      - include: "#comments"
+      - include: "#lvariables"
+      - include: "#constants"
+      - include: "#gtypes"
+      - include: "#functions"
+      - include: "#types"
+      - include: "#keywords"
+      - include: "#lifetimes"
+      - include: "#macros"
+      - include: "#namespaces"
+      - include: "#punctuation"
+      - include: "#strings"
+      - include: "#variables"
+repository:
+      comments:
+            patterns:
+                  - comment: documentation comments
+                    name: comment.line.documentation.vk
+                    match: ^\s*///.*
+                  - comment: line comments
+                    name: comment.line.double-slash.vk
+                    match: \s*//.*
+      block-comments:
+            patterns:
+                  - comment: empty block comments
+                    name: comment.block.vk
+                    match: /\*\*/
+                  - comment: block documentation comments
+                    name: comment.block.documentation.vk
+                    begin: /\*\*
+                    end: \*/
+                    patterns:
+                          - include: "#block-comments"
+                  - comment: block comments
+                    name: comment.block.vk
+                    begin: /\*(?!\*)
+                    end: \*/
+                    patterns:
+                          - include: "#block-comments"
+      constants:
+            patterns:
+                  - comment: ALL CAPS constants
+                    name: constant.other.caps.vk
+                    match: \b[A-Z]{2}[A-Z0-9_]*\b
+                  - comment: constant declarations
+                    match: \b(const)\s+([A-Z][A-Za-z0-9_]*)\b
+                    captures:
+                          "1":
+                                name: storage.type.vk
+                          "2":
+                                name: constant.other.caps.vk
+                  - comment: decimal integers and floats
+                    name: constant.numeric.decimal.vk
+                    match: \b\d[\d_]*(\.?)[\d_]*(?:(E)([+-])([\d_]+))?(f32|f64|i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\b
+                    captures:
+                          "1":
+                                name: punctuation.separator.dot.decimal.vk
+                          "2":
+                                name: keyword.operator.exponent.vk
+                          "3":
+                                name: keyword.operator.exponent.sign.vk
+                          "4":
+                                name: constant.numeric.decimal.exponent.mantissa.vk
+                          "5":
+                                name: entity.name.type.numeric.vk
+                  - comment: hexadecimal integers
+                    name: constant.numeric.hex.vk
+                    match: \b0x[\da-fA-F_]+(i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\b
+                    captures:
+                          "1":
+                                name: entity.name.type.numeric.vk
+                  - comment: octal integers
+                    name: constant.numeric.oct.vk
+                    match: \b0o[0-7_]+(i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\b
+                    captures:
+                          "1":
+                                name: entity.name.type.numeric.vk
+                  - comment: binary integers
+                    name: constant.numeric.bin.vk
+                    match: \b0b[01_]+(i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\b
+                    captures:
+                          "1":
+                                name: entity.name.type.numeric.vk
+                  - comment: booleans
+                    name: constant.language.bool.vk
+                    match: \b(true|false)\b
+      escapes:
+            comment: "escapes: ASCII, byte, Unicode, quote, regex"
+            name: constant.character.escape.vk
+            match: (\\)(?:(?:(x[0-7][0-7a-fA-F])|(u(\{)[\da-fA-F]{4,6}(\}))|.))
+            captures:
+                  "1":
+                        name: constant.character.escape.backslash.vk
+                  "2":
+                        name: constant.character.escape.bit.vk
+                  "3":
+                        name: constant.character.escape.unicode.vk
+                  "4":
+                        name: constant.character.escape.unicode.punctuation.vk
+                  "5":
+                        name: constant.character.escape.unicode.punctuation.vk
+      functions:
+            patterns:
+                  - comment: pub as a function
+                    match: \b(pub)(\()
+                    captures:
+                          "1":
+                                name: keyword.other.vk
+                          "2":
+                                name: punctuation.brackets.round.vk
+                  - comment: function definition
+                    name: meta.function.definition.vk
+                    begin: \b(fn)\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\()|(<))
+                    beginCaptures:
+                          "1":
+                                name: keyword.other.fn.vk
+                          "2":
+                                name: entity.name.function.vk
+                          "4":
+                                name: punctuation.brackets.round.vk
+                          "5":
+                                name: punctuation.brackets.angle.vk
+                    end: \{|;
+                    endCaptures:
+                          "0":
+                                name: punctuation.brackets.curly.vk
+                    patterns:
+                          - include: "#block-comments"
+                          - include: "#comments"
+                          - include: "#keywords"
+                          - include: "#lvariables"
+                          - include: "#constants"
+                          - include: "#gtypes"
+                          - include: "#functions"
+                          - include: "#lifetimes"
+                          - include: "#macros"
+                          - include: "#namespaces"
+                          - include: "#punctuation"
+                          - include: "#strings"
+                          - include: "#types"
+                          - include: "#variables"
+                  - comment: function/method calls, chaining
+                    name: meta.function.call.vk
+                    begin: ((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)(\()
+                    beginCaptures:
+                          "1":
+                                name: entity.name.function.vk
+                          "2":
+                                name: punctuation.brackets.round.vk
+                    end: \)
+                    endCaptures:
+                          "0":
+                                name: punctuation.brackets.round.vk
+                    patterns:
+                          - include: "#block-comments"
+                          - include: "#comments"
+                          - include: "#keywords"
+                          - include: "#lvariables"
+                          - include: "#constants"
+                          - include: "#gtypes"
+                          - include: "#functions"
+                          - include: "#lifetimes"
+                          - include: "#macros"
+                          - include: "#namespaces"
+                          - include: "#punctuation"
+                          - include: "#strings"
+                          - include: "#types"
+                          - include: "#variables"
+                  - comment: function/method calls with turbofish
+                    name: meta.function.call.vk
+                    begin: ((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)(?=::<.*>\()
+                    beginCaptures:
+                          "1":
+                                name: entity.name.function.vk
+                    end: \)
+                    endCaptures:
+                          "0":
+                                name: punctuation.brackets.round.vk
+                    patterns:
+                          - include: "#block-comments"
+                          - include: "#comments"
+                          - include: "#keywords"
+                          - include: "#lvariables"
+                          - include: "#constants"
+                          - include: "#gtypes"
+                          - include: "#functions"
+                          - include: "#lifetimes"
+                          - include: "#macros"
+                          - include: "#namespaces"
+                          - include: "#punctuation"
+                          - include: "#strings"
+                          - include: "#types"
+                          - include: "#variables"
+      keywords:
+            patterns:
+                  - comment: control flow keywords
+                    name: keyword.control.vk
+                    match: \b(await|break|continue|do|else|for|if|loop|match|return|try|while|yield)\b
+                  - comment: storage keywords
+                    name: keyword.other.vk storage.type.vk
+                    match: \b(extern|let|macro|mod)\b
+                  - comment: const keyword
+                    name: storage.modifier.vk
+                    match: \b(const)\b
+                  - comment: type keyword
+                    name: keyword.declaration.type.vk storage.type.vk
+                    match: \b(type)\b
+                  - comment: enum keyword
+                    name: keyword.declaration.enum.vk storage.type.vk
+                    match: \b(enum)\b
+                  - comment: trait keyword
+                    name: keyword.declaration.trait.vk storage.type.vk
+                    match: \b(trait)\b
+                  - comment: struct keyword
+                    name: keyword.declaration.struct.vk storage.type.vk
+                    match: \b(struct)\b
+                  - comment: storage modifiers
+                    name: storage.modifier.vk
+                    match: \b(abstract|static)\b
+                  - comment: other keywords
+                    name: keyword.other.vk
+                    match: \b(as|async|become|box|dyn|move|final|impl|in|override|priv|pub|ref|typeof|union|unsafe|unsized|use|virtual|where)\b
+                  - comment: fn
+                    name: keyword.other.fn.vk
+                    match: \bfn\b
+                  - comment: crate
+                    name: keyword.other.crate.vk
+                    match: \bcrate\b
+                  - comment: mut
+                    name: storage.modifier.mut.vk
+                    match: \bmut\b
+                  - comment: logical operators
+                    name: keyword.operator.logical.vk
+                    match: (\^|\||\|\||&&|<<|>>|!)(?!=)
+                  - comment: logical AND, borrow references
+                    name: keyword.operator.borrow.and.vk
+                    match: "&(?![&=])"
+                  - comment: assignment operators
+                    name: keyword.operator.assignment.vk
+                    match: (\+=|-=|\*=|/=|%=|\^=|&=|\|=|<<=|>>=)
+                  - comment: single equal
+                    name: keyword.operator.assignment.equal.vk
+                    match: (?<![<>])=(?!=|>)
+                  - comment: comparison operators
+                    name: keyword.operator.comparison.vk
+                    match: (=(=)?(?!>)|!=|<=|(?<!=)>=)
+                  - comment: math operators
+                    name: keyword.operator.math.vk
+                    match: (([+%]|(\*(?!\w)))(?!=))|(-(?!>))|(/(?!/))
+                  - comment: less than, greater than (special case)
+                    match: (?:\b|(?:(\))|(\])|(\})))[ \t]+([<>])[ \t]+(?:\b|(?:(\()|(\[)|(\{)))
+                    captures:
+                          "1":
+                                name: punctuation.brackets.round.vk
+                          "2":
+                                name: punctuation.brackets.square.vk
+                          "3":
+                                name: punctuation.brackets.curly.vk
+                          "4":
+                                name: keyword.operator.comparison.vk
+                          "5":
+                                name: punctuation.brackets.round.vk
+                          "6":
+                                name: punctuation.brackets.square.vk
+                          "7":
+                                name: punctuation.brackets.curly.vk
+                  - comment: namespace operator
+                    name: keyword.operator.namespace.vk
+                    match: "::"
+                  - comment: dereference asterisk
+                    match: (\*)(?=\w+)
+                    captures:
+                          "1":
+                                name: keyword.operator.dereference.vk
+                  - comment: subpattern binding
+                    name: keyword.operator.subpattern.vk
+                    match: "@"
+                  - comment: dot access
+                    name: keyword.operator.access.dot.vk
+                    match: \.(?!\.)
+                  - comment: ranges, range patterns
+                    name: keyword.operator.range.vk
+                    match: \.{2}(=|\.)?
+                  - comment: colon
+                    name: keyword.operator.key-value.vk
+                    match: :(?!:)
+                  - comment: dashrocket, skinny arrow
+                    name: keyword.operator.arrow.skinny.vk
+                    match: ->
+                  - comment: hashrocket, fat arrow
+                    name: keyword.operator.arrow.fat.vk
+                    match: =>
+                  - comment: dollar macros
+                    name: keyword.operator.macro.dollar.vk
+                    match: \$
+                  - comment: question mark operator, questionably sized, macro kleene matcher
+                    name: keyword.operator.question.vk
+                    match: \?
+      interpolations:
+            comment: curly brace interpolations
+            name: meta.interpolation.vk
+            match: ({)[^"{}]*(})
+            captures:
+                  "1":
+                        name: punctuation.definition.interpolation.vk
+                  "2":
+                        name: punctuation.definition.interpolation.vk
+      lifetimes:
+            patterns:
+                  - comment: named lifetime parameters
+                    match: (['])([a-zA-Z_][0-9a-zA-Z_]*)(?!['])\b
+                    captures:
+                          "1":
+                                name: punctuation.definition.lifetime.vk
+                          "2":
+                                name: entity.name.type.lifetime.vk
+                  - comment: borrowing references to named lifetimes
+                    match: (\&)(['])([a-zA-Z_][0-9a-zA-Z_]*)(?!['])\b
+                    captures:
+                          "1":
+                                name: keyword.operator.borrow.vk
+                          "2":
+                                name: punctuation.definition.lifetime.vk
+                          "3":
+                                name: entity.name.type.lifetime.vk
+      macros:
+            patterns:
+                  - comment: macros
+                    name: meta.macro.vk
+                    match: (([a-z_][A-Za-z0-9_]*!)|([A-Z_][A-Za-z0-9_]*!))
+                    captures:
+                          "2":
+                                name: entity.name.function.macro.vk
+                          "3":
+                                name: entity.name.type.macro.vk
+      namespaces:
+            patterns:
+                  - comment: namespace (non-type, non-function path segment)
+                    match: (?<![A-Za-z0-9_])([a-z0-9_]+)((?<!super|self)::)
+                    captures:
+                          "1":
+                                name: entity.name.namespace.vk
+                          "2":
+                                name: keyword.operator.namespace.vk
+      types:
+            patterns:
+                  - comment: numeric types
+                    match: (?<![A-Za-z])(f32|f64|i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)\b
+                    captures:
+                          "1":
+                                name: entity.name.type.numeric.vk
+                  - comment: parameterized types
+                    begin: \b([A-Z][A-Za-z0-9]*)(<)
+                    beginCaptures:
+                          "1":
+                                name: entity.name.type.vk
+                          "2":
+                                name: punctuation.brackets.angle.vk
+                    end: ">"
+                    endCaptures:
+                          "0":
+                                name: punctuation.brackets.angle.vk
+                    patterns:
+                          - include: "#block-comments"
+                          - include: "#comments"
+                          - include: "#keywords"
+                          - include: "#lvariables"
+                          - include: "#lifetimes"
+                          - include: "#punctuation"
+                          - include: "#types"
+                          - include: "#variables"
+                  - comment: primitive types
+                    name: entity.name.type.primitive.vk
+                    match: \b(bool|char|str)\b
+                  - comment: trait declarations
+                    match: \b(trait)\s+([A-Z][A-Za-z0-9]*)\b
+                    captures:
+                          "1":
+                                name: keyword.declaration.trait.vk storage.type.vk
+                          "2":
+                                name: entity.name.type.trait.vk
+                  - comment: struct declarations
+                    match: \b(struct)\s+([A-Z][A-Za-z0-9]*)\b
+                    captures:
+                          "1":
+                                name: keyword.declaration.struct.vk storage.type.vk
+                          "2":
+                                name: entity.name.type.struct.vk
+                  - comment: enum declarations
+                    match: \b(enum)\s+([A-Z][A-Za-z0-9_]*)\b
+                    captures:
+                          "1":
+                                name: keyword.declaration.enum.vk storage.type.vk
+                          "2":
+                                name: entity.name.type.enum.vk
+                  - comment: type declarations
+                    match: \b(type)\s+([A-Z][A-Za-z0-9_]*)\b
+                    captures:
+                          "1":
+                                name: keyword.declaration.type.vk storage.type.vk
+                          "2":
+                                name: entity.name.type.declaration.vk
+                  - comment: types
+                    name: entity.name.type.vk
+                    match: \b[A-Z][A-Za-z0-9]*\b(?!!)
+      gtypes:
+            patterns:
+                  - comment: option types
+                    name: entity.name.type.option.vk
+                    match: \b(Some|None)\b
+                  - comment: result types
+                    name: entity.name.type.result.vk
+                    match: \b(Ok|Err)\b
+      punctuation:
+            patterns:
+                  - comment: comma
+                    name: punctuation.comma.vk
+                    match: ","
+                  - comment: curly braces
+                    name: punctuation.brackets.curly.vk
+                    match: "[{}]"
+                  - comment: parentheses, round brackets
+                    name: punctuation.brackets.round.vk
+                    match: "[()]"
+                  - comment: semicolon
+                    name: punctuation.semi.vk
+                    match: ;
+                  - comment: square brackets
+                    name: punctuation.brackets.square.vk
+                    match: "[\\[\\]]"
+                  - comment: angle brackets
+                    name: punctuation.brackets.angle.vk
+                    match: (?<!=)[<>]
+      strings:
+            patterns:
+                  - comment: double-quoted strings and byte strings
+                    name: string.quoted.double.vk
+                    begin: (b?)(")
+                    beginCaptures:
+                          "1":
+                                name: string.quoted.byte.raw.vk
+                          "2":
+                                name: punctuation.definition.string.vk
+                    end: '"'
+                    endCaptures:
+                          "0":
+                                name: punctuation.definition.string.vk
+                    patterns:
+                          - include: "#escapes"
+                          - include: "#interpolations"
+                  - comment: double-quoted raw strings and raw byte strings
+                    name: string.quoted.double.vk
+                    begin: (b?r)(#*)(")
+                    beginCaptures:
+                          "1":
+                                name: string.quoted.byte.raw.vk
+                          "2":
+                                name: punctuation.definition.string.raw.vk
+                          "3":
+                                name: punctuation.definition.string.vk
+                    end: (")(\2)
+                    endCaptures:
+                          "1":
+                                name: punctuation.definition.string.vk
+                          "2":
+                                name: punctuation.definition.string.raw.vk
+                  - comment: characters and bytes
+                    name: string.quoted.single.char.vk
+                    begin: (b)?(')
+                    beginCaptures:
+                          "1":
+                                name: string.quoted.byte.raw.vk
+                          "2":
+                                name: punctuation.definition.char.vk
+                    end: "'"
+                    endCaptures:
+                          "0":
+                                name: punctuation.definition.char.vk
+                    patterns:
+                          - include: "#escapes"
+      lvariables:
+            patterns:
+                  - comment: self
+                    name: variable.language.self.vk
+                    match: \b[Ss]elf\b
+                  - comment: super
+                    name: variable.language.super.vk
+                    match: \bsuper\b
+      variables:
+            patterns:
+                  - comment: variables
+                    name: variable.other.vk
+                    match: \b(?<!(?<!\.)\.)(?:r#(?!(crate|[Ss]elf|super)))?[a-z0-9_]+\b

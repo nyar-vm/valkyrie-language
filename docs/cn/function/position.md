@@ -1,6 +1,6 @@
 
 
-```scala
+```vk
 def function_name(positional, <, free, >, named) {
 
 }
@@ -13,7 +13,7 @@ Positional arguments
 
 位置参数
 
-```scala
+```vk
 def f(a, <) {}
 
 f()     # Error, argument required
@@ -33,7 +33,7 @@ Aka [Keyword arguments (Python)]()
 
 具名参数
 
-```scala
+```vk
 def f(>, a) {}
 
 f()     # Error, argument required
@@ -53,7 +53,7 @@ f(a=1) # Allowed, it's a keyword argument
 
 `Character => String`, `Integer   => Decimal`
 
-```scala
+```vk
 def print_context(>, receiver context: String) {
     print(context)
 }

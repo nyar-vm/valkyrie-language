@@ -1,7 +1,7 @@
 
 
 
-```scala
+```vk
 @inline
 def inline function_name[Generic](arguements, <, >, ): type / effect = {
     todo("${function_name}")
@@ -16,7 +16,7 @@ def inline function_name[Generic](arguements, <, >, ): type / effect = {
 
 `Character => String`, `Integer   => Decimal`
 
-```scala
+```vk
 def print_string(string: String) {
     print(string)
 }
@@ -25,7 +25,7 @@ print_string('c')
 ```
 
 
-```scala
+```vk
 def print_string(explicit string: String) {
     print(string)
 }
@@ -35,7 +35,7 @@ print_string('c')
 
 也可以用宏从上下文中移除自动转换规则.
 
-```scala
+```vk
 @type_cast.implicit.remove {
     Character => String,
     Integer8 => Integer => Decimal
@@ -44,7 +44,7 @@ print_string('c')
 
 ### Explicit Type Conversion
 
-```scala
+```vk
 def print_string(string: String) {
     print(string)
 }
@@ -55,7 +55,7 @@ print_string(1)
 
 
 
-```scala
+```vk
 def print_string(into string: String) {
     print(string)
 }

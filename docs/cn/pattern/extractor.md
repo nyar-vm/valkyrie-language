@@ -3,7 +3,7 @@
 提取器模式代表类被写在 `let` 或者 `case` 之后的行为.
 
 
-```scala
+```vk
 trait Extractor {
     type Input;
     type Output: TupleType;
@@ -18,14 +18,14 @@ trait Extractor {
 ## 常规提取器
 假如我们想实现以下功能:
 
-```scala
+```vk
 # a = ['A', 'B', 'C']
 let MyName(a) := 'A.B.C'
 ```
 
 那么可以定义如下提取器:
 
-```scala
+```vk
 class MyName {}
 
 extends MyName: Extractor<Input: StringView, Output: (String,)> {
@@ -40,7 +40,7 @@ extends MyName: Extractor<Input: StringView, Output: (String,)> {
 
 上面的代码可以简写为:
 
-```scala
+```vk
 class MyName {
     extract(string: StringView): String {
         return string.split('.')
@@ -50,7 +50,7 @@ class MyName {
 
 展开过程等价于如下代码
 
-```scala
+```vk
 let MyName(a) := 'A.B.C'
 
 # _tmp = (['A', 'B', 'C'],)
@@ -61,7 +61,7 @@ let a: [String] = _tmp.1
 
 如果不加 `@never_null`, let 下的返回值会是可空值, case 下没有返回值.
 
-```scala
+```vk
 class MyName {
     extract(one: String): (String, String)? {
         let [one, two, **rest] = string.split('::');
@@ -77,7 +77,7 @@ class MyName {
 
 注意结果可能为空, 此时展开过程为:
 
-```scala
+```vk
 let MyName(a, b) := 'A::B'
 let _tmp: (String, String)? = MyName::extract('A::B');
 let a: String? = _tmp.map { $1.1 }
@@ -89,7 +89,7 @@ let b: String? = _tmp.map { $1.2 }
 ## 不交并的提取器
 
 
-```scala
+```vk
 # 定义不交并
 union Result<T, E> {
     Success {
@@ -133,7 +133,7 @@ result.match {
 
 展开过程等价于如下代码:
 
-```scala
+```vk
 let v = Result::Success::extract(result);
 if v != null {
     return print("success: {v}")
@@ -146,7 +146,7 @@ if e != null {
 
 该实现较为繁琐, 可以使用宏来简化
 
-```scala
+```vk
 union Result<T, E> {
     @construct(value)
     @extract(value)
