@@ -63,7 +63,7 @@ else {
 
 你可以在一行中声明多个常量或者多个变量, 用逗号隔开:
 
-```swift
+```vk
 var x = 0.0, y = 0.0, z = 0.0
 ```
 
@@ -80,7 +80,7 @@ var x = 0.0, y = 0.0, z = 0.0
 
 这个例子给 `welcomeMessage` 变量添加了类型注解, 表示这个变量可以存储 `String` 类型的值:
 
-```swift
+```vk
 var welcomeMessage: String
 ```
 
@@ -92,13 +92,13 @@ var welcomeMessage: String
 
 `welcomeMessage` 变量现在可以被设置成任意字符串:
 
-```swift
+```vk
 welcomeMessage = "Hello"
 ```
 
 你可以在一行中定义多个同样类型的变量, 用逗号分割, 并在最后一个变量名之后添加类型注解:
 
-```swift
+```vk
 var red, green, blue: Double
 ```
 
@@ -110,7 +110,7 @@ var red, green, blue: Double
 
 常量和变量名可以包含任何字符, 包括 Unicode 字符:
 
-```swift
+```vk
 let π = 3.14159
 let 你好 = "你好世界"
 let 🐶🐮 = "dogcow"
@@ -125,7 +125,7 @@ let 🐶🐮 = "dogcow"
 
 你可以用 `print(_:separator:terminator:)` 函数来输出当前常量或变量的值:
 
-```swift
+```vk
 print(friendlyWelcome)
 // 输出"Bonjour!"
 ```
@@ -146,7 +146,7 @@ Swift 用*字符串插值 (string interpolation)*的方式把常量名或者变�
 
 将常量或变量名放入圆括号中, 并在开括号前使用反斜杠将其转义:
 
-```swift
+```vk
 print("The current value of friendlyWelcome is ${friendlyWelcome}")
 // 输出"The current value of friendlyWelcome is Bonjour!"
 ```
@@ -166,7 +166,7 @@ print("The current value of friendlyWelcome is ${friendlyWelcome}")
 
 下面的所有整数字面量的十进制值都是 `17`:
 
-```swift
+```vk
 let decimalInteger = 17
 let binaryInteger = 0b10001       // 二进制的17
 let octalInteger = 0o21           // 八进制的17
@@ -187,7 +187,7 @@ let hexadecimalInteger = 0x11     // 十六进制的17
 
 下面的这些浮点字面量都等于十进制的 `12.1875`:
 
-```swift
+```vk
 let decimalDouble = 12.1875
 let exponentDouble = 1.21875e1
 let hexadecimalDouble = 0xC.3p0
@@ -195,7 +195,7 @@ let hexadecimalDouble = 0xC.3p0
 
 数值类字面量可以包括额外的格式来增强可读性. 整数和浮点数都可以添加额外的零并且包含下划线, 并不会影响字面量:
 
-```swift
+```vk
 let paddedDouble = 000123.456
 let oneMillion = 1_000_000
 let justOverOneMillion = 1_000_000.000_000_1
@@ -211,7 +211,7 @@ let justOverOneMillion = 1_000_000.000_000_1
 
 不同整数类型的变量和常量可以存储不同范围的数字. `Int8` 类型的常量或者变量可以存储的数字范围是 `-128`~`127`, 而 `UInt8` 类型的常量或者变量能存储的数字范围是 `0`~`255`. 如果数字超出了常量或者变量可存储的范围, 编译的时候会报错:
 
-```swift
+```vk
 let cannotBeNegative: UInt8 = -1
 // UInt8 类型不能存储负数, 所以会报错
 let tooBig: Int8 = Int8.max + 1
@@ -222,7 +222,7 @@ let tooBig: Int8 = Int8.max + 1
 
 要将一种数字类型转换成另一种, 你要用当前值来初始化一个期望类型的新数字, 这个数字的类型就是你的目标类型. 在下面的例子中, 常量 `twoThousand` 是 `UInt16` 类型, 然而常量 `one` 是 `UInt8` 类型. 它们不能直接相加, 因为它们类型不同. 所以要调用 `UInt16(one)` 来创建一个新的 `UInt16` 数字并用 `one` 的值来初始化, 然后使用这个新数字来计算:
 
-```swift
+```vk
 let twoThousand: UInt16 = 2_000
 let one: UInt8 = 1
 let twoThousandAndOne = twoThousand + UInt16(one)
@@ -236,7 +236,7 @@ let twoThousandAndOne = twoThousand + UInt16(one)
 
 整数和浮点数的转换必须显式指定类型:
 
-```swift
+```vk
 let three = 3
 let pointOneFourOneFiveNine = 0.14159
 let pi = Double(three) + pointOneFourOneFiveNine
@@ -247,7 +247,7 @@ let pi = Double(three) + pointOneFourOneFiveNine
 
 浮点数到整数的反向转换同样行, 整数类型可以用 `Double` 或者 `Float` 类型来初始化:
 
-```swift
+```vk
 let integerPi = Int(pi)
 // integerPi 等于 3, 所以被推测为 Int 类型
 ```
@@ -264,13 +264,13 @@ let integerPi = Int(pi)
 
 当你想要给现有类型起一个更有意义的名字时, 类型别名非常有用. 假设你正在处理特定长度的外部资源的数据:
 
-```swift
+```vk
 typealias AudioSample = UInt16
 ```
 
 定义了一个类型别名之后, 你可以在任何使用原始名的地方使用别名:
 
-```swift
+```vk
 var maxAmplitudeFound = AudioSample.min
 // maxAmplitudeFound 现在是 0
 ```
@@ -290,7 +290,7 @@ var maxAmplitudeFound = AudioSample.min
 
 下面的例子使用这种构造器来尝试将一个 `String` 转换成 `Int`:
 
-```swift
+```vk
 let possibleNumber = "123"
 let convertedNumber = Int(possibleNumber)
 // convertedNumber 被推测为类型 "Int?",  或者类型 "optional Int"
@@ -302,7 +302,7 @@ let convertedNumber = Int(possibleNumber)
 
 你可以给可选变量赋值为 `nil` 来表示它没有值:
 
-```swift
+```vk
 var serverResponseCode: Int? = 404
 // serverResponseCode 包含一个可选的 Int 值 404
 serverResponseCode = nil
@@ -315,7 +315,7 @@ serverResponseCode = nil
 
 如果你声明一个可选常量或者变量但是没有赋值, 它们会自动被设置为 `nil`:
 
-```swift
+```vk
 var surveyAnswer: String?
 // surveyAnswer 被自动设置为 nil
 ```
@@ -339,7 +339,7 @@ NIL == {}    => true
 
 像下面这样在 `if` 语句中写一个可选绑定:
 
-```swift
+```vk
 if let constantName = someOptional {
     statements
 }
@@ -347,7 +347,7 @@ if let constantName = someOptional {
 
 你可以像上面这样使用可选绑定来重写 在 [可选类型](./01_The_Basics.md#optionals) 举出的 `possibleNumber` 例子:
 
-```swift
+```vk
 if let actualNumber = Int(possibleNumber) {
     print("\'\(possibleNumber)\' has an integer value of \(actualNumber)")
 } else {
@@ -366,7 +366,7 @@ if let actualNumber = Int(possibleNumber) {
 
 你可以包含多个可选绑定或多个布尔条件在一个 `if` 语句中, 只要使用逗号分开就行. 只要有任意一个可选绑定的值为 `nil`, 或者任意一个布尔条件为 `false`, 则整个 `if` 条件判断为 `false`. 下面的两个 `if` 语句是等价的:
 
-```swift
+```vk
 if let firstNumber = Int("4"), let secondNumber = Int("42"), firstNumber < secondNumber && secondNumber < 100 {
     print("\(firstNumber) < \(secondNumber) < 100")
 }
@@ -398,7 +398,7 @@ if let firstNumber = Int("4") {
 
 一个隐式解析可选类型其实就是一个普通的可选类型, 但是可以被当做非可选类型来使用, 并不需要每次都使用解析来获取可选值. 下面的例子展示了可选类型 `String` 和隐式解析可选类型 `String` 之间的区别:
 
-```swift
+```vk
 let possibleString: String? = "An optional string."
 let forcedString: String = possibleString! // 需要感叹号来获取值
 
@@ -407,7 +407,7 @@ let implicitString: String = assumedString  // 不需要感叹号
 ```
 
 你可以把隐式解析可选类型当做一个可以自动解析的可选类型. 当你使用一个隐式解析可选值时, Swift 首先会把它当作普通的可选值；如果它不能被当成可选类型使用, Swift 会强制解析可选值. 在以上的代码中, 可选值 `assumedString` 在把自己的值赋给 `implicitString` 之前会被强制解析, 原因是 `implicitString` 本身的类型是非可选类型的 `String`. 在下面的代码中, `optionalString` 并没有显式的数据类型. 那么根据类型推断, 它就是一个普通的可选类型.
-```swift
+```vk
 let optionalString = assumedString
 // optionalString 的类型是 "String?", assumedString 也没有被强制解析.
 ```
@@ -416,7 +416,7 @@ let optionalString = assumedString
 
 你可以把隐式解析可选类型当做普通可选类型来判断它是否包含值:
 
-```swift
+```vk
 if assumedString != nil {
     print(assumedString!)
 }
@@ -425,7 +425,7 @@ if assumedString != nil {
 
 你也可以在可选绑定中使用隐式解析可选类型来检查并解析它的值:
 
-```swift
+```vk
 if let definiteString = assumedString {
     print(definiteString)
 }
@@ -452,7 +452,7 @@ if let definiteString = assumedString {
 
 你可以调用 Swift 标准库的 `assert(_:_:file:line:)` 函数来写一个断言. 向这个函数传入一个结果为 `true` 或者 `false` 的表达式以及一条信息, 当表达式的结果为 `false` 的时候这条信息会被显示:
 
-```swift
+```vk
 let age = -3
 assert(age >= 0, "A person's age cannot be less than zero")
 // 因为 age < 0, 所以断言会触发
@@ -462,13 +462,13 @@ assert(age >= 0, "A person's age cannot be less than zero")
 
 如果不需要断言信息, 可以就像这样忽略掉:
 
-```swift
+```vk
 assert(age >= 0)
 ```
 
 如果代码已经检查了条件, 你可以使用 `assertionFailure(_:file:line:)` 函数来表明断言失败了, 例如:
 
-```swift
+```vk
 if age > 10 {
     print("You can ride the roller-coaster or the ferris wheel.")
 } else if age > 0 {
@@ -484,7 +484,7 @@ if age > 10 {
 
 你可以使用全局 `precondition(_:_:file:line:)` 函数来写一个先决条件. 向这个函数传入一个结果为 `true` 或者 `false` 的表达式以及一条信息, 当表达式的结果为 `false` 的时候这条信息会被显示:
 
-```swift
+```vk
 // 在一个下标的实现里...
 precondition(index > 0, "Index must be greater than zero.")
 ```

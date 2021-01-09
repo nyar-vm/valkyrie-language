@@ -457,7 +457,7 @@
         {
           "comment": "function definition",
           "name": "meta.function.definition.vk",
-          "begin": "\\b(fn)\\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\\()|(<))",
+          "begin": "\\b(micro|macro)\\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\\()|(<))",
           "beginCaptures": {
             "1": {
               "name": "keyword.other.fn.vk"
@@ -672,18 +672,23 @@
         },
         {
           "comment": "enum keyword",
-          "name": "keyword.declaration.enum.vk storage.type.vk",
-          "match": "\\b(enum)\\b"
+          "name": "keyword.declaration.enumerate.vk",
+          "match": "\\b(enumerate|flags)\\b"
         },
         {
-          "comment": "trait keyword",
-          "name": "keyword.declaration.trait.vk storage.type.vk",
-          "match": "\\b(trait)\\b"
+          "comment": "interface keyword",
+          "name": "keyword.declaration.interface.vk",
+          "match": "\\b(interface|trait)\\b"
         },
         {
-          "comment": "struct keyword",
-          "name": "keyword.declaration.struct.vk storage.type.vk",
-          "match": "\\b(struct)\\b"
+          "comment": "structure keyword",
+          "name": "keyword.declaration.sturcture.vk",
+          "match": "\\b(sturcture|class)\\b"
+        },
+        {
+          "comment": "union keyword",
+          "name": "keyword.declaration.union.vk",
+          "match": "\\b(union|unite)\\b"
         },
         {
           "comment": "storage modifiers",
@@ -693,12 +698,12 @@
         {
           "comment": "other keywords",
           "name": "keyword.other.vk",
-          "match": "\\b(as|async|become|box|dyn|move|final|impl|in|override|priv|pub|ref|typeof|union|unsafe|unsized|use|virtual|where)\\b"
+          "match": "\\b(as|async|become|box|dyn|move|final|impl|in|override|priv|pub|ref|typeof|unsafe|unsized|use|virtual|where)\\b"
         },
         {
-          "comment": "fn",
-          "name": "keyword.other.fn.vk",
-          "match": "\\bfn\\b"
+          "comment": "function keyword",
+          "name": "keyword.declaration.function.vk",
+          "match": "\\b(micro|macro)\\b"
         },
         {
           "comment": "crate",

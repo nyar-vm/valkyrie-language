@@ -247,7 +247,7 @@ repository:
                                 name: punctuation.brackets.round.vk
                   - comment: function definition
                     name: meta.function.definition.vk
-                    begin: \b(fn)\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\()|(<))
+                    begin: \b(micro|macro)\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\()|(<))
                     beginCaptures:
                           "1":
                                 name: keyword.other.fn.vk
@@ -343,23 +343,26 @@ repository:
                     name: keyword.declaration.type.vk storage.type.vk
                     match: \b(type)\b
                   - comment: enum keyword
-                    name: keyword.declaration.enum.vk storage.type.vk
-                    match: \b(enum)\b
-                  - comment: trait keyword
-                    name: keyword.declaration.trait.vk storage.type.vk
-                    match: \b(trait)\b
-                  - comment: struct keyword
-                    name: keyword.declaration.struct.vk storage.type.vk
-                    match: \b(struct)\b
+                    name: keyword.declaration.enumerate.vk
+                    match: \b(enumerate|flags)\b
+                  - comment: interface keyword
+                    name: keyword.declaration.interface.vk
+                    match: \b(interface|trait)\b
+                  - comment: structure keyword
+                    name: keyword.declaration.sturcture.vk
+                    match: \b(sturcture|class)\b
+                  - comment: union keyword
+                    name: keyword.declaration.union.vk
+                    match: \b(union|unite)\b
                   - comment: storage modifiers
                     name: storage.modifier.vk
                     match: \b(abstract|static)\b
                   - comment: other keywords
                     name: keyword.other.vk
-                    match: \b(as|async|become|box|dyn|move|final|impl|in|override|priv|pub|ref|typeof|union|unsafe|unsized|use|virtual|where)\b
-                  - comment: fn
-                    name: keyword.other.fn.vk
-                    match: \bfn\b
+                    match: \b(as|async|become|box|dyn|move|final|impl|in|override|priv|pub|ref|typeof|unsafe|unsized|use|virtual|where)\b
+                  - comment: function keyword
+                    name: keyword.declaration.function.vk
+                    match: \b(micro|macro)\b
                   - comment: crate
                     name: keyword.other.crate.vk
                     match: \bcrate\b

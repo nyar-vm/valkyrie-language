@@ -4,6 +4,7 @@ import {SidebarConfigArray} from "@vuepress/theme-default/lib/shared/nav";
 import {defineUserConfig, defaultTheme} from 'vuepress'
 import {shikiPlugin} from "@vuepress/plugin-shiki";
 import {IGrammar} from "vscode-textmate";
+import * as path from "path";
 
 
 const locales: SiteLocaleConfig = {
@@ -178,15 +179,20 @@ export default defineUserConfig({
         shikiPlugin({
             theme: "monokai",
             langs: [
+                "hs",
+                "typescript",
+                "python",
+                "rust",
+                "yaml",
                 {
-                    id: "valkyrie",
-                    scopeName: "Valkyrie",
-                    aliases: ["vk"],
+                    id: "Valkyrie",
+                    scopeName: "source.vk",
+                    aliases: ["vk", "valkyrie"],
                     // samplePath? : string;
                     // embeddedLangs? : Lang[];
                     // balancedBracketSelectors? : string[];
                     // unbalancedBracketSelectors? : string[];
-                    path: "./valkyrie.tmLanguage.json",
+                    path: path.resolve("./docs/.vuepress/styles/valkyrie.tmLanguage.json"),
                     // grammar? : IGrammar;
                 }
             ]

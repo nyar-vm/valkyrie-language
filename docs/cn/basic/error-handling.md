@@ -77,7 +77,7 @@ let absent_number: Option<i32> = None;
 
 简而言之, 因为 `Option<T>` 和 `T` (这里 `T` 可以是任何类型) 是不同的类型, 编译器不允许像一个肯定有效的值那样使用 `Option<T>`. 例如, 这段代码不能编译, 因为它尝试将 `Option<i8>` 与 `i8` 相加:
 
-```vk,ignore
+```vk
 let x: i8 = 5;
 let y: Option<i8> = Some(5);
 

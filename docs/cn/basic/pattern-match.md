@@ -145,13 +145,13 @@ let none = plus_one(None);
 
 让我们更仔细地检查 `plus_one` 的第一行操作. 当调用 `plus_one(five)` 时, `plus_one` 函数体中的 `x` 将会是值 `Some(5)`. 接着将其与每个分支比较.
 
-```vk,ignore
+```vk
 None => None,
 ```
 
 值 `Some(5)` 并不匹配模式 `None`, 所以继续进行下一个分支.
 
-```vk,ignore
+```vk
 Some(i) => Some(i + 1),
 ```
 
@@ -159,7 +159,7 @@ Some(i) => Some(i + 1),
 
 接着考虑下示例 6-5 中 `plus_one` 的第二个调用, 这里 `x` 是 `None`. 我们进入 `match` 并与第一个分支相比较.
 
-```vk,ignore
+```vk
 None => None,
 ```
 
@@ -171,7 +171,7 @@ None => None,
 
 `match` 还有另一方面需要讨论. 考虑一下 `plus_one` 函数的这个版本, 它有一个 bug 并不能编译:
 
-```vk,ignore,does_not_compile
+```vk
 fn plus_one(x: Option<i32>) -> Option<i32> {
     match x {
         Some(i) => Some(i + 1),

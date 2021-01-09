@@ -42,7 +42,7 @@ if [] {
 
 你可以访问不同整数类型的 `min` 和 `max` 属性来获取对应类型的最小值和最大值:
 
-```swift
+```vk
 let minValue = UInt8.min  // minValue 为 0, 是 UInt8 类型
 let maxValue = UInt8.max  // maxValue 为 255, 是 UInt8 类型
 ```
@@ -208,7 +208,7 @@ let b: Decimal = 0
 
 与其他大部分编程语言不同, Swift 并不强制要求你在每条语句的结尾处使用分号 (`;`) , 当然, 你也可以按照你自己的习惯添加分号. 有一种情况下必须要用分号, 即你打算在同一行内写多条独立的语句:
 
-```swift
+```vk
 let cat = "🐱"; print(cat)
 // 输出"🐱"
 ```
