@@ -7,7 +7,8 @@ footer: CC0 Licensed | Copyright © 2012-2023 Aster™
 
 ## Introduce
 
-Valkyrie is a experimental multi-stage gradual typed language, hoping to combine the respective advantages of static typing and dynamic typing.
+Valkyrie is a experimental multi-stage gradual typed language, hoping to combine the respective advantages of static
+typing and dynamic typing.
 
 Integrate functional programming and object-oriented programming paradigms, and explore new effect-based paradigms.
 
@@ -18,57 +19,54 @@ In fact, you can think of it as scala implemented in rust.
 ## Features
 
 - **Algebraic Data Types**
-  - Your favorite functional paradigm
-  - Null-safe, languages under the ADT model are strictly null-safe
+    - Your favorite functional paradigm
+    - Null-safe, languages under the ADT model are strictly null-safe
 - **Algebraic subtyping**
-  - Restricted traditional object-oriented paradigm
+    - Restricted traditional object-oriented paradigm
 - **Algebraic Effects** (planned, semantically unclear)
 - **Gradual Structure Typing**
-  - Intelligent automatic type inference (in progress)
+    - Intelligent automatic type inference (in progress)
 - **AST Macros** (in progress)
-  - Multi-stage programming with package isolation (not yet implemented)
+    - Multi-stage programming with package isolation (not yet implemented)
 - **Concurrent Garbage Collection** (in plan, use rc for now)
 - **Lossless Rust FFI** (in plan, waiting for crABI)
 
-
-
 ## Tools
 
-- [Jupyter]()
-- [Idea Intellij]()
-- [VS Code]()
-- [AST]()
-
+- [Jupyter](https://github.com/nyar-vm/valkyrie-jupyter/blob/dev/projects/playground/main.ipynb): interactive execution
+  environment
+- [Idea Intellij](https://plugins.jetbrains.com/plugin/19452-valkyrie-language): IDEA support
+- [AST Visitor](https://docs.rs/valkyrie-ast/0.1.7/valkyrie_ast/): AST definition and pretty print
 
 ## Tutorial
 
+Learn basic syntax first
 
-首先学习基础语法
-- [Literals](./literal/readme.md)
-- [Collections](./collection/readme.md)
-- [Function calls and subscripts](./invoke/readme.md)
-- [Monadic calls and null safety](./invoke/readme.md)
-- [Let Binding]()
-- [Define Function]()
-- [Module]() & [Package]()
+- [Literals](./literal/readme.md): learn basic literals like bool, string and integer
+- [Collections](./collection/readme.md): learn common collections like list, map, set
+- [Calls and subscripts](./invoke/readme.md): learn how to call functions and get items
+- [Let Bind](./definition/let-binding.md): learn how to define variables
+- [Define Function](./definition/def-micro.md): learn how to define functions
+- [Module](./definition/module.md) & [Package](./definition/package.md): learn how to organize code
 
-接着学习FP与 OOP 如何结合
-- [Interface and Trait]()
-- [Structure and Class]()
-- [Constructor and builder pattern]()
-- [Disjoint Union and Variants]()
-- [Union, Enumerate and Flags]()
-- [Macro]()
+Then learn how to combine FP and OOP
 
-然后学习新潮的控制流
-- [If] & [Switch]
-- [While Loop] & [For Loop]
-- [Try, Catch, Return and Resume]
+- [Structure and Class](./definition/structure.md): learn polymorphism through subtyping
+- [Interface and Trait](./definition/interface.md): learn polymorphism through type class
+- [Enumerate](./definition/enumerate.md) & [Flags](./definition/flags.md): Learn to code in a more readable way
+- [Disjoint Union and Variants](./definition/disjoint-union.md): learn polymorphism through ADT
+- [Macro](./definition/def-macro.md): learn meta programming through AST transformation
 
+Then learn funky control flow
 
+- [If](./control/jump-if.md) & [Switch](./control/jump-switch.md): learn how to jump by condition
+- [While Loop](./control/loop-while.md) & [For Loop](./control/loop-for.md): learn how to loop with condition and
+  iterator
+- [Return, Break and Continue](./control/jump-control.md): learn how to return non-locally
+- [Try, Catch and Resume](./control/handle-try.md): learn how to return non-locally
 
-最后是永无止境的进阶之旅
-- Annotation and Macroes
+Finally, a never-ending journey of advancement
+
 - Define Effect
 - IO effect and logging effect
 - Generics, covariance, contravariance and invariance
@@ -77,7 +75,7 @@ In fact, you can think of it as scala implemented in rust.
 - Closures, callbacks and asynchronous programming
 - Extractor & Pattern Match
 - Raw pointers and unsafe programming
-- 值类型与栈
+- Value types and the stack allocation
 - Macro and package isolation compile
 
 
