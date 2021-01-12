@@ -73,7 +73,7 @@ Finally, a never-ending journey of advancement
 - Type conversion, type reinterpretation and type transmutation
 - Iterators and Generators
 - Closures, callbacks and asynchronous programming
-- Extractor & Pattern Match
+- [Pattern Match](./advance/pattern-match.md) & [Extractor](./advance/extractor.md)
 - Raw pointers and unsafe programming
 - Value types and the stack allocation
 - Macro and package isolation compile

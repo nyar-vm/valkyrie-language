@@ -19,7 +19,7 @@ const locales: SiteLocaleConfig = {
     }
 };
 
-const sidebar: SidebarConfigArray = [
+const sidebar_en: SidebarConfigArray = [
     {
         text: 'Literals',
         collapsible: false,
@@ -169,9 +169,81 @@ const sidebar: SidebarConfigArray = [
         ]
     },
     {
-        text: 'Appendix',
+        text: 'Control Flow',
         collapsible: false,
         children: [
+            {
+                text: "Overview",
+                link: "/en/control/readme.md"
+            },
+            {
+                text: "If Statement",
+                link: "/en/control/jump-if.md"
+            },
+            {
+                text: "Switch Statement",
+                link: "/en/control/jump-switch.md"
+            },
+            {
+                text: "Non Locally Return",
+                link: "/en/control/jump-control.md"
+            },
+            {
+                text: "While Loop",
+                link: "/en/control/loop-while.md"
+            },
+            {
+                text: "For Loop",
+                link: "/en/control/loop-for.md"
+            },
+            {
+                text: "Auto Handler",
+                link: "/en/control/handle-try.md"
+            },
+            {
+                text: "Effect Handler",
+                link: "/en/control/handle-catch.md"
+            },
+            {
+                text: "Typing Handler",
+                link: "/en/control/handle-match.md"
+            },
+            {
+                text: "Pattern Match",
+                link: "/en/control/jump-if.md"
+            },
+        ]
+    },
+    {
+        text: 'Advance',
+        collapsible: true,
+        children: [
+            {
+                text: "Overview",
+                link: "/en/advance/readme.md",
+            },
+            {
+                text: "Pattern Match",
+                link: "/en/advance/pattern-match.md",
+            },
+            {
+                text: "Extractor",
+                link: "/en/advance/extractor.md",
+            },
+            {
+                text: "Builder",
+                link: "/en/advance/builder.md",
+            },
+        ]
+    },
+    {
+        text: 'Appendix',
+        collapsible: true,
+        children: [
+            {
+                text: "Keywords Summary",
+                link: "/en/appendix/readme.md",
+            },
             {
                 text: "Rust User Guide",
                 link: "/en/appendix/for-rust.md",
@@ -183,39 +255,26 @@ const sidebar: SidebarConfigArray = [
 const theme = defaultTheme(
     {
         repo: 'nyar-lang/ValkyrieTutorial',
-        // editLinks: true,
+        colorModeSwitch: true,
+        docsBranch: "dev",
+        editLink: true,
         docsDir: 'docs',
-        // markdown: {
-        //     lineNumbers: true
-        // },
+        lastUpdated: true,
         locales: {
             '/cn/': {
-                // selectText: '选择语言',
-                // label: '简体中文',
+                selectLanguageText: '选择语言',
+                selectLanguageName: "简体中文",
                 editLinkText: '在 GitHub 上编辑此页',
-                // serviceWorker: {
-                //     updatePopup: {
-                //         message: "发现新内容可用.",
-                //         buttonText: "刷新"
-                //     }
-                // },
                 sidebar: {
-                    "/cn/": sidebar,
+                    "/cn/": sidebar_en,
                 },
             },
             '/en/': {
-                // selectText: 'Languages',
-                // label: 'English',
-                // ariaLabel: 'Languages',
+                selectLanguageText: 'Languages',
+                selectLanguageName: 'English',
                 editLinkText: 'Edit this page on GitHub',
-                // serviceWorker: {
-                //     updatePopup: {
-                //         message: "New content is available.",
-                //         buttonText: "Refresh"
-                //     }
-                // },
                 sidebar: {
-                    "/en/": sidebar
+                    "/en/": sidebar_en
                 }
             },
         },
@@ -226,8 +285,8 @@ const theme = defaultTheme(
 export default defineUserConfig({
     dest: 'docs/.build',
     lang: 'en-US',
-    title: 'Hello VuePress',
-    description: 'Just playing around',
+    title: 'Valkyrie Tutorial',
+    description: 'A multi-stage gradual typed language',
     locales: locales,
     head: [
         ['link', {rel: 'shortcut icon', type: "image/x-icon", href: './favicon.png'}]
@@ -235,6 +294,8 @@ export default defineUserConfig({
     theme: theme,
     // serviceWorker: true,
     markdown: {
+        toc: {}
+
         // config: md => {
         //
         // }
