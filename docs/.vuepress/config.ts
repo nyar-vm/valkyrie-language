@@ -50,29 +50,22 @@ const sidebar_en: SidebarConfigArray = [
                 text: "Overview",
                 link: "/en/collection/readme.md",
             },
-
-            // ['basic/variable', 'Variable'],
-            // ['basic/function', 'Function'],
-            // ['basic/class', 'Class'],
-            // ['basic/trait', 'Trait'],
-            // ['basic/enumerate', 'Enumerate'],
-            // ['basic/pattern-match', 'Pattern Match'],
-            // ['basic/control-flow', 'Control Flow'],
-            // ['basic/error-handling', 'Error Handling'],
-            // ['basic/unit-testing', 'Testing'],
-            // ['basic/module', 'Module'],
-            // ['basic/paclet', 'Paclet'],
-            //         ['collection/readme.md', 'Collection'],
-            //         ['advance/', 'Handler Operators'],
-            //         ['advance/operator-overloading', 'Operator Overloading'],
-            //
-            //         ['advance/collections', 'Collections'],
-            //         ['advance/closure', 'Closure'],
-            //         ['advance/iterators', 'Iterator'],
-            //         ['advance/adhoc-polymorphism', 'Ad-hoc Polymorphism'],
-            //         ['advance/generic-type', 'Generic Type'],
-            //         ['advance/higher-kinded-type', 'Higher Kinded Type'],
-            //         ['advance/algebraic-data-type', 'Algebraic Data Type'],
+            {
+                text: "List",
+                link: "/en/collection/list.md",
+            },
+            {
+                text: "Dict",
+                link: "/en/collection/dict.md",
+            },
+            {
+                text: "Map",
+                link: "/en/collection/map.md",
+            },
+            {
+                text: "Set",
+                link: "/en/collection/set.md",
+            },
         ]
     },
     {

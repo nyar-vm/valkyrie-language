@@ -1,7 +1,5 @@
 # Non-local Return
 
-
-
 | control       | description                                 |
 |---------------|---------------------------------------------|
 | `break`       | exit the loop                               |
@@ -9,9 +7,11 @@
 | `fallthrough` | execute the next case in a switch statement |
 | `return`      | exit the function                           |
 | `raise`       | raise an effect                             |
+| `yield`       | yield a value                               |
+| `yield from`  | yield a value from an iterator              |
+| `yield break` | exit the iterator                           |
 
-
-# Compilation Principle
+## Compilation Principle
 
 ```vk
 micro check235(items: [int]): bool {
@@ -71,14 +71,14 @@ micro check235(items: [int]): bool {
     let mut state = 1;
     let mut next = items.next()
     let mut ret = false;
-    while state > 0 {
+    while true {
         switch {
             case 1:
                 if next.is_some() {
                     state = 2
                 }
                 else {
-                    state = 0
+                    break
                 }
             case 2:
                 let i = next.unwrap()
@@ -100,10 +100,10 @@ micro check235(items: [int]): bool {
             case 5:
                 if item % 5 == 0 {
                     ret = true
-                    state = 0
+                    break
                 }
                 else {
-                    state = 5
+                    state = 6
                 }
             case 6:
                 print("next")
@@ -111,7 +111,7 @@ micro check235(items: [int]): bool {
                 state = 1
             case 7:
                 print("no such item")
-                state = 0
+                break
         }
     }
     ret

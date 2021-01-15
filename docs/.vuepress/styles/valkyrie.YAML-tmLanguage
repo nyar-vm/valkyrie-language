@@ -332,7 +332,19 @@ repository:
             patterns:
                   - comment: control flow keywords
                     name: keyword.control.vk
-                    match: \b(await|break|continue|do|else|for|if|loop|match|return|resume|try|while|yield)\b
+                    match: \b(if|else)\b
+                  - comment: control flow keywords
+                    name: keyword.control.vk
+                    match: \b(switch|when|fallthrough)\b
+                  - comment: control flow keywords
+                    name: keyword.control.vk
+                    match: \b(for|while|break|continue)\b
+                  - comment: control flow keywords
+                    name: keyword.control.vk
+                    match: \b(try|catch|return|resume)\b
+                  - comment: control flow keywords
+                    name: keyword.control.vk
+                    match: \b(yield|from)\b
                   - comment: storage keywords
                     name: keyword.other.vk storage.type.vk
                     match: \b(extern|let|namespace|package)\b
