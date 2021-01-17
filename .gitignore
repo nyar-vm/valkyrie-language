@@ -10,13 +10,10 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-
-# Build
 Thumbs.db
 .DS_Store
-#docs/.build/
-*.ps1
-*.nb
+
+# Build
+.build/
 .cache/
 .temp/
