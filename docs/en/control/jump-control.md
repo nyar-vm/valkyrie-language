@@ -38,8 +38,8 @@ The first stage will program all control jumps to goto
 micro check235(items: [int]): bool {
     let mut next = items.next()
     let mut ret = false;
-    while next.is_some() {
-        @label 1
+    loop {
+        @1
         let i = next.unwrap()
         @label 2
         if item % 2 == 0 {
@@ -57,9 +57,10 @@ micro check235(items: [int]): bool {
         next = items.next()
         @goto 2
     }
-    @label 4
+    @2
     print("no such item")
     @label 5
+    // drops here
     ret
 }
 ```
@@ -117,3 +118,5 @@ micro check235(items: [int]): bool {
     ret
 }
 ```
+
+
