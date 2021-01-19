@@ -1,10 +1,40 @@
+Another important element in algebraic data types is the sum type,
+which is represented by `unite` in the Valkyrie language.
 
+unite Each variant can have its own field, or it can have no field
+
+```valkyrie
+unite Test {
+    A { }
+    B {
+        b: int
+    }
+    C {
+        c1: int
+        c2: str
+    }
+}
+```
+
+Unite can easily use pattern matching to implement interfaces
+
+```valkyrie
+extends Test {
+    to_string(self) {
+        self.match {
+            case A: "A"
+            case B(b): "B: integer is {b}"
+            case C(c1, c2): "C: integer is {c1}, string is {c2}"
+        }
+    }
+}
+```
 
 ## Implementation Details
 
 Disjoint union types will be expanded to `trait` + `subtype`.
 
-```vk
+```valkyrie
 unite Result<T, E> {
     Success {
         value: T
@@ -26,7 +56,7 @@ extends Result<T, E> {
 
 You can also manually implement an extensible Σ type based on this.
 
-```vk
+```valkyrie
 @unite
 @implements.in(file)
 trait Result<T, E> {
@@ -61,3 +91,6 @@ class Failure<T, E>: Result<T, E> {
     }
 }
 ```
+
+Note that the `construct` and `extract` here are not written in the trait constraints,
+so that subclasses can implement them according to their needs

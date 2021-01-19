@@ -1,7 +1,7 @@
 ---
 home: true
 actionText: Start to read
-actionLink: /en/appendix/
+actionLink: /en/literal/readme.md
 footer: CC0 Licensed | Copyright © 2012-2023 Aster™
 ---
 
@@ -55,7 +55,7 @@ Then learn how to combine FP and OOP
 - [Interface and Trait](./definition/interface.md): learn polymorphism through type class
 - [Enumerate](./definition/enumerate.md) & [Flags](./definition/flags.md): Learn to code in a more readable way
 - [Disjoint Union and Variants](./definition/disjoint-union.md): learn polymorphism through ADT
-- [Macro](./definition/def-macro.md): learn meta programming through AST transformation
+- Macro: learn meta programming through AST transformation
 
 Then learn funky control flow
 
@@ -63,17 +63,18 @@ Then learn funky control flow
 - [While Loop](./control/loop-while.md) & [For Loop](./control/loop-for.md): learn how to loop with condition and
   iterator
 - [Return, Break and Continue](./control/jump-control.md): learn how to return non-locally
-- [Try, Catch and Resume](./control/handle-try.md): learn how to return non-locally
+- Try, Catch and Resume: learn how to return non-locally
 
 Finally, a never-ending journey of advancement
 
+- [Pattern Match](./advance/pattern-match.md) & [Extractor](./advance/extractor.md)
+- [Constructor and Builder](./advance/builder.md)
 - Define Effect
-- IO effect and logging effect
+- `Io` effect and `Logging` effect
 - Generics, covariance, contravariance and invariance
 - Type conversion, type reinterpretation and type transmutation
 - Iterators and Generators
 - Closures, callbacks and asynchronous programming
-- [Pattern Match](./advance/pattern-match.md) & [Extractor](./advance/extractor.md)
 - Raw pointers and unsafe programming
 - Value types and the stack allocation
 - Macro and package isolation compile

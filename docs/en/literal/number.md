@@ -31,7 +31,7 @@ Here are some other primitive numeric type
 
 In addition, you can customize other postfix number types
 
-```vk
+```valkyrie
 1m + 2cm
 1kg * 9.8`m/s^2`
 ```
