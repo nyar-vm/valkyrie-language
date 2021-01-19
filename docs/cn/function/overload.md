@@ -1,6 +1,6 @@
 ## Overloading Function
 
-```vk
+```valkyrie
 def overload print_number(number: Integer) {
     print("Integer: ${context}")
 }
@@ -30,7 +30,7 @@ def overload print_number(number: Integer) {
 
 多派发使用通过定义序
 
-```vk
+```valkyrie
 @dispatch(for_int, order: 100)
 def print_number(number: Integer) {
     print("Integer: ${context}")

@@ -3,7 +3,7 @@
 
 case 左边是任意字面量, 中间是 `=>` 箭头, 右边是匹配成功之后的行为
 
-```vk
+```valkyrie
 any.match {
     case 0u8 => print('0')
     case c: char if c == 'c' => print('c')

@@ -5,7 +5,7 @@ An interface describes a set of methods that a structure needs to implement.
 Interface is roughly equivalent to virtual class, but the difference is that it does not participate in mro sorting, and
 its call always points to the end of mro.
 
-```vk
+```valkyrie
 virtual class A {
     who(self) { print("A") }
 }
@@ -35,7 +35,7 @@ interface and trait.
 The second difference is that there is no inheritance of interfaces, there is no interface `A` inheriting
 interface `B`(`A(B)`), only interface `A` satisfies interface `B`(`A:B`)
 
-```vk
+```valkyrie
 interface DividedBy4: DividedBy2 {
     divided_by_4(self) -> bool;
 }
@@ -72,7 +72,7 @@ That's why we need the trait.
 
 The declaration syntax of trait and interface is the same
 
-```vk
+```valkyrie
 trait Show {
     show(self, f: Formatter) -> Unit;
 }

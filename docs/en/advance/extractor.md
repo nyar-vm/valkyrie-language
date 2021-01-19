@@ -2,7 +2,7 @@
 
 
 
-```vk
+```valkyrie
 class Uppercase {
 
 }

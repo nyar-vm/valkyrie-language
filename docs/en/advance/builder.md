@@ -12,7 +12,7 @@ A::new(1)
 
 Valkyrie Language provides an easy way
 
-```vk
+```valkyrie
 class A {
     a: int
     b: int = 1
@@ -39,7 +39,7 @@ new A(1) {
 
 
 
-```vk
+```valkyrie
 let mut a = A(1)
 a.b = 2
 a.c = "c"

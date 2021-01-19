@@ -2,7 +2,7 @@
 
 ## Structure
 
-```vk
+```valkyrie
 structure A {
     field: Type = default_value;
     lazy delay: Type = {
@@ -12,7 +12,7 @@ structure A {
 ```
 
 
-```vk
+```valkyrie
 
 
 ```

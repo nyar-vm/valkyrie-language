@@ -42,7 +42,7 @@ if number != 0 {
 可以将 `else if` 表达式与 `if` 和 `else` 组合来实现多重条件. 例如:
 
 
-```vk
+```valkyrie
 let number = 6;
 if number % 2 == 0 {
     println!("number is divisible by 2");
@@ -87,7 +87,7 @@ Rust 有三种循环: `loop`、`while` 和 `for`. 我们每一个都试试.
 
 <span class="filename">文件名: src/main.rs</span>
 
-```vk
+```valkyrie
 fn main() {
     let mut number = 3;
 
@@ -110,7 +110,7 @@ fn main() {
 
 `loop` 的一个用例是重试可能会失败的操作, 比如检查线程是否完成了任务. 然而你可能会需要将操作的结果传递给其它的代码. 如果将返回值加入你用来停止循环的 `break` 表达式, 它会被停止的循环返回:
 
-```vk
+```valkyrie
 fn main() {
     let mut counter = 0;
 
@@ -134,7 +134,7 @@ fn main() {
 
 <span class="filename">文件名: src/main.rs</span>
 
-```vk
+```valkyrie
 fn main() {
     let a = [10, 20, 30, 40, 50];
 
@@ -156,7 +156,7 @@ fn main() {
 
 <span class="filename">文件名: src/main.rs</span>
 
-```vk
+```valkyrie
 fn main() {
     for number in (1..4).rev() {
         println!("{}!", number);

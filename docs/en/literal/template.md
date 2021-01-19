@@ -4,7 +4,7 @@ Use the `t` prefix for template strings
 
 ### Template Comment
 
-```vk
+```valkyrie
 t"""
 {# This is comment #}
 
@@ -13,7 +13,7 @@ t"""
 
 ### Template Expression
 
-```vk
+```valkyrie
 t"""
 {@ x @}
 {@ None @}
@@ -23,7 +23,7 @@ t"""
 
 ### Template If
 
-```vk
+```valkyrie
 t"""
 {% if a > 0%}
     yes
@@ -36,7 +36,7 @@ t"""
 
 ### Template While
 
-```vk
+```valkyrie
 t"""
 {% while a > 0 %}
     {% if a > 1 %}

@@ -338,7 +338,7 @@ repository:
                     match: \b(switch|when|case|fallthrough)\b
                   - comment: control flow keywords
                     name: keyword.control.vk
-                    match: \b(for|while|break|continue)\b
+                    match: \b(for|while|until|break|continue|otherwise)\b
                   - comment: control flow keywords
                     name: keyword.control.vk
                     match: \b(try|match|catch|return|resume)\b

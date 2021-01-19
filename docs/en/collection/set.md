@@ -12,7 +12,7 @@ It ensures that each element is unique and retains the order in which the elemen
 
 Here's an example:
 
-```vk
+```valkyrie
 let map = new IndexMap<String>() {
     "orange"
     "apple"
@@ -39,7 +39,7 @@ It allows custom ordering of the elements based on a specified criterion.
 
 Here's an example:
 
-```vk
+```valkyrie
 let map = new OrderSet<String>() {
     "orange"
     "apple"
@@ -66,7 +66,7 @@ It provides efficient lookups and ensures uniqueness of elements.
 
 Here's an example:
 
-```vk
+```valkyrie
 let map = new HashSet<String>() {
     "orange"
     "apple"

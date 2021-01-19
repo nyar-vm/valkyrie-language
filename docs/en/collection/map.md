@@ -12,7 +12,7 @@ It allows you to store key-value pairs and retrieve them in the order they were 
 
 Here's an example:
 
-```vk
+```valkyrie
 let map = new IndexMap<String, Integer>() {
     Pair("orange", 7),
     Pair("apple", 10),
@@ -39,7 +39,7 @@ It provides a customizable way to order the map's entries.
 
 Here's an example:
 
-```vk
+```valkyrie
 let map = new OrderMap<String, Integer>() {
     Pair("orange", 7),
     Pair("apple", 10),
@@ -66,7 +66,7 @@ It provides fast key-value lookups based on hash values.
 
 Here's an example:
 
-```vk
+```valkyrie
 let map = new HashMap<String, Integer>() {
     Pair("orange", 7),
     Pair("apple", 10),

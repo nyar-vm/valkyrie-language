@@ -13,7 +13,7 @@ footer: CC0 Licensed | Copyright © 2012-2019 Aster™
 
 ## 运行
 
-```vk
+```valkyrie
 > "Hello World!"
 ```
 
@@ -41,14 +41,14 @@ Swift 是一个*类型安全 (type safe) *的语言. 类型安全的语言可以
 
 例如, 如果你给一个新常量赋值 `42` 并且没有标明类型, Swift 可以推断出常量类型是 `Int` , 因为你给它赋的初始值看起来像一个整数:
 
-```vk
+```valkyrie
 let meaningOfLife = 42
 // meaningOfLife 会被推测为 Int 类型
 ```
 
 同理, 如果你没有给浮点字面量标明类型, Swift 会推断你想要的是 `Double`:
 
-```vk
+```valkyrie
 let pi = 3.14159
 // pi 会被推测为 Double 类型
 ```
@@ -57,7 +57,7 @@ let pi = 3.14159
 
 如果表达式中同时出现了整数和浮点数, 会被推断为 `Double` 类型:
 
-```vk
+```valkyrie
 let anotherPi = 3 + 0.14159
 // anotherPi 会被推测为 Double 类型
 ```

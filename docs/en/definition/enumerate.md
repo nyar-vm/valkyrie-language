@@ -2,7 +2,7 @@
 
 ## Enumerate
 
-```vk
+```valkyrie
 enumerate MyEnum {
 
 }
@@ -13,7 +13,7 @@ enumerate MyEnum {
 ## Flags
 
 
-```vk
+```valkyrie
 flags MyFlags {
 
 }

@@ -4,7 +4,7 @@ no less(`<`) and great(`>`) operator, use `<|` and `|>` instead.
 
 ### XML Comment
 
-```vk
+```valkyrie
 x"""
 <!-- This is comment -->
 """
@@ -12,7 +12,7 @@ x"""
 
 ### XML Class
 
-```vk
+```valkyrie
 x"""
 <Tag attribute a=1>
     text
@@ -22,7 +22,7 @@ x"""
 
 desugars to
 
-```vk
+```valkyrie
 Tag(attribute: true, a: 1) {
     "text"
 }
@@ -31,7 +31,7 @@ Tag(attribute: true, a: 1) {
 
 ## XML Inline
 
-```vk
+```valkyrie
 x"""
 <Tag attribute a=1/>
 """
@@ -39,6 +39,6 @@ x"""
 
 desugars to
 
-```vk
+```valkyrie
 Tag(attribute: true, a: 1);
 ```

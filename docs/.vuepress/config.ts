@@ -22,7 +22,7 @@ const locales: SiteLocaleConfig = {
 const sidebar_en: SidebarConfigArray = [
     {
         text: 'Literals',
-        collapsible: false,
+        collapsible: true,
         children: [
             {
                 text: "Overview",
@@ -44,7 +44,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Collections',
-        collapsible: false,
+        collapsible: true,
         children: [
             {
                 text: "Overview",
@@ -70,7 +70,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Definitions',
-        collapsible: false,
+        collapsible: true,
         children: [
             {
                 text: "Overview",
@@ -128,7 +128,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Invokes',
-        collapsible: false,
+        collapsible: true,
         children: [
             {
                 text: "Overview",
@@ -163,7 +163,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Control Flow',
-        collapsible: false,
+        collapsible: true,
         children: [
             {
                 text: "Overview",

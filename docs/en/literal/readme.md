@@ -3,7 +3,7 @@
 
 ## Comment
 
-```vk
+```valkyrie
 #
 
 #?
@@ -31,7 +31,7 @@
 
 ### 字面量多态
 
-```vk
+```valkyrie
 let list: List[String] = [] # derived as List()
 let dict: Dict[String] = [] # derived as Dict()
 ```
@@ -53,6 +53,6 @@ Default Value: false
 ###
 
 
-```vk
+```valkyrie
 
 ```

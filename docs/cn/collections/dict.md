@@ -8,7 +8,7 @@
 
 有序表
 
-```vk
+```valkyrie
 let mut map: OrderedMap[String, Int] = []
 map.insert("a", 1)
 map.insert("z", 26)
@@ -24,7 +24,7 @@ print_line("${map}{:?}")
 
 排序表
 
-```vk
+```valkyrie
 let mut map: SortedMap[String, Int] = []
 map.insert("a", 1)
 map.insert("z", 26)
@@ -41,12 +41,12 @@ print_line("${map}{:?}")
 
 `Dict` is a `OrderedMap` with string keys.
 
-```vk
+```valkyrie
 type Dict[T] = OrderedMap[String, T]
 ```
 
 
-```vk
+```valkyrie
 let map = [
     a: 1,
     z: 26,

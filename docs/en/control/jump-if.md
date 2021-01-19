@@ -3,7 +3,7 @@
 
 ## Simple If Statement
 
-```vk
+```valkyrie
 if a > 0 {
     print("a > 0")
 }
@@ -13,7 +13,7 @@ if a > 0 {
 
 ## If Else Statement
 
-```vk
+```valkyrie
 if a > 0 {
     print("a > 0")
 }
@@ -25,7 +25,7 @@ else {
 
 ## If Else Statement
 
-```vk
+```valkyrie
 if a > 0 {
     print("a > 0")
 }
@@ -39,7 +39,7 @@ else {
 
 ## If Let Statement
 
-```vk
+```valkyrie
 if let Some(a) = a {
     print(a)
 }
@@ -48,7 +48,7 @@ if let Some(a) = a {
 
 ## If Let Else Statement
 
-```vk
+```valkyrie
 if let Some(a) = a {
     print(a)
 }

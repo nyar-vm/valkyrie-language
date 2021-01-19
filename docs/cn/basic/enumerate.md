@@ -6,7 +6,7 @@
 
 可以通过在代码中定义一个 `IpAddrKind` 枚举来表现这个概念并列出可能的 IP 地址类型, `V4` 和 `V6`. 这被称为枚举的 **成员** (*variants*) :
 
-```vk
+```valkyrie
 enum IpAddrKind {
     V4,
     V6,
@@ -19,7 +19,7 @@ enum IpAddrKind {
 
 可以像这样创建 `IpAddrKind` 两个不同成员的实例:
 
-```vk
+```valkyrie
 # enum IpAddrKind {
 #     V4,
 #     V6,
@@ -31,7 +31,7 @@ let six = IpAddrKind::V6;
 
 注意枚举的成员位于其标识符的命名空间中, 并使用两个冒号分开. 这么设计的益处是现在 `IpAddrKind::V4` 和 `IpAddrKind::V6` 都是 `IpAddrKind` 类型的. 例如, 接着可以定义一个函数来获取任何 `IpAddrKind`:
 
-```vk
+```valkyrie
 # enum IpAddrKind {
 #     V4,
 #     V6,
@@ -42,7 +42,7 @@ fn route(ip_type: IpAddrKind) { }
 
 现在可以使用任一成员来调用这个函数:
 
-```vk
+```valkyrie
 # enum IpAddrKind {
 #     V4,
 #     V6,
@@ -56,7 +56,7 @@ route(IpAddrKind::V6);
 
 我们可以使用一种更简洁的方式来表达相同的概念, 仅仅使用枚举并将数据直接放进每一个枚举成员而不是将枚举作为结构体的一部分. `IpAddr` 枚举的新定义表明了 `V4` 和 `V6` 成员都关联了 `String` 值:
 
-```vk
+```valkyrie
 enum IpAddr {
     V4(String),
     V6(String),
@@ -71,7 +71,7 @@ let loopback = IpAddr::V6(String::from("::1"));
 
 用枚举替代结构体还有另一个优势: 每个成员可以处理不同类型和数量的数据. IPv4 版本的 IP 地址总是含有四个值在 0 和 255 之间的数字部分. 如果我们想要将 `V4` 地址存储为四个 `u8` 值而 `V6` 地址仍然表现为一个 `String`, 这就不能使用结构体了. 枚举则可以轻易处理的这个情况:
 
-```vk
+```valkyrie
 enum IpAddr {
     V4(u8, u8, u8, u8),
     V6(String),

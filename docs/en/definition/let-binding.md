@@ -1,7 +1,7 @@
 
 
 
-```vk
+```valkyrie
 let a = 1
 let mut a = 2
 ```
@@ -9,18 +9,18 @@ let mut a = 2
 
 
 
-```vk
+```valkyrie
 ;; main function
 def main hello_world() {
     print("Hello world!")
 }
 ```
 
-```vk
+```valkyrie
 let x = 0;
 let mut x = 0;
 ```
 
-```vk
+```valkyrie
 let int: number = 0;
 ```

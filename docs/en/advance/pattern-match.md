@@ -2,7 +2,7 @@
 ## Literal Pattern Match
 
 
-```vk
+```valkyrie
 terms.match {
     case true:
         branch_a
@@ -19,7 +19,7 @@ terms.match {
 ## Conditional Pattern Match
 
 
-```vk
+```valkyrie
 terms.match {
     when > 0:
         branch_a
@@ -34,7 +34,7 @@ terms.match {
 ## Type Pattern Match
 
 
-```vk
+```valkyrie
 terms.match {
     # same as `case a if a is Integer:`
     type Integer a:
@@ -53,7 +53,7 @@ terms.match {
 ## Tuple Pattern Match
 
 
-```vk
+```valkyrie
 terms.match {
     case (a, _):
         branch_a
@@ -64,7 +64,7 @@ terms.match {
 
 ## Class Pattern Match
 
-```vk
+```valkyrie
 terms.match {
     case { a, *** }:
         branch_a
@@ -77,7 +77,7 @@ terms.match {
 
 All captures with the same name on the same branch must be type-compatible to first capture.
 
-```vk
+```valkyrie
 terms.match {
     case Some(a) | Success { value: a }:
         branch_a

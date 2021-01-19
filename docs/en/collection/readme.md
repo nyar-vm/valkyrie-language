@@ -29,6 +29,6 @@ Aka `Heterogeneous Vector`
 
 `Dict` is a `OrderedMap` with string keys.
 
-```vk
+```valkyrie
 type Dict[T] = OrderedMap[String, T]
 ```

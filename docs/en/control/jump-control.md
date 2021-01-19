@@ -13,7 +13,7 @@
 
 ## Compilation Principle
 
-```vk
+```valkyrie
 micro check235(items: [int]): bool {
     for item in items {
         if item % 2 == 0 {
@@ -34,7 +34,7 @@ micro check235(items: [int]): bool {
 
 The first stage will program all control jumps to goto
 
-```vk
+```valkyrie
 micro check235(items: [int]): bool {
     let mut next = items.next()
     let mut ret = false;
@@ -66,7 +66,7 @@ micro check235(items: [int]): bool {
 
 The second stage will execute the relooper, compiling goto into a state machine
 
-```vk
+```valkyrie
 micro check235(items: [int]): bool {
     let mut state = 1;
     let mut next = items.next()

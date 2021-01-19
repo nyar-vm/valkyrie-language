@@ -1,6 +1,6 @@
 ### Type Cast Hook
 
-```vk
+```valkyrie
 @type_cast.implicit: Graph
 @type_cast.implicit.clear: ()
 @type_cast.implicit.try {Integer => Decimal} : bool

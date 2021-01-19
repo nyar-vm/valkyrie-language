@@ -53,7 +53,7 @@ Tony Hoare, null 的发明者, 在他 2009 年的演讲 "Null References: The Bi
 
 [option]: https://doc.rust-lang.org/std/option/enum.Option.html
 
-```vk
+```valkyrie
 enum Option<T> {
     Some(T),
     None,
@@ -64,7 +64,7 @@ enum Option<T> {
 
 `<T>` 语法是一个我们还未讲到的 Rust 功能. 它是一个泛型类型参数, 第十章会更详细的讲解泛型. 目前, 所有你需要知道的就是 `<T>` 意味着 `Option` 枚举的 `Some` 成员可以包含任意类型的数据. 这里是一些包含数字类型和字符串类型 `Option` 值的例子:
 
-```vk
+```valkyrie
 let some_number = Some(5);
 let some_string = Some("a string");
 
@@ -77,7 +77,7 @@ let absent_number: Option<i32> = None;
 
 简而言之, 因为 `Option<T>` 和 `T` (这里 `T` 可以是任何类型) 是不同的类型, 编译器不允许像一个肯定有效的值那样使用 `Option<T>`. 例如, 这段代码不能编译, 因为它尝试将 `Option<i8>` 与 `i8` 相加:
 
-```vk
+```valkyrie
 let x: i8 = 5;
 let y: Option<i8> = Some(5);
 
