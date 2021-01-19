@@ -132,38 +132,39 @@ const sidebar_en: SidebarConfigArray = [
         children: [
             {
                 text: "Overview",
-                link: "/en/definition/readme.md",
+                link: "/en/invoke/readme.md",
+                // target: "/en/invoke/overview",
             },
             {
                 text: "Function Call",
-                link: "/en/definition/readme.md",
+                link: "/en/invoke/apply.md",
             },
             {
                 text: "Function Dot Call",
-                link: "/en/definition/readme.md",
+                link: "/en/invoke/apply-dot.md",
             },
             {
                 text: "Index Call",
-                link: "/en/definition/readme.md",
+                link: "/en/invoke/subscript.md",
             },
             {
                 text: "Slice Call",
-                link: "/en/definition/readme.md",
+                link: "/en/invoke/slice.md",
             },
             {
                 text: "Lambda Call",
-                link: "/en/definition/readme.md",
+                link: "/en/invoke/lambda.md",
             },
             {
                 text: "Lambda Dot Call",
-                link: "/en/definition/readme.md",
+                link: "/en/invoke/lambda-dot.md",
             }
-
         ]
     },
     {
         text: 'Control Flow',
         collapsible: true,
+        target: "/en/control/readme.md",
         children: [
             {
                 text: "Overview",
