@@ -1,3 +1,15 @@
+
+
+## Sized Number
+
+The default integer type is `Integer`, short alias is `int`.
+
+It is a reference type, which represents an arbitrary precision integer.
+
+If you want some fixed size number, you can write 255u8
+
+Here are some other primitive numeric type
+
 | postfix | description              |                                        example |
 |--------:|--------------------------|-----------------------------------------------:|
 |    `u8` | unsigned 8 bit integer   |                                        `255u8` |
@@ -14,3 +26,14 @@
 |  `u128` | unsigned 128 bit integer |  `340282366920938463463374607431768211455u128` |
 |  `i128` | signed 128 bit integer   | `-170141183460469231731687303715884105727i128` |
 |  `d128` | 128 bit decimal          |                                      `0.5d128` |
+
+## Unit number
+
+In addition, you can customize other postfix number types
+
+```vk
+1m + 2cm
+1kg * 9.8`m/s^2`
+```
+
+

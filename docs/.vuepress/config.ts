@@ -11,7 +11,6 @@ const locales: SiteLocaleConfig = {
     '/cn/': {
         lang: 'zh-CN',
         title: 'Valkyrie 语言教程',
-
     },
     '/en/': {
         lang: 'en-US',
@@ -22,7 +21,7 @@ const locales: SiteLocaleConfig = {
 const sidebar_en: SidebarConfigArray = [
     {
         text: 'Literals',
-        collapsible: true,
+        collapsible: false,
         children: [
             {
                 text: "Overview",
@@ -44,7 +43,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Collections',
-        collapsible: true,
+        collapsible: false,
         children: [
             {
                 text: "Overview",
@@ -70,7 +69,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Definitions',
-        collapsible: true,
+        collapsible: false,
         children: [
             {
                 text: "Overview",
@@ -128,12 +127,11 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Invokes',
-        collapsible: true,
+        collapsible: false,
         children: [
             {
                 text: "Overview",
                 link: "/en/invoke/readme.md",
-                // target: "/en/invoke/overview",
             },
             {
                 text: "Function Call",
@@ -163,7 +161,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Control Flow',
-        collapsible: true,
+        collapsible: false,
         target: "/en/control/readme.md",
         children: [
             {
@@ -210,7 +208,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Advance',
-        collapsible: true,
+        collapsible: false,
         children: [
             {
                 text: "Overview",
@@ -232,7 +230,7 @@ const sidebar_en: SidebarConfigArray = [
     },
     {
         text: 'Appendix',
-        collapsible: true,
+        collapsible: false,
         children: [
             {
                 text: "Keywords Summary",
@@ -248,7 +246,7 @@ const sidebar_en: SidebarConfigArray = [
 
 const theme = defaultTheme(
     {
-        repo: 'nyar-lang/ValkyrieTutorial',
+        repo: 'nyar-lang/valkyrie-language',
         colorModeSwitch: true,
         docsBranch: "dev",
         editLink: true,
@@ -269,7 +267,8 @@ const theme = defaultTheme(
                 editLinkText: 'Edit this page on GitHub',
                 sidebar: {
                     "/en/": sidebar_en
-                }
+                },
+                navbar: []
             },
         },
     }
