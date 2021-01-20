@@ -11,7 +11,7 @@
 | `yield from`  | yield a value from an iterator              |
 | `yield break` | exit the iterator                           |
 
-## Compilation Principle
+## Implementation Details
 
 ```valkyrie
 micro check235(items: [int]): bool {
