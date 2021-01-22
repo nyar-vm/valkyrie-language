@@ -653,7 +653,7 @@
         {
           "comment": "control flow keywords",
           "name": "keyword.control.vk",
-          "match": "\\b(if|else)\\b"
+          "match": "\\b(if|guard|then|else)\\b"
         },
         {
           "comment": "control flow keywords",
@@ -663,12 +663,12 @@
         {
           "comment": "control flow keywords",
           "name": "keyword.control.vk",
-          "match": "\\b(loop|while|until|break|continue)\\b"
+          "match": "\\b(loop|while|until|for|break|continue|otherwise)\\b"
         },
         {
           "comment": "control flow keywords",
           "name": "keyword.control.vk",
-          "match": "\\b(for|otherwise)\\b"
+          "match": "\\b(let|namespace|package)\\b"
         },
         {
           "comment": "control flow keywords",
@@ -679,11 +679,6 @@
           "comment": "control flow keywords",
           "name": "keyword.control.vk",
           "match": "\\b(yield|from)\\b"
-        },
-        {
-          "comment": "storage keywords",
-          "name": "keyword.other.vk storage.type.vk",
-          "match": "\\b(extern|let|namespace|package)\\b"
         },
         {
           "comment": "const keyword",
@@ -714,11 +709,6 @@
           "comment": "enum keyword",
           "name": "keyword.declaration.enumerate.vk",
           "match": "\\b(enumerate|flags)\\b"
-        },
-        {
-          "comment": "interface keyword",
-          "name": "keyword.declaration.interface.vk",
-          "match": "\\b(interface|trait)\\b"
         },
         {
           "comment": "structure keyword",
@@ -757,8 +747,8 @@
         },
         {
           "comment": "mut",
-          "name": "storage.modifier.mut.vk",
-          "match": "\\b(ref|mut|lazy)\\b"
+          "name": "storage.modifier.mut.vk storage.type.vk",
+          "match": "\\b(ref|get|set|mut|lazy)\\b"
         },
         {
           "comment": "logical operators",
@@ -1012,10 +1002,10 @@
         },
         {
           "comment": "trait declarations",
-          "match": "\\b(trait)\\s+([A-Z][A-Za-z0-9]*)\\b",
+          "match": "\\b(trait|interface)\\s+([A-Z][A-Za-z0-9]*)\\b",
           "captures": {
             "1": {
-              "name": "keyword.declaration.trait.vk storage.type.vk"
+              "name": "keyword.declaration.trait.vk"
             },
             "2": {
               "name": "entity.name.type.trait.vk"

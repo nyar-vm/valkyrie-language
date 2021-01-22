@@ -17,7 +17,7 @@ The type signature part is divided into two parts `Type` / `Effect`, both of whi
 There are two types of pattern matching, match matches `Type`, catch matches `Effect`, raise changes `Type` to `Effect`, resume changes `Effect` to `Type`.
 
 ```vk
-fun div2(a: Integer, b: Integer): Unit / DivideError {
+micro div2(a: Integer, b: Integer): Unit / DivideError {
     if (b == 0) {
         let fill = raise DivideError::divide_zero(a);
         print("can't divide zero, default as { fill }")

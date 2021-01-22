@@ -332,25 +332,22 @@ repository:
             patterns:
                   - comment: control flow keywords
                     name: keyword.control.vk
-                    match: \b(if|else)\b
+                    match: \b(if|guard|then|else)\b
                   - comment: control flow keywords
                     name: keyword.control.vk
                     match: \b(switch|when|case|fallthrough)\b
                   - comment: control flow keywords
                     name: keyword.control.vk
-                    match: \b(loop|while|until|break|continue)\b
+                    match: \b(loop|while|until|for|break|continue|otherwise)\b
                   - comment: control flow keywords
                     name: keyword.control.vk
-                    match: \b(for|otherwise)\b
+                    match: \b(let|namespace|package)\b
                   - comment: control flow keywords
                     name: keyword.control.vk
                     match: \b(try|match|catch|return|resume)\b
                   - comment: control flow keywords
                     name: keyword.control.vk
                     match: \b(yield|from)\b
-                  - comment: storage keywords
-                    name: keyword.other.vk storage.type.vk
-                    match: \b(extern|let|namespace|package)\b
                   - comment: const keyword
                     name: storage.modifier.vk
                     match: \b(const)\b
@@ -369,9 +366,6 @@ repository:
                   - comment: enum keyword
                     name: keyword.declaration.enumerate.vk
                     match: \b(enumerate|flags)\b
-                  - comment: interface keyword
-                    name: keyword.declaration.interface.vk
-                    match: \b(interface|trait)\b
                   - comment: structure keyword
                     name: keyword.declaration.structure.vk
                     match: \b(structure|class)\b
@@ -394,8 +388,8 @@ repository:
                     name: keyword.other.vow.vk
                     match: \b(vow|vouch)\b
                   - comment: mut
-                    name: storage.modifier.mut.vk
-                    match: \b(ref|mut|lazy)\b
+                    name: storage.modifier.mut.vk storage.type.vk
+                    match: \b(ref|get|set|mut|lazy)\b
                   - comment: logical operators
                     name: keyword.operator.logical.vk
                     match: (\^|\||\|\||&&|<<|>>|!)(?!=)
@@ -540,12 +534,12 @@ repository:
                     name: entity.name.type.primitive.vk
                     match: \b(bool|char|str)\b
                   - comment: trait declarations
-                    match: \b(trait)\s+([A-Z][A-Za-z0-9]*)\b
+                    match: \b(trait|interface)\s+([A-Z][A-Za-z0-9]*)\b
                     captures:
-                          "1":
-                                name: keyword.declaration.trait.vk storage.type.vk
-                          "2":
-                                name: entity.name.type.trait.vk
+                      1:
+                        name: keyword.declaration.trait.vk
+                      2:
+                        name: entity.name.type.trait.vk
                   - comment: struct declarations
                     match: \b(struct)\s+([A-Z][A-Za-z0-9]*)\b
                     captures:
