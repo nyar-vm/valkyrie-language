@@ -88,8 +88,8 @@ const sidebar_en: SidebarConfigArray = [
                 link: "/en/definition/def-macro.md",
             },
             {
-                text: "Aliased Type",
-                link: "/en/definition/readme.md",
+                text: "Types",
+                link: "/en/definition/typing.md",
             },
             {
                 text: "Structures",
@@ -97,7 +97,7 @@ const sidebar_en: SidebarConfigArray = [
             },
             {
                 text: "Inheritance",
-                link: "/en/definition/readme.md",
+                link: "/en/definition/subtyping.md",
             },
             {
                 text: "Interfaces",
@@ -105,7 +105,7 @@ const sidebar_en: SidebarConfigArray = [
             },
             {
                 text: "Association Type",
-                link: "/en/definition/readme.md",
+                link: "/en/definition/associated.md",
             },
             {
                 text: "Enumerations",

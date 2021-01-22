@@ -1,3 +1,5 @@
+## Type System
+
 The type system used by the Valkyrie language is the Extensible Row Type System
 
 All types will be compiled to things like: `[field: P -> Q -> R, ..]`.
@@ -10,7 +12,7 @@ The difference between the row type and the general structure type is that no ad
 
 ## Declarations
 
-Every define keyword in the Valkyrie language is syntactic sugar for `Record`.
+Every define keyword in the Valkyrie language is syntactic sugar for `TypeRecord`.
 
 These declarative keywords are mainly for some engineering constraints.
 
