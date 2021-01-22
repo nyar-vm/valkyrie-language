@@ -295,7 +295,7 @@ export default defineUserConfig({
     },
     plugins: [
         shikiPlugin({
-            theme: "monokai",
+            theme: "one-dark-pro",
             langs: [
                 "hs",
                 "typescript",

@@ -57,21 +57,9 @@ patterns:
                     name: variable.other.metavariable.specifier.vk
         patterns:
               - include: "#keywords"
-      - comment: macro rules
-        name: meta.macro.rules.vk
-        match: \b(macro_rules!)\s+(([a-z0-9_]+)|([A-Z][a-z0-9_]*))\s+(\{)
-        captures:
-              "1":
-                    name: entity.name.function.macro.rules.vk
-              "3":
-                    name: entity.name.function.macro.vk
-              "4":
-                    name: entity.name.type.macro.vk
-              "5":
-                    name: punctuation.brackets.curly.vk
       - comment: attributes
         name: meta.attribute.vk
-        begin: (#)(\!?)(\[)
+        begin: (@)(\!?)(\[)
         beginCaptures:
               "1":
                     name: punctuation.definition.attribute.vk
@@ -389,7 +377,7 @@ repository:
                     match: \b(vow|vouch)\b
                   - comment: mut
                     name: storage.modifier.mut.vk storage.type.vk
-                    match: \b(ref|get|set|mut|lazy)\b
+                    match: \b(ref|get|set|mut|lazy|effect)\b
                   - comment: logical operators
                     name: keyword.operator.logical.vk
                     match: (\^|\||\|\||&&|<<|>>|!)(?!=)
@@ -488,7 +476,7 @@ repository:
             patterns:
                   - comment: macros
                     name: meta.macro.vk
-                    match: (([a-z_][A-Za-z0-9_]*!)|([A-Z_][A-Za-z0-9_]*!))
+                    match: ((@[a-z_][A-Za-z0-9_]*)|([A-Z_][A-Za-z0-9_]*!))
                     captures:
                           "2":
                                 name: entity.name.function.macro.vk
