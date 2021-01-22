@@ -20,13 +20,13 @@ extends IB: IA {
     who(self) { print("B") }
 }
 
-let b1 = new B();  // MRO = [B, A]
-let b2 = new IB(); // MRO = [IB]
+let b1 = new B();  # MRO = [B, A]
+let b2 = new IB(); # MRO = [IB]
 
-A::who(b1); // A
-B::who(b1); // B
-IA::who(b2); // B
-IB::who(b2); // B
+A::who(b1); # A
+B::who(b1); # B
+IA::who(b2); # B
+IB::who(b2); # B
 ```
 
 Valkyrie language does not recommend the use of virtual base classes, in fact most of these requirements can be met by
@@ -48,11 +48,11 @@ extends int: DividedBy4 {
     divided_by_2(self) -> bool { self % 2 == 0;}
 }
 
-6.divided_by_2(); // true
-6.divided_by_4(); // false
-DividedBy2::divided_by_2(6); // true
-DividedBy4::divided_by_4(6); // false
-DividedBy4::divided_by_2(6); // ERROR: `DividedBy4::divided_by_2` does not exist.
+6.divided_by_2(); # true
+6.divided_by_4(); # false
+DividedBy2::divided_by_2(6); # true
+DividedBy4::divided_by_4(6); # false
+DividedBy4::divided_by_2(6); # ERROR: `DividedBy4::divided_by_2` does not exist.
 ```
 
 This makes interface more like type class.

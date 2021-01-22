@@ -62,7 +62,7 @@ else {
 
 ```text
 $ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
+   Compiling branches v0.1.0 (file:#?projects/branches)
     Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
      Running `target/debug/branches`
 number is divisible by 3

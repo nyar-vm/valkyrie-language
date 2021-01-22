@@ -127,7 +127,7 @@ let 🐶🐮 = "dogcow"
 
 ```valkyrie
 print(friendlyWelcome)
-// 输出"Bonjour!"
+# 输出"Bonjour!"
 ```
 
 `print(_:separator:terminator:)` 是一个用来输出一个或多个值到适当输出区的全局函数.
@@ -148,7 +148,7 @@ Swift 用*字符串插值 (string interpolation)*的方式把常量名或者变�
 
 ```valkyrie
 print("The current value of friendlyWelcome is ${friendlyWelcome}")
-// 输出"The current value of friendlyWelcome is Bonjour!"
+# 输出"The current value of friendlyWelcome is Bonjour!"
 ```
 
 > 注意
@@ -168,9 +168,9 @@ print("The current value of friendlyWelcome is ${friendlyWelcome}")
 
 ```valkyrie
 let decimalInteger = 17
-let binaryInteger = 0b10001       // 二进制的17
-let octalInteger = 0o21           // 八进制的17
-let hexadecimalInteger = 0x11     // 十六进制的17
+let binaryInteger = 0b10001       # 二进制的17
+let octalInteger = 0o21           # 八进制的17
+let hexadecimalInteger = 0x11     # 十六进制的17
 ```
 
 浮点字面量可以是十进制 (没有前缀) 或者是十六进制 (前缀是 `0x` ) . 小数点两边必须有至少一个十进制数字 (或者是十六进制的数字) . 十进制浮点数也可以有一个可选的指数 (exponent), 通过大写或者小写的 `e` 来指定；十六进制浮点数必须有一个指数, 通过大写或者小写的 `p` 来指定.
@@ -213,9 +213,9 @@ let justOverOneMillion = 1_000_000.000_000_1
 
 ```valkyrie
 let cannotBeNegative: UInt8 = -1
-// UInt8 类型不能存储负数, 所以会报错
+# UInt8 类型不能存储负数, 所以会报错
 let tooBig: Int8 = Int8.max + 1
-// Int8 类型不能存储超过最大值的数, 所以会报错
+# Int8 类型不能存储超过最大值的数, 所以会报错
 ```
 
 由于每种整数类型都可以存储不同范围的值, 所以你必须根据不同情况选择性使用数值型类型转换. 这种选择性使用的方式, 可以预防隐式转换的错误并让你的代码中的类型转换意图变得清晰.
@@ -240,7 +240,7 @@ let twoThousandAndOne = twoThousand + UInt16(one)
 let three = 3
 let pointOneFourOneFiveNine = 0.14159
 let pi = Double(three) + pointOneFourOneFiveNine
-// pi 等于 3.14159, 所以被推测为 Double 类型
+# pi 等于 3.14159, 所以被推测为 Double 类型
 ```
 
 这个例子中, 常量 `three` 的值被用来创建一个 `Double` 类型的值, 所以加号两边的数类型须相同. 如果不进行转换, 两者无法相加.
@@ -249,7 +249,7 @@ let pi = Double(three) + pointOneFourOneFiveNine
 
 ```valkyrie
 let integerPi = Int(pi)
-// integerPi 等于 3, 所以被推测为 Int 类型
+# integerPi 等于 3, 所以被推测为 Int 类型
 ```
 
 当用这种方式来初始化一个新的整数值时, 浮点值会被截断. 也就是说 `4.75` 会变成 `4`, `-3.9` 会变成 `-3`.
@@ -272,7 +272,7 @@ typealias AudioSample = UInt16
 
 ```valkyrie
 var maxAmplitudeFound = AudioSample.min
-// maxAmplitudeFound 现在是 0
+# maxAmplitudeFound 现在是 0
 ```
 
 本例中, `AudioSample` 被定义为 `UInt16` 的一个别名. 因为它是别名, `AudioSample.min` 实际上是 `UInt16.min`, 所以会给 `maxAmplitudeFound` 赋一个初值 `0`.
@@ -293,7 +293,7 @@ var maxAmplitudeFound = AudioSample.min
 ```valkyrie
 let possibleNumber = "123"
 let convertedNumber = Int(possibleNumber)
-// convertedNumber 被推测为类型 "Int?",  或者类型 "optional Int"
+# convertedNumber 被推测为类型 "Int?",  或者类型 "optional Int"
 ```
 
 因为该构造器可能会失败, 所以它返回一个*可选类型* (optional) `Int`, 而不是一个 `Int`. 一个可选的 `Int` 被写作 `Int?` 而不是 `Int`. 问号暗示包含的值是可选类型, 也就是说可能包含 `Int` 值也可能*不包含值*.  (不能包含其他任何值比如 `Bool` 值或者 `String` 值. 只能是 `Int` 或者什么都没有. )
@@ -304,9 +304,9 @@ let convertedNumber = Int(possibleNumber)
 
 ```valkyrie
 var serverResponseCode: Int? = 404
-// serverResponseCode 包含一个可选的 Int 值 404
+# serverResponseCode 包含一个可选的 Int 值 404
 serverResponseCode = nil
-// serverResponseCode 现在不包含值
+# serverResponseCode 现在不包含值
 ```
 
 > 注意
@@ -317,7 +317,7 @@ serverResponseCode = nil
 
 ```valkyrie
 var surveyAnswer: String?
-// surveyAnswer 被自动设置为 nil
+# surveyAnswer 被自动设置为 nil
 ```
 
 > 注意
@@ -353,7 +353,7 @@ if let actualNumber = Int(possibleNumber) {
 } else {
     print("\'\(possibleNumber)\' could not be converted to an integer")
 }
-// 输出"'123' has an integer value of 123"
+# 输出"'123' has an integer value of 123"
 ```
 
 这段代码可以被理解为:
@@ -370,7 +370,7 @@ if let actualNumber = Int(possibleNumber) {
 if let firstNumber = Int("4"), let secondNumber = Int("42"), firstNumber < secondNumber && secondNumber < 100 {
     print("\(firstNumber) < \(secondNumber) < 100")
 }
-// 输出"4 < 42 < 100"
+# 输出"4 < 42 < 100"
 
 if let firstNumber = Int("4") {
     if let secondNumber = Int("42") {
@@ -379,7 +379,7 @@ if let firstNumber = Int("4") {
         }
     }
 }
-// 输出"4 < 42 < 100"
+# 输出"4 < 42 < 100"
 ```
 
 > 注意
@@ -400,16 +400,16 @@ if let firstNumber = Int("4") {
 
 ```valkyrie
 let possibleString: String? = "An optional string."
-let forcedString: String = possibleString! // 需要感叹号来获取值
+let forcedString: String = possibleString! # 需要感叹号来获取值
 
 let assumedString: String! = "An implicitly unwrapped optional string."
-let implicitString: String = assumedString  // 不需要感叹号
+let implicitString: String = assumedString  # 不需要感叹号
 ```
 
 你可以把隐式解析可选类型当做一个可以自动解析的可选类型. 当你使用一个隐式解析可选值时, Swift 首先会把它当作普通的可选值；如果它不能被当成可选类型使用, Swift 会强制解析可选值. 在以上的代码中, 可选值 `assumedString` 在把自己的值赋给 `implicitString` 之前会被强制解析, 原因是 `implicitString` 本身的类型是非可选类型的 `String`. 在下面的代码中, `optionalString` 并没有显式的数据类型. 那么根据类型推断, 它就是一个普通的可选类型.
 ```valkyrie
 let optionalString = assumedString
-// optionalString 的类型是 "String?", assumedString 也没有被强制解析.
+# optionalString 的类型是 "String?", assumedString 也没有被强制解析.
 ```
 
 如果你在隐式解析可选类型没有值的时候尝试取值, 会触发运行时错误. 和你在没有值的普通可选类型后面加一个感叹号一样.
@@ -420,7 +420,7 @@ let optionalString = assumedString
 if assumedString != nil {
     print(assumedString!)
 }
-// 输出"An implicitly unwrapped optional string."
+# 输出"An implicitly unwrapped optional string."
 ```
 
 你也可以在可选绑定中使用隐式解析可选类型来检查并解析它的值:
@@ -429,7 +429,7 @@ if assumedString != nil {
 if let definiteString = assumedString {
     print(definiteString)
 }
-// 输出"An implicitly unwrapped optional string."
+# 输出"An implicitly unwrapped optional string."
 ```
 
 > 注意
@@ -455,7 +455,7 @@ if let definiteString = assumedString {
 ```valkyrie
 let age = -3
 assert(age >= 0, "A person's age cannot be less than zero")
-// 因为 age < 0, 所以断言会触发
+# 因为 age < 0, 所以断言会触发
 ```
 
 在这个例子中, 只有 `age >= 0` 为 `true` 时, 即 `age` 的值非负的时候, 代码才会继续执行. 如果 `age` 的值是负数, 就像代码中那样, `age >= 0` 为 `false`, 断言被触发, 终止应用.
@@ -485,7 +485,7 @@ if age > 10 {
 你可以使用全局 `precondition(_:_:file:line:)` 函数来写一个先决条件. 向这个函数传入一个结果为 `true` 或者 `false` 的表达式以及一条信息, 当表达式的结果为 `false` 的时候这条信息会被显示:
 
 ```valkyrie
-// 在一个下标的实现里...
+# 在一个下标的实现里...
 precondition(index > 0, "Index must be greater than zero.")
 ```
 

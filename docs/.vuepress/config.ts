@@ -200,10 +200,6 @@ const sidebar_en: SidebarConfigArray = [
                 text: "Typing Handler",
                 link: "/en/control/handle-match.md"
             },
-            {
-                text: "Pattern Match",
-                link: "/en/control/jump-if.md"
-            },
         ]
     },
     {

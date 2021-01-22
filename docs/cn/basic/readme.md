@@ -43,8 +43,8 @@ if [] {
 你可以访问不同整数类型的 `min` 和 `max` 属性来获取对应类型的最小值和最大值:
 
 ```valkyrie
-let minValue = UInt8.min  // minValue 为 0, 是 UInt8 类型
-let maxValue = UInt8.max  // maxValue 为 255, 是 UInt8 类型
+let minValue = UInt8.min  # minValue 为 0, 是 UInt8 类型
+let maxValue = UInt8.max  # maxValue 为 255, 是 UInt8 类型
 ```
 
 `min` 和 `max` 所传回值的类型, 正是其所对的整数类型 (如上例 UInt8, 所传回的类型是 UInt8) , 可用在表达式中相同类型值旁.
@@ -117,7 +117,7 @@ HTTP 状态码是当你请求网页的时候 web 服务器返回的一个特殊�
 
 ```valkyrie
 let http404 = (404, "Not Found")
-/// http404 的类型是 (Integer, String), 值是 (404, "Not Found")
+#? http404 的类型是 (Integer, String), 值是 (404, "Not Found")
 ```
 
 `(404, "Not Found")` 元组把一个 `Integer` 值和一个 `String` 值组合起来表示 HTTP 状态码的两个部分: 一个数字和一个人类可读的描述.
@@ -131,9 +131,9 @@ let http404 = (404, "Not Found")
 ```valkyrie
 let (status_code, status_message) = http404Error;
 print("The status code is ${status_code}")
-/// 输出 "The status code is 404"
+#? 输出 "The status code is 404"
 print("The status message is ${status_message}")
-/// 输出 "The status message is Not Found"
+#? 输出 "The status message is Not Found"
 ```
 
 如果你只需要一部分元组值, 分解的时候可以把要忽略的部分用下划线 (`_`) 标记:
@@ -141,16 +141,16 @@ print("The status message is ${status_message}")
 ```valkyrie
 let (just_status_code, _) = http404;
 print("The status code is ${just_status_code}")
-/// 输出 "The status code is 404"
+#? 输出 "The status code is 404"
 ```
 
 此外, 你还可以通过下标来访问元组中的单个元素, 下标从零开始:
 
 ```valkyrie
 print("The status code is ${http404.0}")
-/// 输出"The status code is 404"
+#? 输出"The status code is 404"
 print("The status message is ${http404.1}")
-/// 输出"The status message is Not Found"
+#? 输出"The status message is Not Found"
 ```
 
 元组一般被用于轻量级的数据结构, 比如函数的返回值.
@@ -194,7 +194,7 @@ let b: Decimal = 0
 注释分为单行注释和多行注释
 
 ```rs
-/// NORMAL: 这是普通注释
+#? NORMAL: 这是普通注释
 //* ATTENTION: 这里需要引起注意
 //! FIXME: 这里是急需修复的部分
 //? TODO: 这里是待办事项
@@ -210,5 +210,5 @@ let b: Decimal = 0
 
 ```valkyrie
 let cat = "🐱"; print(cat)
-// 输出"🐱"
+# 输出"🐱"
 ```

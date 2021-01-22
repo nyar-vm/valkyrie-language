@@ -4,7 +4,7 @@ Another commonly used looping method is the iterator traversal.
 
 ```valkyrie
 for pattern in iterator {
-    // ...
+    # ...
 }
 ```
 
@@ -17,7 +17,7 @@ loop {
         break
     }
     let pattern = pattern.unwrap()
-    // ...
+    # ...
 }
 ```
 
@@ -27,7 +27,7 @@ loop {
 
 ```valkyrie
 for a in iterator if a > 0 {
-    // ...
+    # ...
 }
 ```
 
@@ -35,7 +35,7 @@ equivalent to
 
 ```valkyrie
 for a in iterator.select({ $a > 0 }) {
-    // ...
+    # ...
 }
 ```
 
@@ -45,7 +45,7 @@ for a in iterator.select({ $a > 0 }) {
 
 ```valkyrie
 for x in iterator if check(x) {
-    // ...
+    # ...
 }
 otherwise {
     print("empty")
@@ -61,7 +61,7 @@ for x in iterator {
         continue
     }
     no_run = false
-    // ...
+    # ...
 }
 if no_run {
     print("empty")

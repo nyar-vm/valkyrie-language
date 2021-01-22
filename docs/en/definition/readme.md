@@ -56,7 +56,7 @@ type A = [
 let a = new A [
     call: { $x.to_string() }
 ]
-A::call(10) // "10"
+A::call(10) # "10"
 ```
 
 The subtype will only determine whether all the fields in `B` exist in `A`.
@@ -73,7 +73,7 @@ type A = [
     field: String,
 ]
 
-A::field // Integer
+A::field # Integer
 ```
 
 Querying the field directly will return the first matching row type.
@@ -92,9 +92,9 @@ type C = A & B {
     B::field: String,
 }
 
-C::field // Integer
-<C as A>::field // Integer
-<C as B>::field // String
+C::field # Integer
+<C as A>::field # Integer
+<C as B>::field # String
 ```
 
 This ability is very useful,

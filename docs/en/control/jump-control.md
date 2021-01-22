@@ -60,7 +60,7 @@ micro check235(items: [int]): bool {
     @2
     print("no such item")
     @label 5
-    // drops here
+    # drops here
     ret
 }
 ```

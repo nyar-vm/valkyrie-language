@@ -43,14 +43,14 @@ Swift 是一个*类型安全 (type safe) *的语言. 类型安全的语言可以
 
 ```valkyrie
 let meaningOfLife = 42
-// meaningOfLife 会被推测为 Int 类型
+# meaningOfLife 会被推测为 Int 类型
 ```
 
 同理, 如果你没有给浮点字面量标明类型, Swift 会推断你想要的是 `Double`:
 
 ```valkyrie
 let pi = 3.14159
-// pi 会被推测为 Double 类型
+# pi 会被推测为 Double 类型
 ```
 
 当推断浮点数的类型时, Swift 总是会选择 `Double` 而不是 `Float`.
@@ -59,7 +59,7 @@ let pi = 3.14159
 
 ```valkyrie
 let anotherPi = 3 + 0.14159
-// anotherPi 会被推测为 Double 类型
+# anotherPi 会被推测为 Double 类型
 ```
 
 原始值 `3` 没有显式声明类型, 而表达式中出现了一个浮点字面量, 所以表达式会被推断为 `Double` 类型.

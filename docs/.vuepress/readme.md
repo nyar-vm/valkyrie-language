@@ -26,8 +26,8 @@ This rule is to prevent the introduction of unknown semantics without knowing it
 <details>
 <summary>Copy code</summary>
 ````valkyrie
-/// Namespace is generally lowercase, but extension is uppercase
-/// Because the performance is similar to the introduce a trait
+#? Namespace is generally lowercase, but extension is uppercase
+#? Because the performance is similar to the introduce a trait
 pkg extension Features;
 ````
 </details>
@@ -53,16 +53,16 @@ So you can give the choice to the library user.
 <details>
 <summary>Copy code</summary>
 ````valkyrie
-/// Otherwise, all it will inherit all extensions in the current namespace
+#? Otherwise, all it will inherit all extensions in the current namespace
 @no_prelude
 pkg extension FreeAdd {
-    /// Symbols are defined in the standard library
-    /// Types are also defined in the standard library
-    /// Overloading is prohibited by the orphan rule
-    /// Ordinary overload does not need extension
+    #? Symbols are defined in the standard library
+    #? Types are also defined in the standard library
+    #? Overloading is prohibited by the orphan rule
+    #? Ordinary overload does not need extension
     def +(i: Integer, f: Decimal) {
-        /// The function will return automatically
-        /// The return type is automatically inferred
+        #? The function will return automatically
+        #? The return type is automatically inferred
         i as Decimal + f
     }
 }
@@ -87,11 +87,11 @@ tagged Quality {
     Gram(auto Decimal),
 }
 def +(lhs: Quality, rhg: Quality): Quality {
-    /// Some conversion rules, that's it, anyone can write
+    #? Some conversion rules, that's it, anyone can write
     @unimplemented()
 }
 pkg extension SIUnit {
-    /// number_suffix means integer_suffix + decimal_suffix
+    #? number_suffix means integer_suffix + decimal_suffix
     def number_suffix kg(n): Quality = Quality::Kilogram(n);
     def number_suffix  g(n): Quality = Quality::Gram(n);
 }
@@ -117,7 +117,7 @@ By analogy, you should be able to easily implement the following functions, whic
 ````valkyrie
 use Complex;
 let z = 1 + 2i;
-/// Note that you cannot bind `i` twice in one namespace
+#? Note that you cannot bind `i` twice in one namespace
 use Quaternion;
 let q = 1 + 2i + 3j + 4k;
 ````
@@ -201,14 +201,14 @@ Sometimes you want to match a certain piece of data, then you can use case decon
 <summary>Copy code</summary>
 ````valkyrie
 if case Point {x: a, y, ...p} = Point {x: 1, y: 2, z: 3, w: 4, } {
-    print(a) /// 1
-    print(y) /// 2
-    print(p) /// {z: 3, w: 4}
+    print(a) #? 1
+    print(y) #? 2
+    print(p) #? {z: 3, w: 4}
 }
 if case Point(a, ..p, y) = Point(1, 2, 3, 4) {
-    print(a) /// 1
-    print(p) /// [2, 3]
-    print(y) /// 4
+    print(a) #? 1
+    print(p) #? [2, 3]
+    print(y) #? 4
 }
 ````
 </details>
@@ -225,7 +225,7 @@ For custom classes, you can define the `unapply` method to customize the extract
 match input {
     case Regex(group0) => Integer::parse(group0),
 }
-/// desugar as unapply
+#? desugar as unapply
 if case Some(group0) = Regex::unapply(input) {
     Integer::parse(group0)
 }
@@ -264,7 +264,7 @@ Now consider writing it as an anonymous function:
 <summary>Copy code</summary>
 ````valkyrie
 [1, 2, 3, 4].map {
-    /// `{lambda (x) expr}` even longer than python 🤣
+    #? `{lambda (x) expr}` even longer than python 🤣
     lambda (x) match x {
         x if x % 2 => 2 * x,
         x          => x,
@@ -299,7 +299,7 @@ There is also a shorthand method called `slot closure`:
 [1, 2, 3, 4].map {
     if $0 % 2 {2 * $0} else {$0}
 }
-/// Looks like perl, maybe the ternary operator should be banned
+#? Looks like perl, maybe the ternary operator should be banned
 [1, 2, 3, 4].map {$0 % 2 ? 2 * $0 : $0}
 ````
 </details>
@@ -316,17 +316,17 @@ The most intrusive but the most convenient to use is implicit type conversion
 <details>
 <summary>Copy code</summary>
 ````valkyrie
-/// First define ordinary type conversion
+#? First define ordinary type conversion
 extends Integer: From<String> {
     def from(s) { Self::parse(i) }
 }
-/// `ImplicitFrom<T>` needs to meet trait bound `From<T>`
+#? `ImplicitFrom<T>` needs to meet trait bound `From<T>`
 extends Integer: ImplicitFrom<String>;
 def add_one(input: Integer): Integer {
     input + 1
 }
-/// Found type mismatch, try implicit type conversion
-add_one("1") /// 2
+#? Found type mismatch, try implicit type conversion
+add_one("1") #? 2
 ````
 </details>
 
@@ -340,8 +340,8 @@ Followed by explicit type conversion, automatic convert input.
 def add_one(auto input: Integer): Integer {
     input + 1
 }
-/// Found that the type does not match, call the `from` method
-add_one("1") /// 2
+#? Found that the type does not match, call the `from` method
+add_one("1") #? 2
 ````
 </details>
 
@@ -375,12 +375,12 @@ But think about it carefully, can `Optional<Optional<T>>` and `Nullable<Nullable
 <details>
 <summary>Copy code</summary>
 ````valkyrie
-/// This is the sum type, tagged union
+#? This is the sum type, tagged union
 tagged Optional<T> {
     Some<T>,
     None,
 }
-/// This is the union type, untagged union
+#? This is the union type, untagged union
 class Null {};
 type Nullable<T> = T | Null;
 Optional<Optional<T>> ==> Optional<Optional<T>>
@@ -397,7 +397,7 @@ But in fact the compiler should be able to optimize to the same.
 <details>
 <summary>Copy code</summary>
 ````valkyrie
-/// sum type matching
+#? sum type matching
 def add_one(input: Integer|String): Integer {
     let y = match input {
         x is Integer => x,
@@ -405,7 +405,7 @@ def add_one(input: Integer|String): Integer {
     }
     y + 1
 }
-/// union type matching
+#? union type matching
 tagged Canbe {
     Integer(Integer)
     String(String)

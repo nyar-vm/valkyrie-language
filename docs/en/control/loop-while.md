@@ -58,10 +58,10 @@ You can also use pattern matching as a loop condition:
 
 ```valkyrie
 while let Some(x) = iter.next() {
-    // ...
+    # ...
 }
 until let None = iter.next() {
-    // ...
+    # ...
 }
 ```
 
@@ -72,7 +72,7 @@ until let None = iter.next() {
 
 ```valkyrie
 while a > 0 {
-    // ...
+    # ...
 }
 otherwise {
     print("empty")
@@ -85,7 +85,7 @@ equivalent to
 let mut no_run = true
 while a > 0 {
     no_run = false
-    // ...
+    # ...
 }
 if no_run {
     print("empty")
