@@ -1,9 +1,9 @@
 information_for_contributors:
-      - This file has been converted from
-        https://github.com/dustypomerleau/rust-syntax/blob/master/syntaxes/rust.tmLanguage.json
-      - If you want to provide a fix or improvement, please create a pull
-        request against the original repository.
-      - Once accepted there, we are happy to receive an update request.
+    - This file has been converted from
+      https://github.com/dustypomerleau/rust-syntax/blob/master/syntaxes/rust.tmLanguage.json
+    - If you want to provide a fix or improvement, please create a pull
+      request against the original repository.
+    - Once accepted there, we are happy to receive an update request.
 version: https://github.com/dustypomerleau/rust-syntax/commit/20462d50ff97338f42c6b64c3f421c634fd60734
 name: Valkyrie
 scopeName: source.vk
@@ -22,7 +22,7 @@ patterns:
         patterns:
               - include: "#block-comments"
               - include: "#comments"
-              - include: "#gtypes"
+              - include: "#variants"
               - include: "#lvariables"
               - include: "#lifetimes"
               - include: "#punctuation"
@@ -78,7 +78,7 @@ patterns:
               - include: "#lifetimes"
               - include: "#punctuation"
               - include: "#strings"
-              - include: "#gtypes"
+              - include: "#variants"
               - include: "#types"
       - comment: modules
         match: (mod)\s+((?:r#(?!crate|[Ss]elf|super))?[a-z][A-Za-z0-9_]*)
@@ -126,7 +126,7 @@ patterns:
       - include: "#comments"
       - include: "#lvariables"
       - include: "#constants"
-      - include: "#gtypes"
+      - include: "#variants"
       - include: "#functions"
       - include: "#types"
       - include: "#keywords"
@@ -167,13 +167,6 @@ repository:
                   - comment: ALL CAPS constants
                     name: constant.other.caps.vk
                     match: \b[A-Z]{2}[A-Z0-9_]*\b
-                  - comment: constant declarations
-                    match: \b(const)\s+([A-Z][A-Za-z0-9_]*)\b
-                    captures:
-                          "1":
-                                name: storage.type.vk
-                          "2":
-                                name: constant.other.caps.vk
                   - comment: decimal integers and floats
                     name: constant.numeric.decimal.vk
                     match: \b\d[\d_]*(\.?)[\d_]*(?:(E)([+-])([\d_]+))?(f32|f64|i128|i16|i32|i64|i8|isize|u128|u16|u32|u64|u8|usize)?\b
@@ -226,13 +219,6 @@ repository:
                         name: constant.character.escape.unicode.punctuation.vk
       functions:
             patterns:
-                  - comment: pub as a function
-                    match: \b(pub)(\()
-                    captures:
-                          "1":
-                                name: keyword.other.vk
-                          "2":
-                                name: punctuation.brackets.round.vk
                   - comment: function definition
                     name: meta.function.definition.vk
                     begin: \b(micro|macro)\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\()|(<))
@@ -255,7 +241,7 @@ repository:
                           - include: "#keywords"
                           - include: "#lvariables"
                           - include: "#constants"
-                          - include: "#gtypes"
+                          - include: "#variants"
                           - include: "#functions"
                           - include: "#lifetimes"
                           - include: "#macros"
@@ -282,7 +268,7 @@ repository:
                           - include: "#keywords"
                           - include: "#lvariables"
                           - include: "#constants"
-                          - include: "#gtypes"
+                          - include: "#variants"
                           - include: "#functions"
                           - include: "#lifetimes"
                           - include: "#macros"
@@ -307,7 +293,7 @@ repository:
                           - include: "#keywords"
                           - include: "#lvariables"
                           - include: "#constants"
-                          - include: "#gtypes"
+                          - include: "#variants"
                           - include: "#functions"
                           - include: "#lifetimes"
                           - include: "#macros"
@@ -552,14 +538,6 @@ repository:
                   - comment: types
                     name: entity.name.type.vk
                     match: \b[A-Z][A-Za-z0-9]*\b(?!!)
-      gtypes:
-            patterns:
-                  - comment: option types
-                    name: entity.name.type.option.vk
-                    match: \b(Some|None)\b
-                  - comment: result types
-                    name: entity.name.type.result.vk
-                    match: \b(Ok|Err)\b
       punctuation:
             patterns:
                   - comment: comma
@@ -627,16 +605,24 @@ repository:
                                 name: punctuation.definition.char.vk
                     patterns:
                           - include: "#escapes"
+      variants:
+        patterns:
+          - comment: option types
+            name: entity.name.type.option.vk
+            match: \b(Some|None)\b
+          - comment: result types
+            name: entity.name.type.result.vk
+            match: \b(Success|Failure)\b
       lvariables:
-            patterns:
-                  - comment: self
-                    name: variable.language.self.vk
-                    match: \b[Ss]elf\b
-                  - comment: super
-                    name: variable.language.super.vk
-                    match: \bsuper\b
+        patterns:
+          - comment: self
+            name: variable.language.self.vk
+            match: \b([Ss]elf)\b
+          - comment: super
+            name: variable.language.super.vk
+            match: \b(super)\b
       variables:
-            patterns:
-                  - comment: variables
-                    name: variable.other.vk
-                    match: \b(?<!(?<!\.)\.)(?:r#(?!(crate|[Ss]elf|super)))?[a-z0-9_]+\b
+        patterns:
+          - comment: variables
+            name: variable.other.vk
+            match: \b(?<!(?<!\.)\.)(?:r#(?!(crate|[Ss]elf|super)))?[a-z0-9_]+\b

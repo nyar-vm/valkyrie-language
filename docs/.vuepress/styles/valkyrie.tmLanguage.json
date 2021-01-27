@@ -33,7 +33,7 @@
           "include": "#comments"
         },
         {
-          "include": "#gtypes"
+          "include": "#variants"
         },
         {
           "include": "#lvariables"
@@ -141,7 +141,7 @@
           "include": "#strings"
         },
         {
-          "include": "#gtypes"
+          "include": "#variants"
         },
         {
           "include": "#types"
@@ -245,7 +245,7 @@
       "include": "#constants"
     },
     {
-      "include": "#gtypes"
+      "include": "#variants"
     },
     {
       "include": "#functions"
@@ -327,18 +327,6 @@
           "comment": "ALL CAPS constants",
           "name": "constant.other.caps.vk",
           "match": "\\b[A-Z]{2}[A-Z0-9_]*\\b"
-        },
-        {
-          "comment": "constant declarations",
-          "match": "\\b(const)\\s+([A-Z][A-Za-z0-9_]*)\\b",
-          "captures": {
-            "1": {
-              "name": "storage.type.vk"
-            },
-            "2": {
-              "name": "constant.other.caps.vk"
-            }
-          }
         },
         {
           "comment": "decimal integers and floats",
@@ -424,18 +412,6 @@
     "functions": {
       "patterns": [
         {
-          "comment": "pub as a function",
-          "match": "\\b(pub)(\\()",
-          "captures": {
-            "1": {
-              "name": "keyword.other.vk"
-            },
-            "2": {
-              "name": "punctuation.brackets.round.vk"
-            }
-          }
-        },
-        {
           "comment": "function definition",
           "name": "meta.function.definition.vk",
           "begin": "\\b(micro|macro)\\s+((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)((\\()|(<))",
@@ -476,7 +452,7 @@
               "include": "#constants"
             },
             {
-              "include": "#gtypes"
+              "include": "#variants"
             },
             {
               "include": "#functions"
@@ -539,7 +515,7 @@
               "include": "#constants"
             },
             {
-              "include": "#gtypes"
+              "include": "#variants"
             },
             {
               "include": "#functions"
@@ -599,7 +575,7 @@
               "include": "#constants"
             },
             {
-              "include": "#gtypes"
+              "include": "#variants"
             },
             {
               "include": "#functions"
@@ -1036,20 +1012,6 @@
         }
       ]
     },
-    "gtypes": {
-      "patterns": [
-        {
-          "comment": "option types",
-          "name": "entity.name.type.option.vk",
-          "match": "\\b(Some|None)\\b"
-        },
-        {
-          "comment": "result types",
-          "name": "entity.name.type.result.vk",
-          "match": "\\b(Ok|Err)\\b"
-        }
-      ]
-    },
     "punctuation": {
       "patterns": [
         {
@@ -1164,17 +1126,31 @@
         }
       ]
     },
+    "variants": {
+      "patterns": [
+        {
+          "comment": "option types",
+          "name": "entity.name.type.option.vk",
+          "match": "\\b(Some|None)\\b"
+        },
+        {
+          "comment": "result types",
+          "name": "entity.name.type.result.vk",
+          "match": "\\b(Success|Failure)\\b"
+        }
+      ]
+    },
     "lvariables": {
       "patterns": [
         {
           "comment": "self",
           "name": "variable.language.self.vk",
-          "match": "\\b[Ss]elf\\b"
+          "match": "\\b([Ss]elf)\\b"
         },
         {
           "comment": "super",
           "name": "variable.language.super.vk",
-          "match": "\\bsuper\\b"
+          "match": "\\b(super)\\b"
         }
       ]
     },
