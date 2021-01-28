@@ -137,31 +137,6 @@ patterns:
       - include: "#strings"
       - include: "#variables"
 repository:
-      comments:
-        patterns:
-            - comment: documentation comments
-              name: comment.line.documentation.vk
-              match: ^\s*\#\?.*
-            - comment: line comments
-              name: comment.line.double-slash.vk
-              match: \s*\#.*
-      block-comments:
-            patterns:
-                  - comment: empty block comments
-                    name: comment.block.vk
-                    match: /\*\*/
-                  - comment: block documentation comments
-                    name: comment.block.documentation.vk
-                    begin: /\*\*
-                    end: \*/
-                    patterns:
-                          - include: "#block-comments"
-                  - comment: block comments
-                    name: comment.block.vk
-                    begin: /\*(?!\*)
-                    end: \*/
-                    patterns:
-                          - include: "#block-comments"
       constants:
             patterns:
                   - comment: ALL CAPS constants
@@ -626,3 +601,28 @@ repository:
           - comment: variables
             name: variable.other.vk
             match: \b(?<!(?<!\.)\.)(?:r#(?!(crate|[Ss]elf|super)))?[a-z0-9_]+\b
+      comments:
+        patterns:
+            - comment: documentation comments
+              name: comment.line.documentation.vk
+              match: ^\s*\#\?.*
+            - comment: line comments
+              name: comment.line.double-slash.vk
+              match: \s*\#.*
+      block-comments:
+        patterns:
+          - comment: empty block comments
+            name: comment.block.vk
+            match: /\*\*/
+          - comment: block documentation comments
+            name: comment.block.documentation.vk
+            begin: /\*\*
+            end: \*/
+            patterns:
+              - include: "#block-comments"
+          - comment: block comments
+            name: comment.block.vk
+            begin: /\*(?!\*)
+            end: \*/
+            patterns:
+              - include: "#block-comments"
