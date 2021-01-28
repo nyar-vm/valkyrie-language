@@ -31,12 +31,17 @@ In fact, you can think of it as scala implemented in rust.
 - **Concurrent Garbage Collection** (in plan, use rc for now)
 - **Lossless Rust FFI** (in plan, waiting for crABI)
 
-## Tools
+## Tools & Community
 
-- [Jupyter](https://github.com/nyar-vm/valkyrie-jupyter/blob/dev/projects/playground/main.ipynb): interactive execution
+- [Jupyter Runner](https://github.com/nyar-vm/valkyrie-jupyter/blob/dev/projects/playground/main.ipynb): interactive execution
   environment
 - [Idea Intellij](https://plugins.jetbrains.com/plugin/19452-valkyrie-language): IDEA support
 - [AST Visitor](https://docs.rs/valkyrie-ast/0.1.7/valkyrie_ast/): AST definition and pretty print
+
+
+- Advice on Github: [github.com/valkyrie-language](https://github.com/nyar-vm/valkyrie-language/discussions)
+- Chat in Discord: [![discord](https://img.shields.io/discord/794446776232443955.svg?logo=discord&style=flat-square)](https://discord.gg/rDScD9GyUC)
+
 
 ## Tutorial
 

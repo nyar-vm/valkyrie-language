@@ -28,9 +28,6 @@ micro div2(a: Integer, b: Integer): Unit / DivideError {
 }
 
 try {
-    Some(), None(), Success(), Failure()
-    Class(),
-
     div2(0, 0)
     div2(1, 0)
 }
@@ -41,5 +38,3 @@ try {
         }
 }
 ```
-
-

@@ -1,24 +1,20 @@
-information_for_contributors:
-    - This file has been converted from
-      https://github.com/dustypomerleau/rust-syntax/blob/master/syntaxes/rust.tmLanguage.json
-    - If you want to provide a fix or improvement, please create a pull
-      request against the original repository.
-    - Once accepted there, we are happy to receive an update request.
-version: https://github.com/dustypomerleau/rust-syntax/commit/20462d50ff97338f42c6b64c3f421c634fd60734
+information_for_contributors: |
+  Valkyrie language tm highlight
 name: Valkyrie
+version: https://github.com/nyar-vm/valkyrie-language
 scopeName: source.vk
 patterns:
       - comment: boxed slice literal
         begin: (<)(\[)
         beginCaptures:
-              "1":
-                    name: punctuation.brackets.angle.vk
-              "2":
-                    name: punctuation.brackets.square.vk
+          1:
+            name: punctuation.brackets.angle.vk
+          2:
+            name: punctuation.brackets.square.vk
         end: ">"
         endCaptures:
-              "0":
-                    name: punctuation.brackets.angle.vk
+          0:
+            name: punctuation.brackets.angle.vk
         patterns:
         - include: "#block-comments"
         - include: "#comments"
@@ -27,36 +23,6 @@ patterns:
         - include: "#lifetimes"
         - include: "#punctuation"
         - include: "#types"
-      - comment: macro type metavariables
-        name: meta.macro.metavariable.type.vk
-        match: (\$)((crate)|([A-Z][A-Za-z0-9_]*))((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?
-        captures:
-              "1":
-                    name: keyword.operator.macro.dollar.vk
-              "3":
-                    name: keyword.other.crate.vk
-              "4":
-                    name: entity.name.type.metavariable.vk
-              "6":
-                    name: keyword.operator.key-value.vk
-              "7":
-                    name: variable.other.metavariable.specifier.vk
-        patterns:
-        - include: "#keywords"
-      - comment: macro metavariables
-        name: meta.macro.metavariable.vk
-        match: (\$)([a-z][A-Za-z0-9_]*)((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?
-        captures:
-              "1":
-                    name: keyword.operator.macro.dollar.vk
-              "2":
-                    name: variable.other.metavariable.name.vk
-              "4":
-                    name: keyword.operator.key-value.vk
-              "5":
-                    name: variable.other.metavariable.specifier.vk
-        patterns:
-        - include: "#keywords"
       - comment: attributes
         name: meta.attribute.vk
         begin: (@)(\!?)(\[)
