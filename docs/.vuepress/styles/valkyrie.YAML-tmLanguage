@@ -20,13 +20,13 @@ patterns:
               "0":
                     name: punctuation.brackets.angle.vk
         patterns:
-              - include: "#block-comments"
-              - include: "#comments"
-              - include: "#variants"
-              - include: "#lvariables"
-              - include: "#lifetimes"
-              - include: "#punctuation"
-              - include: "#types"
+        - include: "#block-comments"
+        - include: "#comments"
+        - include: "#variants"
+        - include: "#lvariables"
+        - include: "#lifetimes"
+        - include: "#punctuation"
+        - include: "#types"
       - comment: macro type metavariables
         name: meta.macro.metavariable.type.vk
         match: (\$)((crate)|([A-Z][A-Za-z0-9_]*))((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?
@@ -42,7 +42,7 @@ patterns:
               "7":
                     name: variable.other.metavariable.specifier.vk
         patterns:
-              - include: "#keywords"
+        - include: "#keywords"
       - comment: macro metavariables
         name: meta.macro.metavariable.vk
         match: (\$)([a-z][A-Za-z0-9_]*)((:)(block|expr|ident|item|lifetime|literal|meta|path?|stmt|tt|ty|vis))?
@@ -56,7 +56,7 @@ patterns:
               "5":
                     name: variable.other.metavariable.specifier.vk
         patterns:
-              - include: "#keywords"
+        - include: "#keywords"
       - comment: attributes
         name: meta.attribute.vk
         begin: (@)(\!?)(\[)
@@ -72,14 +72,14 @@ patterns:
               "0":
                     name: punctuation.brackets.attribute.vk
         patterns:
-              - include: "#block-comments"
-              - include: "#comments"
-              - include: "#keywords"
-              - include: "#lifetimes"
-              - include: "#punctuation"
-              - include: "#strings"
-              - include: "#variants"
-              - include: "#types"
+        - include: "#block-comments"
+        - include: "#comments"
+        - include: "#keywords"
+        - include: "#lifetimes"
+        - include: "#punctuation"
+        - include: "#strings"
+        - include: "#variants"
+        - include: "#types"
       - comment: modules
         match: (mod)\s+((?:r#(?!crate|[Ss]elf|super))?[a-z][A-Za-z0-9_]*)
         captures:
@@ -100,10 +100,10 @@ patterns:
               "0":
                     name: punctuation.semi.vk
         patterns:
-              - include: "#block-comments"
-              - include: "#comments"
-              - include: "#keywords"
-              - include: "#punctuation"
+        - include: "#block-comments"
+        - include: "#comments"
+        - include: "#keywords"
+        - include: "#punctuation"
       - comment: use statements
         name: meta.use.vk
         begin: \b(use)\s
@@ -115,13 +115,13 @@ patterns:
               "0":
                     name: punctuation.semi.vk
         patterns:
-              - include: "#block-comments"
-              - include: "#comments"
-              - include: "#keywords"
-              - include: "#namespaces"
-              - include: "#punctuation"
-              - include: "#types"
-              - include: "#lvariables"
+        - include: "#block-comments"
+        - include: "#comments"
+        - include: "#keywords"
+        - include: "#namespaces"
+        - include: "#punctuation"
+        - include: "#types"
+        - include: "#lvariables"
       - include: "#block-comments"
       - include: "#comments"
       - include: "#lvariables"
@@ -211,20 +211,20 @@ repository:
                           "0":
                                 name: punctuation.brackets.curly.vk
                     patterns:
-                          - include: "#block-comments"
-                          - include: "#comments"
-                          - include: "#keywords"
-                          - include: "#lvariables"
-                          - include: "#constants"
-                          - include: "#variants"
-                          - include: "#functions"
-                          - include: "#lifetimes"
-                          - include: "#macros"
-                          - include: "#namespaces"
-                          - include: "#punctuation"
-                          - include: "#strings"
-                          - include: "#types"
-                          - include: "#variables"
+                    - include: "#block-comments"
+                    - include: "#comments"
+                    - include: "#keywords"
+                    - include: "#lvariables"
+                    - include: "#constants"
+                    - include: "#variants"
+                    - include: "#functions"
+                    - include: "#lifetimes"
+                    - include: "#macros"
+                    - include: "#namespaces"
+                    - include: "#punctuation"
+                    - include: "#strings"
+                    - include: "#types"
+                    - include: "#variables"
                   - comment: function/method calls, chaining
                     name: meta.function.call.vk
                     begin: ((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)(\()
@@ -238,20 +238,20 @@ repository:
                           "0":
                                 name: punctuation.brackets.round.vk
                     patterns:
-                          - include: "#block-comments"
-                          - include: "#comments"
-                          - include: "#keywords"
-                          - include: "#lvariables"
-                          - include: "#constants"
-                          - include: "#variants"
-                          - include: "#functions"
-                          - include: "#lifetimes"
-                          - include: "#macros"
-                          - include: "#namespaces"
-                          - include: "#punctuation"
-                          - include: "#strings"
-                          - include: "#types"
-                          - include: "#variables"
+                    - include: "#block-comments"
+                    - include: "#comments"
+                    - include: "#keywords"
+                    - include: "#lvariables"
+                    - include: "#constants"
+                    - include: "#variants"
+                    - include: "#functions"
+                    - include: "#lifetimes"
+                    - include: "#macros"
+                    - include: "#namespaces"
+                    - include: "#punctuation"
+                    - include: "#strings"
+                    - include: "#types"
+                    - include: "#variables"
                   - comment: function/method calls with turbofish
                     name: meta.function.call.vk
                     begin: ((?:r#(?!crate|[Ss]elf|super))?[A-Za-z0-9_]+)(?=::<.*>\()
@@ -263,20 +263,20 @@ repository:
                           "0":
                                 name: punctuation.brackets.round.vk
                     patterns:
-                          - include: "#block-comments"
-                          - include: "#comments"
-                          - include: "#keywords"
-                          - include: "#lvariables"
-                          - include: "#constants"
-                          - include: "#variants"
-                          - include: "#functions"
-                          - include: "#lifetimes"
-                          - include: "#macros"
-                          - include: "#namespaces"
-                          - include: "#punctuation"
-                          - include: "#strings"
-                          - include: "#types"
-                          - include: "#variables"
+                    - include: "#block-comments"
+                    - include: "#comments"
+                    - include: "#keywords"
+                    - include: "#lvariables"
+                    - include: "#constants"
+                    - include: "#variants"
+                    - include: "#functions"
+                    - include: "#lifetimes"
+                    - include: "#macros"
+                    - include: "#namespaces"
+                    - include: "#punctuation"
+                    - include: "#strings"
+                    - include: "#types"
+                    - include: "#variables"
       keywords:
             patterns:
                   - comment: control flow keywords
@@ -471,14 +471,14 @@ repository:
                           "0":
                                 name: punctuation.brackets.angle.vk
                     patterns:
-                          - include: "#block-comments"
-                          - include: "#comments"
-                          - include: "#keywords"
-                          - include: "#lvariables"
-                          - include: "#lifetimes"
-                          - include: "#punctuation"
-                          - include: "#types"
-                          - include: "#variables"
+                    - include: "#block-comments"
+                    - include: "#comments"
+                    - include: "#keywords"
+                    - include: "#lvariables"
+                    - include: "#lifetimes"
+                    - include: "#punctuation"
+                    - include: "#types"
+                    - include: "#variables"
                   - comment: primitive types
                     name: entity.name.type.primitive.vk
                     match: \b(bool|char|str)\b
@@ -548,8 +548,8 @@ repository:
                           "0":
                                 name: punctuation.definition.string.vk
                     patterns:
-                          - include: "#escapes"
-                          - include: "#interpolations"
+                    - include: "#escapes"
+                    - include: "#interpolations"
                   - comment: double-quoted raw strings and raw byte strings
                     name: string.quoted.double.vk
                     begin: (b?r)(#*)(")
@@ -579,50 +579,50 @@ repository:
                           "0":
                                 name: punctuation.definition.char.vk
                     patterns:
-                          - include: "#escapes"
+                    - include: "#escapes"
       variants:
         patterns:
-          - comment: option types
-            name: entity.name.type.option.vk
-            match: \b(Some|None)\b
-          - comment: result types
-            name: entity.name.type.result.vk
-            match: \b(Success|Failure)\b
+        - comment: option types
+          name: entity.name.type.option.vk
+          match: \b(Some|None)\b
+        - comment: result types
+          name: entity.name.type.result.vk
+          match: \b(Success|Failure)\b
       lvariables:
         patterns:
-          - comment: self
-            name: variable.language.self.vk
-            match: \b([Ss]elf)\b
-          - comment: super
-            name: variable.language.super.vk
-            match: \b(super)\b
+        - comment: self
+          name: variable.language.self.vk
+          match: \b([Ss]elf)\b
+        - comment: super
+          name: variable.language.super.vk
+          match: \b(super)\b
       variables:
         patterns:
-          - comment: variables
-            name: variable.other.vk
-            match: \b(?<!(?<!\.)\.)(?:r#(?!(crate|[Ss]elf|super)))?[a-z0-9_]+\b
+        - comment: variables
+          name: variable.other.vk
+          match: \b(?<!(?<!\.)\.)(?:r#(?!(crate|[Ss]elf|super)))?[a-z0-9_]+\b
       comments:
         patterns:
-            - comment: documentation comments
-              name: comment.line.documentation.vk
-              match: ^\s*\#\?.*
-            - comment: line comments
-              name: comment.line.double-slash.vk
-              match: \s*\#.*
+        - comment: documentation comments
+          name: comment.line.documentation.vk
+          match: ^\s*\#\?.*
+        - comment: line comments
+          name: comment.line.double-slash.vk
+          match: \s*\#.*
       block-comments:
         patterns:
-          - comment: empty block comments
-            name: comment.block.vk
-            match: /\*\*/
-          - comment: block documentation comments
-            name: comment.block.documentation.vk
-            begin: /\*\*
-            end: \*/
-            patterns:
-              - include: "#block-comments"
-          - comment: block comments
-            name: comment.block.vk
-            begin: /\*(?!\*)
-            end: \*/
-            patterns:
-              - include: "#block-comments"
+        - comment: empty block comments
+          name: comment.block.vk
+          match: /\*\*/
+        - comment: block documentation comments
+          name: comment.block.documentation.vk
+          begin: /\*\*
+          end: \*/
+          patterns:
+          - include: "#block-comments"
+        - comment: block comments
+          name: comment.block.vk
+          begin: /\*(?!\*)
+          end: \*/
+          patterns:
+          - include: "#block-comments"
