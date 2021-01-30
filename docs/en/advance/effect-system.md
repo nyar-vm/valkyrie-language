@@ -38,3 +38,32 @@ try {
         }
 }
 ```
+
+
+## Implement Details
+
+The core idea is that Valkyrie will do cps transformation for all functions with effect.
+
+```vk
+# cps form
+micro div2(a: Integer, b: Integer, divide_error: DivideError?): Unit / DivideError {
+    if (b == 0) {
+        let fill = divide_error;
+        print("can't divide zero, default as { fill }")
+    }
+    else {
+        print("{a} / {b} = {a / b}")
+    }
+}
+
+try {
+    div2(0, 0, k)
+    div2(1, 0, k)
+}
+.catch {
+    case DivideError(numerator):
+        delay(100ms) {
+            resume numerator
+        }
+}
+```
