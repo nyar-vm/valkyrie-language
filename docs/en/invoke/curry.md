@@ -31,9 +31,9 @@ add(0)(1, 2)    # error, except 2 parameters, but 3 parameters are provided
 add(0)(a: 1)    # error, mixed parameters `a` had been filled
 ```
 
-## Delay function
+## Defer function
 
-If you need to overwrite the named key multiple times, you can use the delay function
+If you need to overwrite the named key multiple times, you can use the defer function
 
 ```vk
 defer micro add(<, a: int, b: int, >): int {
@@ -74,6 +74,23 @@ count()(0)(1, 2)(3, 4, 5)(invoke: true) # 6
 ```
 
 
+
+## Curry with `partial`
+
+`std::functional::partial` can be used to fill in the parameters of any function.
+
+No need to mark `curry` or `defer` in advance.
+
+```vk
+micro add(a: int, b: int): int {
+    a + b
+}
+
+let add1: CurryFunction = std::functional::partial(add, [b: 1], override: true)
+```
+
+
+
 ## Curry with Continuation
 
 If the last parameter is Action type, then this parameter function must be filled before calling.
@@ -85,6 +102,11 @@ micro add(a: int, b: int, k: Action): int {
 ```
 
 
+```vk
+micro add(<, a: int, b: int, >, k: Action): int {
+    cont(a + b)
+}
+```
 
 
 ```vk
@@ -94,4 +116,6 @@ add(1)(2) {
 
 add(1)(2, k: { print($it)})
 ```
+
+
 
