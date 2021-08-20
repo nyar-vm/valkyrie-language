@@ -223,6 +223,10 @@ const sidebar_en: SidebarConfigArray = [
                 link: "/en/advance/builder.md",
             },
             {
+                text: "Logger",
+                link: "/en/advance/logger.md",
+            },
+            {
                 text: "Effect System",
                 link: "/en/advance/effect-system.md",
             },

@@ -1,7 +1,7 @@
 {
-  "information_for_contributors": "This file has been converted from\nhttps://github.com/dustypomerleau/rust-syntax/blob/master/syntaxes/rust.tmLanguage.json\nIf you want to provide a fix or improvement, please create a pull\nrequest against the original repository.\nOnce accepted there, we are happy to receive an update request.",
-  "version": "https://github.com/dustypomerleau/rust-syntax/commit/20462d50ff97338f42c6b64c3f421c634fd60734",
+  "information_for_contributors": "Valkyrie language tm highlight\n",
   "name": "Valkyrie",
+  "version": "https://github.com/nyar-vm/valkyrie-language",
   "scopeName": "source.vk",
   "patterns": [
     {
@@ -605,7 +605,7 @@
         {
           "comment": "mut",
           "name": "storage.modifier.mut.vk storage.type.vk",
-          "match": "\\b(ref|get|set|mut|lazy|effect)\\b"
+          "match": "\\b(ref|get|set|mut|lazy|effect|event|singleton)\\b"
         },
         {
           "comment": "logical operators",
@@ -1037,6 +1037,11 @@
           "comment": "result types",
           "name": "entity.name.type.result.vk",
           "match": "\\b(Success|Failure)\\b"
+        },
+        {
+          "comment": "log types",
+          "name": "entity.name.type.log.vk",
+          "match": "\\b(Trace|Debug|Alert|Error|Fatal)\\b"
         }
       ]
     },
@@ -1044,7 +1049,7 @@
       "patterns": [
         {
           "comment": "self",
-          "name": "variable.language.self.vk",
+          "name": "keyword.other.self.vk",
           "match": "\\b([Ss]elf)\\b"
         },
         {

@@ -304,7 +304,7 @@ repository:
                     match: \b(vow|vouch)\b
                   - comment: mut
                     name: storage.modifier.mut.vk storage.type.vk
-                    match: \b(ref|get|set|mut|lazy|effect)\b
+                    match: \b(ref|get|set|mut|lazy|effect|event|singleton)\b
                   - comment: logical operators
                     name: keyword.operator.logical.vk
                     match: (\^|\||\|\||&&|<<|>>|!)(?!=)
@@ -554,10 +554,13 @@ repository:
         - comment: result types
           name: entity.name.type.result.vk
           match: \b(Success|Failure)\b
+        - comment: log types
+          name: entity.name.type.log.vk
+          match: \b(Trace|Debug|Alert|Error|Fatal)\b
       lvariables:
         patterns:
         - comment: self
-          name: variable.language.self.vk
+          name: keyword.other.self.vk
           match: \b([Ss]elf)\b
         - comment: super
           name: variable.language.super.vk
