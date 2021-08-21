@@ -17,7 +17,7 @@
 
 
 
-```vk
+```valkyrie
 singleton class Logger {
     #? The normal log event callbacks.
     event logging(messages: UTF8Text, level: LogLevel) {

@@ -1,5 +1,5 @@
 
-```vk
+```valkyrie
 class DivideError: Error {
     numerator: Integer
     # The left side represents the uploaded parameters,
@@ -16,7 +16,7 @@ The type signature part is divided into two parts `Type` / `Effect`, both of whi
 
 There are two types of pattern matching, match matches `Type`, catch matches `Effect`, raise changes `Type` to `Effect`, resume changes `Effect` to `Type`.
 
-```vk
+```valkyrie
 micro div2(a: Integer, b: Integer): Unit / DivideError {
     if (b == 0) {
         let fill = raise DivideError::divide_zero(a);
@@ -44,8 +44,8 @@ try {
 
 The core idea is that Valkyrie will do cps transformation for all functions with effect.
 
-```vk
-# cps form
+```valkyrie
+// cps form
 micro div2(a: Integer, b: Integer, divide_error: DivideError?): Unit / DivideError {
     if (b == 0) {
         let fill = divide_error;

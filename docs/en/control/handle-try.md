@@ -2,7 +2,7 @@ try comes with a local effect handler
 
 ## Option Handler
 
-```vk
+```valkyrie
 let a = try T? {
     map.get("value")! + 1
 }
@@ -18,7 +18,7 @@ Option handler 会捕捉所有实现了 Error 的类型.
 
 捕捉后可以使用 `as_option` 转为 `Option<T>`
 
-```vk
+```valkyrie
 let a = try Maybe<T> {
     map.get("value")! + 1
 }

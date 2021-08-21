@@ -1,5 +1,5 @@
 
-```vk
+```valkyrie
 # Takes 16 bits of space, but only uses the last 4 bits
 flags FontStyle(16, 4): Show {
     # Nothing will be generated even if it is not written, you can rename `0` to any other name
@@ -45,7 +45,7 @@ Converting between `Integer` and `Flags` is not free, the layout of Integer is `
 
 Also, you can pass `Integer` to any function parameter that accepts `Flags`.
 
-```vk
+```valkyrie
 micro render(text: String, style: FontStyle): String {
     if style == FontStyle::RedBold {
         return '<b style="color: red">{text}</b>'
@@ -64,7 +64,7 @@ But if the `Integer` is greater than the maximum value of `Flags`, the large int
 
 ## As String
 
-```vk
+```valkyrie
 imply FontStyle: Show {
     show(self)
 }

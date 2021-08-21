@@ -2,7 +2,7 @@
 
 A curry function cannot be an overloaded function at the same time.
 
-```vk
+```valkyrie
 curry micro add(a: int, b: int): int {
     a + b
 }
@@ -10,7 +10,7 @@ curry micro add(a: int, b: int): int {
 
 Without any mark, `a, b` represent mixed parameters, so this definition is equivalent to.
 
-```vk
+```valkyrie
 curry micro add(<, a: int, b: int, >): int {
     a + b
 }
@@ -22,7 +22,7 @@ curry micro add(<, a: int, b: int, >): int {
 - If the name key is provided, the corresponding parameters will be filled first,
   - and cannot be filled repeatedly
 
-```vk
+```valkyrie
 add(1)(2)       # 3, filled a = 1, b = 2
 add(a: 1)(2)    # 3, filled a = 1, b = 2
 add(b: 1)(2)    # 3, filled a = 2, b = 1
@@ -35,7 +35,7 @@ add(0)(a: 1)    # error, mixed parameters `a` had been filled
 
 If you need to overwrite the named key multiple times, you can use the defer function
 
-```vk
+```valkyrie
 defer micro add(<, a: int, b: int, >): int {
     a + b
 }
@@ -43,7 +43,7 @@ defer micro add(<, a: int, b: int, >): int {
 
 
 
-```vk
+```valkyrie
 add(1)(2)       # 3, filled a = 1, b = 2
 add(a: 1)(2)    # 3, filled a = 1, b = 2
 add(b: 1)(2)    # 3, filled a = 2, b = 1
@@ -57,7 +57,7 @@ add(0)(a: 2)(1) # 3, filled a = 2, b = 1
 
 If a curry function adds `**args`, it will never fire with unnamed arguments.
 
-```vk
+```valkyrie
 curry micro count(<, **args: Array<int>, >, invoke: bool): int {
     if invoke {
         args.length
@@ -68,7 +68,7 @@ curry micro count(<, **args: Array<int>, >, invoke: bool): int {
 }
 ```
 
-```vk
+```valkyrie
 count()(0)(1, 2)(invoke: false)         # 0
 count()(0)(1, 2)(3, 4, 5)(invoke: true) # 6
 ```
@@ -81,7 +81,7 @@ count()(0)(1, 2)(3, 4, 5)(invoke: true) # 6
 
 No need to mark `curry` or `defer` in advance.
 
-```vk
+```valkyrie
 micro add(a: int, b: int): int {
     a + b
 }
@@ -95,21 +95,21 @@ let add1: CurryFunction = std::functional::partial(add, [b: 1], override: true)
 
 If the last parameter is Action type, then this parameter function must be filled before calling.
 
-```vk
+```valkyrie
 micro add(a: int, b: int, k: Action): int {
     cont(a + b)
 }
 ```
 
 
-```vk
+```valkyrie
 micro add(<, a: int, b: int, >, k: Action): int {
     cont(a + b)
 }
 ```
 
 
-```vk
+```valkyrie
 add(1)(2) {
     print($it)
 }
