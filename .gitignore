@@ -12,8 +12,10 @@ yarn-debug.log*
 yarn-error.log*
 Thumbs.db
 .DS_Store
+*.zip
 
 # Build
 .build/
 .cache/
 .temp/
+
