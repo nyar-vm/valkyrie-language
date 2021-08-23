@@ -1,33 +1,25 @@
-## Structure
-
-Valkyrie defines structures through the `structure` keyword,
-and each structure can have its own fields and methods.
+## Class
 
 ```valkyrie
-structure A {
+class A {
     field: Type = default_value;
-    lazy delay: Type = {
-        lazy_progress
-    }
 }
 ```
 
-In principle, it is best to separate the data from the calling method, unless it is a particularly closely related method such as setter or getter.
+In principle, it is best to separate the data from the calling method.
 
-General extension methods can be written in the extends statement.
-
-If the first argument is not `self`, then this is a static method that can be called via `A::method()`.
-
+If the first argument is not `self`, then this is a static method that can be called via `A::method1()`.
 
 ```valkyrie
 extends A {
+    // static method
     method1(): String {
         "call method1"
     }
 }
 ```
 
-If the first argument is `self`, then this is an instance method that can be called via `a.method2()`.
+If the first argument is `self`, then this is an instance method that can be called via `A().method2()`.
 
 ```valkyrie
 extends A {
@@ -37,22 +29,22 @@ extends A {
 }
 ```
 
+## Structure
 
-## Class
+```valkyrie
+structure B {
+    field: Type = default_value;
+}
+```
 
-A class is a structure that automatically implements many interfaces and traits, otherwise there is no difference.
+| Parameter   | `class A`     | `structure B`    |
+|-------------|---------------|------------------|
+| `x: X`      | pass `&x`     | pass `x.clone()` |
+| `ref x: X`  | pass `&x`     | pass `&x`        |
+| `mut x: X`  | pass `&mut x` | pass `move x`    |
+| `move x: X` | pass `move x` | pass `move x`    |
 
-Temporarily gain the following features:
 
-- [Constructor](../advance/builder.md): Support call like `Class(args)`
-- [Extractor](../advance/extractor.md): Support call like `case Class(pats): `
-- [Clone](): How to get an independent copy object
-- [Copy](): Support for zero-heap allocation cloning
-- [ShowDebug](): How to display the fields that the structure actually has, without properties
-- [ShowDetail](): How to display the fields that the structure actually has, with properties and getters.
-- [Equality](): Determine whether two objects are interchangeable
-- [Congruence](): If it is a value type, it means that the values are equal, and if it is a reference type, it means
-  that the pointers are the same
 
 ## Implementation Details
 
