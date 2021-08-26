@@ -52,7 +52,9 @@ This macro evaluates the `lhs` expression using the `evaluate` method and adds i
 
 Please note that the specific implementation details of the `evaluate` method and how the addition is performed are not provided in the code snippet.
 
-### Continuation Capture
+## Continuation Capture
+
+Continuation capture in Valkyrie allows macros to receive and manipulate continuations, which represent the remaining code to be executed.
 
 ```valkyrie
 #continuation
@@ -69,6 +71,8 @@ macro f3(e: ExpressionNode) {
 }
 ```
 
+The last parameter defined must be a `ContinuationNode`.
+
 
 ```valkyrie
 f1(1 + 1) // fatal error: macro f: expected ContinuationNode, found None
@@ -82,10 +86,14 @@ f2(1 + 1) {
 }
 ```
 
+The above code snippet demonstrates the usage of the previously defined continuation capture macros.
 
+- `f1(1 + 1)` tries to invoke the `f1` macro without providing a continuation. However, this macro expects a continuation to be provided, so it results in a fatal error [[2]](https://poe.com/citation?message_id=61591009926&citation=2).
+- `f1(1 + 1) { body }` invokes the `f1` macro with the argument `1 + 1` and a continuation block `body`. The macro implementation can manipulate the continuation block as needed.
+- `f2(1 + 1)` invokes the `f2` macro with the argument `1 + 1` but without providing a continuation. Since the continuation is optional, this usage is valid.
+- `f2(1 + 1) { class A { } body }` invokes the `f2` macro with the argument `1 + 1` and a continuation block containing a class declaration `class A { }` and a `body`. However, this usage results in a syntax error because declarations are not allowed within a continuation [[3]](https://poe.com/citation?message_id=61591009926&citation=3).
 
-
-### Domain Capture
+### `@Procedural` Macro
 
 ```valkyrie
 #procedural
@@ -109,6 +117,6 @@ macro f3(e: ExpressionNode) {
 }
 ```
 
-### Attribute Capture
+### `#Attribute` Macro
 
 
