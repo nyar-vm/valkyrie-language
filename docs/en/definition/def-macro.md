@@ -88,20 +88,22 @@ f2(1 + 1) {
 
 The above code snippet demonstrates the usage of the previously defined continuation capture macros.
 
-- `f1(1 + 1)` tries to invoke the `f1` macro without providing a continuation. However, this macro expects a continuation to be provided, so it results in a fatal error [[2]](https://poe.com/citation?message_id=61591009926&citation=2).
+- `f1(1 + 1)` tries to invoke the `f1` macro without providing a continuation. However, this macro expects a continuation to be provided, so it results in a fatal error.
 - `f1(1 + 1) { body }` invokes the `f1` macro with the argument `1 + 1` and a continuation block `body`. The macro implementation can manipulate the continuation block as needed.
 - `f2(1 + 1)` invokes the `f2` macro with the argument `1 + 1` but without providing a continuation. Since the continuation is optional, this usage is valid.
-- `f2(1 + 1) { class A { } body }` invokes the `f2` macro with the argument `1 + 1` and a continuation block containing a class declaration `class A { }` and a `body`. However, this usage results in a syntax error because declarations are not allowed within a continuation [[3]](https://poe.com/citation?message_id=61591009926&citation=3).
+- `f2(1 + 1) { class A { } body }` invokes the `f2` macro with the argument `1 + 1` and a continuation block containing a class declaration `class A { }` and a `body`. However, this usage results in a syntax error because declarations are not allowed within a continuation.
 
 ### `@Procedural` Macro
 
+The `@procedural` macro in Valkyrie allows macros to capture and manipulate domain-specific language (DSL) constructs.
+
 ```valkyrie
 #procedural
-macro f1(e: ExpressionNode, dsl: DomainNode) {
+macro f1(e: ExpressionNode, dsl: StatementBlock) {
     // domain is required
 }
 #procedural
-macro f2(e: ExpressionNode, dsl: DomainNode?) {
+macro f2(e: ExpressionNode, dsl: StatementBlock?) {
     // domain is optional
 }
 #procedural
@@ -110,6 +112,7 @@ macro f3(e: ExpressionNode) {
 }
 ```
 
+
 ```valkyrie
 @f(1 + 1) {
     class A { } // ok
@@ -117,6 +120,10 @@ macro f3(e: ExpressionNode) {
 }
 ```
 
+
+`@f(1 + 1)` invokes the `f` macro with the argument `1 + 1` and a domain construct enclosed in curly braces `{}`.
+
 ### `#Attribute` Macro
+
 
 
