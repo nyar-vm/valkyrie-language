@@ -1,4 +1,4 @@
-## 注释
+# 注释
 
 Valkyrie 使用 `//` 进行行注释, 使用 `/* */` 进行块注释, 使用 `///` 与 `/** */` 进行文档注释.
 
@@ -10,7 +10,7 @@ Valkyrie 使用 `//` 进行行注释, 使用 `/* */` 进行块注释, 使用 `//
 type MyResult<T = ()> = Result<T, MyError>
 ```
 
-### 字面量
+# 字面量
 
 这里是一些原始字面量:
 
@@ -21,25 +21,22 @@ type MyResult<T = ()> = Result<T, MyError>
 | Decimal | `0.0`, `0.0f32`, `0.0dec`        |
 | String  | `""`, `"Hello world!"`, `"'\n'"` |
 
-下面是一些常见的数据字面量:
-
-| 集合     | 示例                               |
-|:-------|:---------------------------------|
-| List   | `List()`, `[1, 2, 3]`            |
-| Dict   | `Dict()`, `[a: 1, z: 26]`        |
-| Tuple  | `()`, `(1,)`,  `(1, "Hello")`    |
-| Option | `None`, `Some(1)`                |
-| Result | `Success(1)`, `Failure("Error")` |
-
-
-### 字面量多态
+## 字面量多态
 
 同一个字面量对应多种可能的类型, 除非左边加上类型限定, 或者使用 `as` 转换.
 
 ```valkyrie
-let string: str = "c"
-let char: char = "c"
-let list: List<String> = ()
-let dict: Dict<String> = ()
+let s1: str  = "c"
+let s2       = "c" as String
+let c1: char = "c"
+let c2:      = "c" as Character
 ```
 
+
+
+# 进阶阅读
+
+- [数字字面量](./number.md)
+- [字符串插值](./formatter.md)
+- [字符串模板](./template.md)
+- [字符串标记](./xml.md)

@@ -32,7 +32,7 @@ Valkyrie 是一种实验性的多阶段编程语言, 结合了函数式编程和
 ### 基本概念
 
 - [字面量](./literal/readme.md): 布尔值, 整数值以及字符串
-- [常用数据结构](./collection/readme.md): 列表, 字典以及集合
+- [常用数据结构](./collections/readme.md): 列表, 字典以及集合
 - [函数调用](./invoke/readme.md):
 - [下标](./invoke/readme.md):
 - [变量定义](./definition/let-binding.md):
